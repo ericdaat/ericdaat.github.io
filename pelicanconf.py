@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
-AUTHOR = 'Foo Bar'
+AUTHOR = 'Eric Daoud'
 SITEURL = ''
-SITENAME = 'Foo Bar\'s Blog'
-SITETITLE = 'Foo Bar'
-SITESUBTITLE = 'Web Developer'
+SITENAME = 'Eric\'s Blog'
+SITETITLE = 'Eric\'s Blog'
+SITESUBTITLE = 'Jr. Data Scientist'
 SITEDESCRIPTION = 'Foo Bar\'s Thoughts and Writings'
-# SITELOGO = SITEURL + '/images/profile.png'
+SITELOGO = '/images/eric.jpg'
 # FAVICON = SITEURL + '/images/favicon.ico'
 
 PATH = 'content'
@@ -36,23 +36,31 @@ LINKS = ()
 
 # Social widget
 SOCIAL = (
-	('github', '#'),
-	('twitter', '#'),
-	('youtube', '#'),
-	('linkedin', '#'),
-	('500px', '#'),
+	('Github', 'https://github.com/ericdaat'),
+	('Twitter', 'https://twitter.com/ericdaoud'),
+	('Youtube', 'https://www.youtube.com/user/ericmusic13'),
+	('Linkedin', 'https://www.linkedin.com/in/ericdaoud/'),
+	('500px', 'https://500px.com/ericda'),
 	)
 
 DEFAULT_PAGINATION = 10
 
 MARKUP = ('md', 'ipynb')
 
+DEFAULT_METADATA = {
+    'status': 'draft',
+}
+
 # Plugins
 PLUGIN_PATHS = ['./plugins']
 PLUGINS = ['ipynb.markup', 'render_math']
 
 # Themes
-THEME = 'Flex'
+THEME = 'aboutwilson'
+
+# code blocks with line numbers
+# PYGMENTS_MD_OPTIONS = {'linenos': 'table'}
+# PYGMENTS_STYLE = 'monokai'
 
 # Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
+RELATIVE_URLS = True
