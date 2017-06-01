@@ -5,19 +5,17 @@ Category: Programming
 Tags: python, code
 Slug: python-tips-and-tools
 Authors: Eric Daoud
-Summary: Showing some tips and useful stuff I like about Python language.
+Summary: There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments. 
 Status: published
 
 
-I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... because he was bored ! 
+I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored ! 
 
 > *Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).*  
 
 > -- Guido Van Rossum, 1996
 
-There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments. 
-
-Before we dive in this article, let me mention a few things:
+There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments. Before we dive in this article, let me mention a few things:
 
 1. This is absolutely not exhaustive. I am very aware that I don't know all about Python and have no legitimacy teaching it. I just wanted to share some of my favorite aspects of the language.
 2. You can learn more about Python [here](https://www.python.org/).
@@ -32,7 +30,7 @@ A python code doesn't need to be Object Oriented, as opposed to Java for instanc
 
 ### Simple Class
 
-We create a basic class `MyClass` with a constructor `__init__` that takes no argument. Our class is very simple and has no attribute.
+We create a basic class `MyClass` with a constructor `__init__` that takes no argument. Our class is very simple and has no attribute. Note that `self` is just a keyword, it serves as a placeholder for the instance object. 
 
 ``` python
 class MyClass(object):
@@ -45,7 +43,7 @@ if __name__ == '__main__':
 
 ### Passing arguments
 
-Let's improve our class by changing the constructor and adding arguments.
+Let's improve our class by changing the constructor and adding arguments. Arguments in the constructor (or in any method) go after the `self` keyword. 
 
 ``` python
 class MyClass(object):
@@ -57,7 +55,7 @@ if __name__ == '__main__':
     print my_class.arg      # will print 1
 ```
 
-Note that unlike Java, you can't define multiple constructors for one same class.
+Note that unlike Java, you can't define multiple constructors for one same class:
 
 ``` python
 class MyClass(object):
@@ -70,7 +68,7 @@ class MyClass(object):
 
 ### Calling methods
 
-We can now add an instance method to our class. Such a method must always have `self` as first argument. It is a reference to the object itself.
+We can now add an instance method to our class. Such a method must always have `self` as first argument. Later, we will talk about instance methods versus class methods and see how they differ.
 
 ``` python
 class MyClass(object):
@@ -87,8 +85,7 @@ if __name__ == '__main__':
 
 ### Inheritance
 
-Create two Classes `A` and `B`, where `B` inherits from `A`. Notice
-how `B` can use `a_method` even though it is defined in `A`.
+Here we create two Classes `A` and `B`, where `B` inherits from `A`. Notice how `B` can use `a_method` even though it is defined in `A`. Indeed, a subclass has access to every method and attribute from its superclass. 
 
 ``` python
 class A(object):
@@ -107,10 +104,9 @@ if __name__ == '__main__':
     print b.a_method(3)                 # will print 3
 ```
 
-## Overidding
+### Overidding
 
-Same `A` and `B` Classes, but this time we override
-`A.a_method` in `B`
+A subclas can redefine its superclass behavior. This is called overidding. Here we have the same `A` and `B` Classes, but this time we override `A.a_method` in `B` to no longer return `value`but `2 * value`.
 
 ``` python
 class A(object):
@@ -132,10 +128,9 @@ if __name__ == '__main__':
     print b.a_method(3)                 # will print 6
 ```
 
-## instance method vs. Class method
+### instance method vs. Class method
 
-An instance method is called on an instance of the Class.  
-Here, `Animal` is our class, and `bob` is an instance of `Animal`.
+An instance method is called on an instance of the Class. Here, `Animal` is our class, and `bob` is an instance of `Animal`. 
 
 ``` python
 class Animal(object):
@@ -168,11 +163,28 @@ if __name__ == '__main__':
     print Animal.introduce()    # will print "I am <class '__main__.Animal'>"
 ```
 
-## Public vs. private
+### instance attribute vs. Class attribute
 
-Methods and attributes are public by default in python. Adding a `_` makes
-them private:
+Similarly, we could define class attributes and instance attributes. Instance attributes belong to the instance, and are not accessible from an instance to another. However class attributes are shared by all instances of the class. It can be handy to count how many objects from one class we created.
 
+``` python
+class Animal(object):
+    count = 0
+
+    def __init__(self):
+        Animal.count += 1
+
+if __name__ == '__main__':
+    animal_1 = Animal()
+    animal_2 = Animal()
+    animal_3 = Animal()
+
+    print Animal.count    # will print 3
+```
+
+### Public vs. private
+
+Methods and attributes are public by default in python. Adding a `_` makes them private:
  - `self.name` vs. `self._name` for attributes
  - `def some_method(self)` vs. `def _some_method(self)` for methods
 
@@ -196,10 +208,9 @@ Note that privacy doesn't really exist in Python. Indeed, you could call `bob._d
 
 You might also come accross `__do_something_private() declaration of methods. The two leading underscores mean that this function must not be overridden by any subclass.
 
-## Accessing private attributes: getter & setter
+### Accessing private attributes: getter & setter
 
-When defining private attributes, we can access them with getters,
-and redefine them with setters.
+When defining private attributes, we can access them with getters, and redefine them with setters.
 
 
 ``` python
@@ -222,39 +233,53 @@ if __name__ == '__main__':
     print c.private_attribute     # will print 2
 ```
 
-# Useful tools and functions
-## Comprehension lists
+That's about it for Object Oriented Programming. Knowing these little snippets, you should be able to build a decent Object Oriented Program. Don't hesitate to learn more on the subject, as this post is not exhaustive. 
 
-Creating arrays faster and in a more elegant way.
+## Useful tools and functions
+
+Now I'd like to show you some of my favorite python tools and handy functions. We often hear people asking for a "pythonic" way to do something, and it sometimes refer to taking advantage of some python built in tools that makes it so easy to use and elegant to read. The following paragraphs will demonstrate some of these techniques. 
+
+### Comprehension lists
+
+Comprehension lists allow creating arrays faster and in a more much more elegant way. The first approach one might think of for creating an array in python would be to declare an empty one and then append some values to it, like in this snippet:
 
 ``` python
-# The ugly way:
+# The normal way:
 l = []
-for i in range(5):
+for i in xrange(5): 
+"""   
+You should use xrange instead of range in
+python2 as it avoids load an entire array in memory.
+In python3, xrange is implicitly used when typing range.
+"""
     l.append(i)
 # l = [0, 1, 2, 3, 4]
-
-
-# The list comprehension way:
-l = [i for i in range(5)]
-# l = [0, 1, 2, 3, 4]
-
-
-# Works with dicts too !
-d = {str(i):i for i in range(5)}
-# d = {'1': 1, '0': 0, '3': 3, '2': 2, '4': 4}
-
 ```
 
-## Enumerate
+It turns out that there is a simpler way to write this, and that is also more efficient:
 
-An elegant way to iterate over an iterable object
+``` python
+# The list comprehension way:
+l = [i for i in xrange(5)]
+# l = [0, 1, 2, 3, 4]
+```
+
+It works with other Python data structures, like `dict` for instance:
+``` python
+# Works with dicts too !
+d = {str(i):i for i in xrange(5)}
+# d = {'1': 1, '0': 0, '3': 3, '2': 2, '4': 4}
+```
+
+### Enumerate
+
+`enumerate` provides an elegant way to go through over an iterable object while keeping track of the curent item and its position.
 
 ``` python
 l = [10, 20, 30]
 
-# The ugly way:
-for i in range(len(l)):
+# The normal way:
+for i in xrange(len(l)):
     print i, l[i]               # will print 0, 10 then 1, 20 etc ...
 
 
@@ -263,9 +288,9 @@ for i, item in enumerate(l):    # enumerate(l) = [(0, 10), ...]
     print i, item               # print the same thing, but nicer !
 ```
 
-## Map functions
+### Map functions
 
-Apply a function to every item of an iterable object (e.g. arrays).
+Apply a function to every item of an iterable object (e.g. arrays). Maps are faster than doing a for loop over the iterrable object.
 
 ``` python
 l = [1, 2, 3]           # l is an iterable object
@@ -274,7 +299,7 @@ def f(value):           # function to apply to l items
     return 2 * value
 
 
-# The ugly way:
+# The normal way:
 new_l = []
 for i in range(len(l)):
     new_l.append(f(l))
@@ -287,9 +312,9 @@ new_l = map(f, l)
 
 ```
 
-## Lambda functions
+### Lambda functions
 
-Create anonymous functions.
+`lambda` functions allow to define anonymous functions, typically used when the operation to perform is really simple and doesn't need a dedicated function to be created.
 
 ``` python
 l = [1, 2, 3]
@@ -300,7 +325,7 @@ def f(value):
 print map(f, l) 
 ```
 
-Do we really need to declare a function for such an easy operation ? Nope.
+Do we really need to declare a function for such an easy operation ? Nope:
 
 ``` python
 l = [1, 2, 3]
@@ -308,18 +333,16 @@ l = [1, 2, 3]
 print map(lambda r: r*2, l)     # will print [2, 4, 6]
 ```
 
-## Partial functions
+### Partial functions
 
-Functions used in map can only take a single argument. What if we have more ?
-Here, we learn to create a partial function filled with some constant 
-arguments and leave one free, so we can map values on it.
+Functions used in map can only take a single argument. What if we have more ? Here, we learn to create a partial function filled with some constant arguments and leave one free, so we can map values on it.
 
 ``` python
 from functools import partial
 
 l = [1,2,3]
 
-def f(value, coefficient):          # would be hard to map huh ?
+def f(value, coefficient):
     return value * coefficient
 
 fp = partial(f, coefficient=2)      # fp = f(value, coefficient=2)
@@ -328,9 +351,9 @@ print map(fp, l)                    # will print [2, 4, 6]
 
 ```
 
-## Multiprocessing with Pool
+### Multiprocessing with Pool
 
-Multi process a function with multiprocessing.Pool
+Multi process a function with multiprocessing.Pool is really easy:
 
 ``` python
 from multiprocessing import Pool
@@ -343,14 +366,13 @@ def f(value):
 l = [1, 2, 3, 4]
 p = Pool(4)         # say we have 4 cores --> 4 processes
 
-map(f, l)           # would take 4 seconds
-p.map(f, l)         # would take 1 second
-
+map(f, l)           # would take 4 seconds (call to f(1), then f(2), then f(3), then f(4))
+p.map(f, l)         # would take 1 second (simultaneously call f(1), f(2), f(3) and f(4))
 ```
 
-## Handling Exceptions: with try & except
+### Handling Exceptions: with try & except
 
-Things will break.
+When things get unpredictive, you can avoid your program crashing by adding `try` and `except` keywords. In this snippet, `l + 1` will raise an error when l will be assigned None, as we can't add an integer and a NoneType object.
 
 ``` python
 l = [1, 2, 3, None]
@@ -359,7 +381,7 @@ for i, item in enumerate(l):
     print l + 1     # will crash when item=None
 ```
 
-Handle exceptions:
+We can handle such exceptions as follows:
 
 ``` python
 l = [1, 2, 3, None]
@@ -371,18 +393,18 @@ for i, item in enumerate(l):
         print "Something went wrong"
 ```
 
-Full list of Exceptions [here](https://docs.python.org/2/library/exceptions.html#bltin-exceptions).
+See the full list of Exceptions [here](https://docs.python.org/2/library/exceptions.html#bltin-exceptions).
 
-## Assertions
+### Assertions
 
-Checks boolean expressions, raises exception when False.
+`assert` checks a boolean expression and raises an exception when the expression result is False.
 
 ``` python
 assert(2>=1)     # works
 assert(2<=1)     # raises AssertionError
 ```
 
-Useful for parameter checking:
+This can be useful for parameter checking:
 ```python
 def f(value):
     try:
@@ -397,7 +419,8 @@ if __name__ == "__main__":
     print f("hi")   # will raise ValueError
 ```
 
-## Loop statements
+### Loop statements
+Here are some keywords that can be used within a python loop:
 - `break`: terminates the current loop
 - `continue`: returns to the top of the loop, ignoring future statements
 - `pass`: when a statement is required, but we don't want to do anything
@@ -443,21 +466,22 @@ else:
 # will print i from 0 to 9, then "done"
 ```
 
-## Logging
+### Logging
 
-Are you using `print` for logging ? Stop right now.
+Are you using `print` for logging ? Stop right now, and consider using the built in `logging` module which makes it really easy to display and organise your logs.
 
 ``` python
 import logging
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)s:%(message)s',
-    level=logging.DEBUG)     # minimum logging level
+    level=logging.DEBUG     # minimum logging level
+    )
 
 logging.info("this is info") # prints 2017-05-11 17:36:33,141 INFO:this is info
 ```
 
-Be careful with the logging level.
+Be careful with the logging level, the minimum logging level matters, as messages with lower level than the minimum will not be displayed or saved.
 
 ``` python
 import logging
@@ -469,9 +493,9 @@ logging.basicConfig(
 logging.debug("this is debug") # won't be displayed because DEBUG < INFO
 ```
 
-## Generators
+### Generators
 
-A generator produces a sequence of results and not the full array. Hence, we never load a full array in memory.
+A generator produces a sequence of results and avoid loading an iterable object all at once. For instance we never load a full array in memory, instead we load and process its element one by one by calling the `next()` method.
 
 ``` python
 def yrange(n):
@@ -487,27 +511,13 @@ print y.next()      # prints 2
 print y.next()      # raises Error
 ```
 
-#Structure of a project
+## Structure of a project
 
-## `__init__.py`
+In this section we wil learn about modules, and how to organise a project that has multiple classes or functions declared in separated files.
 
-This is where the main function starts
+### Importance of an `__init__.py` file
 
-```python
-def main():
-    # main function
-    pass
-
-if __name__ == "__main__":
-    # this is the entrypoint of the code
-    main()
-```
-
-## Modules
-
-Let's say we defined a function `some_function` within 
-the `my_module.__init__.py` file. This function is now part
-of a module beautifully called `my_module`.
+Adding a `__init__.py` file within a folder makes the folder a python module, that can be imported in other python files. Let's say we defined a function `some_function` within the `my_module.__init__.py` file. This function is now part of a module called `my_module`.
 
 ``` shell
 my_python_project/
@@ -516,7 +526,7 @@ my_python_project/
     └── __init__.py
 ```
 
-`my_python_project.__init__.py` : 
+Within `my_python_project.__init__.py`, we write: 
 ``` python
 from my_module import some_function
 
@@ -527,11 +537,17 @@ if __name__ == "__main__":
     main()
 ```
 
-# For a better Sublime Text
-## Install Sublime Text 3 & Package Control
+And in `my_python_project.my_module.__init__.py` we might have:
 
-Sublime Text is a text editor that can be enhanced with 
-several packages.
+``` python
+def some_function():
+    return "hi"
+```
+
+## Sulbime Text
+I personally use Sublime Text 3 when writing python code for production. I like that it is lightweight and very extensible thanks to so many third parties packages. In the following, I share with you some of my favorite packages.
+
+### Install Sublime Text 3 & Package Control
 
 1. Download from [here](https://www.sublimetext.com/3)  
 
@@ -541,8 +557,8 @@ Sublime Text even better.
 
 3. Launch Package Control from Sublime Text with `CTRL` + `MAJ` + `P` and
 search for Package Control. Autocomplete should bring you a list of various commands.
-# For a better Sublime Text
-## My Favorite Packages
+
+### My Favorite Packages
 
 1. [SideBarEnhancements](https://packagecontrol.io/packages/SideBarEnhancements),
 adds tons of options to the Sublime Text sidebar.
@@ -554,8 +570,8 @@ in all open files.
 6. [SublimeCodeIntel](https://packagecontrol.io/packages/SublimeCodeIntel): Smart autocompletion for Sublime Text
 7. [Agila Theme](https://packagecontrol.io/packages/Agila%20Theme): One theme among others
 
-# Virtual Environments
-## What is it ?
+## Virtual Environments
+### What is it ?
 
 From [virtualenv documentation](http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/):
 > A Virtual Environment is a tool to keep the dependencies required by different projects in separate places, by creating virtual Python environments for them. It solves the “Project X depends on version 1.x but, Project Y needs 4.x” dilemma, and keeps your global site-packages directory clean and manageable.
@@ -570,7 +586,7 @@ Instead, pip install any library you want **inside** a virtualenv:
 $ (your-virtualenv) pip install whatever        # good
 ``
 
-## Getting started
+### Getting started
 
 Install virtualenv with pip
 ``` shell
@@ -593,7 +609,7 @@ You're free ! Install whatever you want !
 $ (your-virtualenv) pip install pandas
 ```
 
-## It gets better
+### It gets better
 
 You can use whatever python you want !
 ```shell
@@ -610,11 +626,16 @@ Install back your pip libraries in another virtualenv:
 $ (your-virtualenv2) pip install requirements.txt
 ```
 
-# Writing Beautiful Python
-## PEP 8
+## Writing Beautiful Python
+### PEP 8
 
 A guide written by Guido van Rossum, Barray Warsaw and Nick Coghlan for defining naming and formatting conventions accross all python scripts.
 
 Taken from [python.org](https://www.python.org/dev/peps/pep-0008/):
 - [Code layout](https://www.python.org/dev/peps/pep-0008/#code-lay-out)
 - [Naming conventions](https://www.python.org/dev/peps/pep-0008/#naming-conventions)
+
+## Thank you 
+That's it ! I hope this post made sense and helped you a little ! Have fun progamming in this beautiful language that is Python.
+
+<iframe src="https://giphy.com/embed/ZVik7pBtu9dNS" width="480" height="268" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/life-interesting-footage-ZVik7pBtu9dNS">via GIPHY</a></p>
