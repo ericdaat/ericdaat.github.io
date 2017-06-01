@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Python tips and useful tools — Eric's Blog</title>
+	<meta name="description" content="Title: Python tips and useful tools; Date: 2017-05-28; Author: Eric Daoud">
+	<meta name="author" content="Eric Daoud">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="../theme/html5.js"></script>
+		<![endif]-->
+	<link href="../theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="../theme/css/local.css" rel="stylesheet">
+	<link href="../theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="../">Eric's Blog</a>
+			<br><small>Jr. Data Scientist</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Python tips and useful tools</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">Eric Daoud</h4>
+		</span>
+		<time datetime="2017-05-28T10:20:00+02:00" itemprop="datePublished">Sun 28 May 2017</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="../category/misc.html" rel="category">misc</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><!-- Modified: 2010-12-03 10:20 -->
+
+<p>Category: Programming
+Tags: python, code
+Slug: python-tips
+Authors: Eric Daoud
+Summary: Showing some tips and useful stuff I like about Python language.
+Status: published</p>
+<h1>Introduction</h1>
+<p>Python is awesome.</p>
+<p>Built by Guido Van Rossum in 1989... because he was bored:</p>
+<blockquote>
+<p><em>Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).</em></p>
+<p>-- Guido Van Rossum, 1996</p>
+</blockquote>
+<p>Few things worth mentioning:</p>
+<ol>
+<li>
+<p>This is absolutely not exhaustive.</p>
+</li>
+<li>
+<p>You can learn more about Python <a href="https://www.python.org/">here</a>.</p>
+</li>
+<li>
+<p>I personally started learning it by reading <a href="https://learnpythonthehardway.org/book/">Learn Python the Hard Way</a></p>
+</li>
+<li>
+<p>For Mac users, it is recommended to <strong>not</strong> use the built in macOS Python. Instead, do the following:</p>
+<ul>
+<li>Get <a href="https://brew.sh/">Homebrew</a>, the missing package manager for macOS</li>
+<li>Run <code>brew install python</code></li>
+</ul>
+</li>
+</ol>
+<h1>Object Oriented Programming</h1>
+<h2>Simple Class</h2>
+<p>Create a basic class <code>MyClass</code> with a constructor <code>__init__</code> 
+that takes no argument. Our class is very simple and has
+no attribute.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">my_class</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>    <span class="c1"># call to the __init__ constructor</span>
+</pre></div>
+
+
+<h2>Passing arguments</h2>
+<p>Improve our class by changing the constructor and adding arguments.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">my_class</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># call to the __init__ constructor</span>
+    <span class="k">print</span> <span class="n">my_class</span><span class="o">.</span><span class="n">arg</span>      <span class="c1"># will print 1</span>
+</pre></div>
+
+
+<h2>Calling methods</h2>
+<p>Adding an instance method to our class</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+
+    <span class="k">def</span> <span class="nf">some_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">my_class</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">my_class</span><span class="o">.</span><span class="n">some_method</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>      <span class="c1"># will print 3</span>
+</pre></div>
+
+
+<h2>Inheritance</h2>
+<p>Create two Classes <code>A</code> and <code>B</code>, where <code>B</code> inherits from <code>A</code>. Notice
+how <code>B</code> can use <code>a_method</code> even though it is defined in <code>A</code>.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+
+    <span class="k">def</span> <span class="nf">a_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>    <span class="c1"># calls A constructor with arg</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                            <span class="c1"># creates A then B</span>
+    <span class="k">print</span> <span class="n">b</span><span class="o">.</span><span class="n">a_method</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>                 <span class="c1"># will print 3</span>
+</pre></div>
+
+
+<h2>Overidding</h2>
+<p>Same <code>A</code> and <code>B</code> Classes, but this time we override
+<code>A.a_method</code> in <code>B</code></p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
+
+    <span class="k">def</span> <span class="nf">a_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>    <span class="c1"># calls A constructor with arg</span>
+
+    <span class="k">def</span> <span class="nf">a_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>          <span class="c1"># overriding a_method</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>                            <span class="c1"># creates A then B</span>
+    <span class="k">print</span> <span class="n">b</span><span class="o">.</span><span class="n">a_method</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>                 <span class="c1"># will print 6</span>
+</pre></div>
+
+
+<h2>instance method vs. Class method</h2>
+<p>An instance method is called on an instance of the Class.<br>
+Here, <code>Animal</code> is our class, and <code>bob</code> is an instance of <code>Animal</code>.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">say_my_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">bob</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">bob</span><span class="o">.</span><span class="n">say_my_name</span><span class="p">()</span>      <span class="c1"># will print &quot;Bob&quot;</span>
+</pre></div>
+
+
+<p>A Class method however, is called on the Class itself.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">introduce</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;I am {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">say_my_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">Animal</span><span class="o">.</span><span class="n">introduce</span><span class="p">()</span>    <span class="c1"># will print &quot;I am &lt;class &#39;__main__.Animal&#39;&gt;&quot;</span>
+</pre></div>
+
+
+<h2>Public vs. private</h2>
+<p>Methods and attributes are public by default in python. Adding a <code>_</code> makes
+them private:<br>
+ - <code>self.name</code> vs. <code>self._name</code> for attributes
+ - <code>def some_method(self)</code> vs. <code>def _some_method(self)</code> for methods</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">credit_card_code</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_credit_card_code</span> <span class="o">=</span> <span class="n">credit_card_code</span>
+
+    <span class="k">def</span> <span class="nf">_do_something_private</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">bob</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="mi">1234</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">bob</span><span class="o">.</span><span class="n">name</span>                  <span class="c1"># will print &quot;Bob&quot;</span>
+    <span class="k">print</span> <span class="n">bob</span><span class="o">.</span><span class="n">credit_card_code</span>      <span class="c1"># will crash</span>
+    <span class="n">bob</span><span class="o">.</span><span class="n">do_something_private</span><span class="p">()</span>      <span class="c1"># will crash</span>
+</pre></div>
+
+
+<p>Note that privacy doesn't really exist in Python. Indeed, you could call</p>
+<h2>Accessing private attributes: getter &amp; setter</h2>
+<p>When defining private attributes, we can access them with getters,
+and redefine them with setters.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_private_attribute</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">private_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_private_attribute</span>
+
+    <span class="nd">@private_attribute.setter</span>
+    <span class="k">def</span> <span class="nf">private_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_private_attribute</span> <span class="o">=</span> <span class="n">new_value</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">SomeClass</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">c</span><span class="o">.</span><span class="n">private_attribute</span>     <span class="c1"># will print 1</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">private_attribute</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">print</span> <span class="n">c</span><span class="o">.</span><span class="n">private_attribute</span>     <span class="c1"># will print 2</span>
+</pre></div>
+
+
+<h1>Useful tools and functions</h1>
+<h2>Comprehension lists</h2>
+<p>Creating arrays faster and in a more elegant way.</p>
+<div class="highlight"><pre><span></span><span class="c1"># The ugly way:</span>
+<span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="c1"># l = [0, 1, 2, 3, 4]</span>
+
+
+<span class="c1"># The list comprehension way:</span>
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
+<span class="c1"># l = [0, 1, 2, 3, 4]</span>
+
+
+<span class="c1"># Works with dicts too !</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">):</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)}</span>
+<span class="c1"># d = {&#39;1&#39;: 1, &#39;0&#39;: 0, &#39;3&#39;: 3, &#39;2&#39;: 2, &#39;4&#39;: 4}</span>
+</pre></div>
+
+
+<h2>Enumerate</h2>
+<p>An elegant way to iterate over an iterable object</p>
+<div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+
+<span class="c1"># The ugly way:</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+    <span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>               <span class="c1"># will print 0, 10 then 1, 20 etc ...</span>
+
+
+<span class="c1"># The enumerate way:</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>    <span class="c1"># enumerate(l) = [(0, 10), ...]</span>
+    <span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span>               <span class="c1"># print the same thing, but nicer !</span>
+</pre></div>
+
+
+<h2>Map functions</h2>
+<p>Apply a function to every item of an iterable object (e.g. arrays).</p>
+<div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>           <span class="c1"># l is an iterable object</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>           <span class="c1"># function to apply to l items</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">value</span>
+
+
+<span class="c1"># The ugly way:</span>
+<span class="n">new_l</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+    <span class="n">new_l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+<span class="c1"># new_l = [2, 4, 6]</span>
+
+
+<span class="c1"># The map way:</span>
+<span class="n">new_l</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+<span class="c1"># new_l = [2, 4, 6]</span>
+</pre></div>
+
+
+<h2>Lambda functions</h2>
+<p>Create anonymous functions.</p>
+<div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">value</span>
+
+<span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> 
+</pre></div>
+
+
+<p>Do we really need to declare a function for such an easy operation ? Nope.</p>
+<div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>     <span class="c1"># will print [2, 4, 6]</span>
+</pre></div>
+
+
+<h2>Partial functions</h2>
+<p>Functions used in map can only take a single argument. What if we have more ?
+Here, we learn to create a partial function filled with some constant 
+arguments and leave one free, so we can map values on it.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">coefficient</span><span class="p">):</span>          <span class="c1"># would be hard to map huh ?</span>
+    <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="n">coefficient</span>
+
+<span class="n">fp</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">coefficient</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>      <span class="c1"># fp = f(value, coefficient=2)</span>
+
+<span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>                    <span class="c1"># will print [2, 4, 6]</span>
+</pre></div>
+
+
+<h2>Multiprocessing with Pool</h2>
+<p>Multi process a function with multiprocessing.Pool</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>         <span class="c1"># say we have 4 cores --&gt; 4 processes</span>
+
+<span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>           <span class="c1"># would take 4 seconds</span>
+<span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>         <span class="c1"># would take 1 second</span>
+</pre></div>
+
+
+<h2>Handling Exceptions: with try &amp; except</h2>
+<p>Things will break.</p>
+<div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span>     <span class="c1"># will crash when item=None</span>
+</pre></div>
+
+
+<p>Handle exceptions:</p>
+<div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">l</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">except</span><span class="p">:</span>     <span class="c1"># Will catch any exception (KeyError, ValueError, etc...)</span>
+        <span class="k">print</span> <span class="s2">&quot;Something went wrong&quot;</span>
+</pre></div>
+
+
+<p>Full list of Exceptions <a href="https://docs.python.org/2/library/exceptions.html#bltin-exceptions">here</a>.</p>
+<h2>Assertions</h2>
+<p>Checks boolean expressions, raises exception when False.</p>
+<div class="highlight"><pre><span></span><span class="k">assert</span><span class="p">(</span><span class="mi">2</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">)</span>     <span class="c1"># works</span>
+<span class="k">assert</span><span class="p">(</span><span class="mi">2</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">)</span>     <span class="c1"># raises AssertionError</span>
+</pre></div>
+
+
+<p>Useful for parameter checking:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">assert</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;value must be integer&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">value</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">f</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>      <span class="c1"># will print 3</span>
+    <span class="k">print</span> <span class="n">f</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">)</span>   <span class="c1"># will raise ValueError</span>
+</pre></div>
+
+
+<h2>Loop statements</h2>
+<ul>
+<li><code>break</code>: terminates the current loop</li>
+<li><code>continue</code>: returns to the top of the loop, ignoring future statements</li>
+<li><code>pass</code>: when a statement is required, but we don't want to do anything</li>
+<li><code>else</code>: <ol>
+<li>in for loops, executed when the loop is done iterrating the list</li>
+<li>in while loops, executed when the condition becomes False</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">print</span> <span class="n">i</span>
+
+<span class="c1"># will print i from 0 to 4</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">print</span> <span class="n">i</span>
+
+<span class="c1"># will print i from 0 to 4 and 6 to 9</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">print</span> <span class="n">i</span>
+
+<span class="c1"># will print i from 0 to 9</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">print</span> <span class="n">i</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s2">&quot;done&quot;</span>
+
+<span class="c1"># will print i from 0 to 9, then &quot;done&quot;</span>
+</pre></div>
+
+
+<h2>Logging</h2>
+<p>Are you using <code>print</code> for logging ? Stop right now.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)s</span><span class="s1">:</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>     <span class="c1"># minimum logging level</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;this is info&quot;</span><span class="p">)</span> <span class="c1"># prints 2017-05-11 17:36:33,141 INFO:this is info</span>
+</pre></div>
+
+
+<p>Be careful with the logging level.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)s</span><span class="s1">:</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>        <span class="c1"># minimum logging level</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;this is debug&quot;</span><span class="p">)</span> <span class="c1"># won&#39;t be displayed because DEBUG &lt; INFO</span>
+</pre></div>
+
+
+<h2>Generators</h2>
+<p>A generator produces a sequence of results and not the full array. Hence, we never load a full array in memory.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">yrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>    <span class="c1"># the loop doesn&#39;t run all at once, it waits for next()</span>
+        <span class="k">yield</span> <span class="n">i</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">yrange</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>       <span class="c1"># generator object</span>
+<span class="k">print</span> <span class="n">y</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>      <span class="c1"># prints 0</span>
+<span class="k">print</span> <span class="n">y</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>      <span class="c1"># prints 1</span>
+<span class="k">print</span> <span class="n">y</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>      <span class="c1"># prints 2</span>
+<span class="k">print</span> <span class="n">y</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>      <span class="c1"># raises Error</span>
+</pre></div>
+
+
+<h1>Structure of a project</h1>
+<h2><code>__init__.py</code></h2>
+<p>This is where the main function starts</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># main function</span>
+    <span class="k">pass</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># this is the entrypoint of the code</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<h2>Modules</h2>
+<p>Let's say we defined a function <code>some_function</code> within 
+the <code>my_module.__init__.py</code> file. This function is now part
+of a module beautifully called <code>my_module</code>.</p>
+<div class="highlight"><pre><span></span>my_python_project/
+├── __init__.py
+└── my_module
+    └── __init__.py
+</pre></div>
+
+
+<p><code>my_python_project.__init__.py</code> : </p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">my_module</span> <span class="kn">import</span> <span class="n">some_function</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">some_function</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+
+<h1>For a better Sublime Text</h1>
+<h2>Install Sublime Text 3 &amp; Package Control</h2>
+<p>Sublime Text is a text editor that can be enhanced with 
+several packages.</p>
+<ol>
+<li>
+<p>Download from <a href="https://www.sublimetext.com/3">here</a>  </p>
+</li>
+<li>
+<p>Install Package Control from <a href="https://packagecontrol.io/installation">here</a>.
+Package control will enable you to browse and install awesome packages to make
+Sublime Text even better.  </p>
+</li>
+<li>
+<p>Launch Package Control from Sublime Text with <code>CTRL</code> + <code>MAJ</code> + <code>P</code> and
+search for Package Control. Autocomplete should bring you a list of various commands.</p>
+</li>
+</ol>
+<h1>For a better Sublime Text</h1>
+<h2>My Favorite Packages</h2>
+<ol>
+<li><a href="https://packagecontrol.io/packages/SideBarEnhancements">SideBarEnhancements</a>,
+adds tons of options to the Sublime Text sidebar.</li>
+<li><a href="https://packagecontrol.io/packages/GitGutter">GitGutter</a>: See git diff in Sublime Text</li>
+<li><a href="https://packagecontrol.io/packages/BracketHighlighter">BracketHighlighter</a>: Bracket and tag highlighter for Sublime Text</li>
+<li><a href="https://packagecontrol.io/packages/All%20Autocomplete">All Autocomplete</a>: Extend Sublime Text autocompletion to find matches 
+in all open files.</li>
+<li><a href="https://packagecontrol.io/packages/Markdown%20Preview">Markdown Preview</a>: Write markdown and then render as HTML</li>
+<li><a href="https://packagecontrol.io/packages/SublimeCodeIntel">SublimeCodeIntel</a>: Smart autocompletion for Sublime Text</li>
+<li><a href="https://packagecontrol.io/packages/Agila%20Theme">Agila Theme</a>: One theme among others</li>
+</ol>
+<h1>Virtual Environments</h1>
+<h2>What is it ?</h2>
+<p>From <a href="http://python-guide-pt-br.readthedocs.io/en/latest/dev/virtualenvs/">virtualenv documentation</a>:</p>
+<blockquote>
+<p>A Virtual Environment is a tool to keep the dependencies required by different projects in separate places, by creating virtual Python environments for them. It solves the “Project X depends on version 1.x but, Project Y needs 4.x” dilemma, and keeps your global site-packages directory clean and manageable.</p>
+</blockquote>
+<p>You should never <strong>sudo</strong> pip install something:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> sudo pip install whatever                     <span class="c1"># bad</span>
+</pre></div>
+
+
+<p>Instead, pip install any library you want <strong>inside</strong> a virtualenv:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span> <span class="o">(</span>your-virtualenv<span class="o">)</span> pip install whatever        <span class="c1"># good</span>
+<span class="go">``</span>
+
+<span class="gp">#</span><span class="c1"># Getting started</span>
+
+<span class="go">Install virtualenv with pip</span>
+<span class="go">``` shell</span>
+<span class="gp">$</span> pip install virtualenv  <span class="c1"># you may need sudo</span>
+</pre></div>
+
+
+<p>Create a virtualenv somewhere in your file system:</p>
+<div class="highlight"><pre><span></span>$ virtualenv your-virtualenv  <span class="c1"># will create a your-virtualenv folder</span>
+</pre></div>
+
+
+<p>Activate it:</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">source</span> your-virtualenv/bin/activate
+$ <span class="o">(</span>your-virtualenv<span class="o">)</span> pip list <span class="c1"># check what&#39;s inside</span>
+</pre></div>
+
+
+<p>You're free ! Install whatever you want !</p>
+<div class="highlight"><pre><span></span>$ <span class="o">(</span>your-virtualenv<span class="o">)</span> pip install pandas
+</pre></div>
+
+
+<h2>It gets better</h2>
+<p>You can use whatever python you want !</p>
+<div class="highlight"><pre><span></span>$ virtualenv your-virtualenv -p python3
+</pre></div>
+
+
+<p>Export all you pip libraries to a .txt file:</p>
+<div class="highlight"><pre><span></span>$ <span class="o">(</span>your-virtualenv<span class="o">)</span> pip freeze &gt; requirements.txt
+</pre></div>
+
+
+<p>Install back your pip libraries in another virtualenv:</p>
+<div class="highlight"><pre><span></span>$ <span class="o">(</span>your-virtualenv2<span class="o">)</span> pip install requirements.txt
+</pre></div>
+
+
+<h1>Writing Beautiful Python</h1>
+<h2>PEP 8</h2>
+<p>A guide written by Guido van Rossum, Barray Warsaw and Nick Coghlan for defining naming and formatting conventions accross all python scripts.</p>
+<p>Taken from <a href="https://www.python.org/dev/peps/pep-0008/">python.org</a>:
+- <a href="https://www.python.org/dev/peps/pep-0008/#code-lay-out">Code layout</a>
+- <a href="https://www.python.org/dev/peps/pep-0008/#naming-conventions">Naming conventions</a></p></div>
+	<hr>
+	<h2>Comments</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="..">Eric's Blog</a></li>
+							<li><a href="..//archives.html"><i class="fa fa-Archives "></i> Archives</a></li>
+							<li><a href="..//categories.html"><i class="fa fa-Categories "></i> Categories</a></li>
+							<li><a href="..//tags.html"><i class="fa fa-Tags "></i> Tags</a></li>
+							<li><a href="../pages/about-me.html"><i class="fa fa-About me "></i> About me</a></li>
+							<li><a href="../pages/contact-me.html"><i class="fa fa-Contact me "></i> Contact me</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="#">Github</a></li>
+							<li><a href="#">Twitter</a></li>
+							<li><a href="#">Youtube</a></li>
+							<li><a href="#">Linkedin</a></li>
+							<li><a href="#">500px</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; Eric Daoud 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>

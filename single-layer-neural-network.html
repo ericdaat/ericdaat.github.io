@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Single Layer Neural Network — Eric's Blog</title>
+	<meta name="description" content="Title: Single Layer Neural Network; Date: 2010-12-03; Author: Eric Daoud">
+	<meta name="author" content="Eric Daoud">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="./theme/html5.js"></script>
+		<![endif]-->
+	<link href="./theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="./theme/css/local.css" rel="stylesheet">
+	<link href="./theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="./">Eric's Blog</a>
+			<br><small>Jr. Data Scientist</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Single Layer Neural Network</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">Eric Daoud</h4>
+		</span>
+		<time datetime="2010-12-03T10:20:00+01:00" itemprop="datePublished">Fri 03 December 2010</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="./category/data-science.html" rel="category">Data Science</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="./tag/python.html" rel="tag">python</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="./tag/machine-learning.html" rel="tag">machine-learning</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="./tag/neural-networks.html" rel="tag">neural-networks</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><h1>Neural Networks</h1>
+<h2>About neural networks</h2>
+<h3>Layers</h3>
+<p>A single hidden layer neural network has 3 different layers:</p>
+<ul>
+<li>An input layer <span class="math">\(X\)</span> of size <span class="math">\(P\)</span></li>
+<li>A hidden layer <span class="math">\(Z\)</span> of size <span class="math">\(M\)</span></li>
+<li>An output layer <span class="math">\(Y\)</span> of size <span class="math">\(K\)</span></li>
+</ul>
+<p><img src="/images/neural-net.png" width=400px/></p>
+<p>Each layer is computed from the layer below using weights and an activation function. </p>
+<p>The hidden layer is computed by <span class="math">\(Z_m = \sigma (\alpha_{0m} + \alpha_{m}^{T} X)\)</span>; with <span class="math">\(m = 1, \ldots, M\)</span> and the output layer with <span class="math">\(Y_k = g_k(\beta_{0k} + \beta_{k}^{T} Z)\)</span>; with <span class="math">\(k = 1, \ldots, K\)</span>.</p>
+<p>The two matrices <span class="math">\(\alpha\)</span> and <span class="math">\(\beta\)</span> contain the parameters of the model, composed by weights and biases. For instance, the <span class="math">\(\alpha\)</span> matrix contains both biases and weights between the input and the hidden layer.</p>
+<div class="math">\begin{equation}
+    \alpha = \begin{pmatrix}
+        \alpha_{00} &amp; \alpha_{01} &amp; \ldots &amp; \alpha_{0M} \\
+        \vdots &amp; \vdots &amp; \ldots &amp; \vdots \\
+        \alpha_{P0} &amp; \alpha_{P1} &amp; \ldots &amp; \alpha_{PM} \\
+    \end{pmatrix}
+\end{equation}</div>
+<div class="math">\begin{equation}
+    b_\alpha = \begin{pmatrix}
+        \alpha_{00} \\
+        \vdots \\
+        \alpha_{P0} \\
+    \end{pmatrix}
+\end{equation}</div>
+<div class="math">\begin{equation}
+    W_\alpha = \begin{pmatrix}
+        \alpha_{01} &amp; \ldots &amp; \alpha_{0M} \\
+        \vdots &amp; \ldots &amp; \vdots \\
+        \alpha_{P1} &amp; \ldots &amp; \alpha_{PM} \\
+    \end{pmatrix}
+\end{equation}</div>
+<p>To compute the hidden layer neurons, we use a non linear function <span class="math">\(\sigma\)</span> which is typically a sigmoid or tanh function. Regarding the output layer neurons, there are two cases:
+ - For a regression problem, <span class="math">\(K=1\)</span> and we use the identity function
+ - For a <span class="math">\(K\)</span> class classifiction problem, we often use a softmax function <span class="math">\(g_k(T) = \frac{e^{T_k}}{\sum_{l=1}{K}e^{T_l}}\)</span>. The softmax function outputs probabilities of each class corresponding to our input. We simply use <span class="math">\(argmax_k(g_k(T))\)</span> as our classifier to keep the class with the largest probability.</p>
+<h3>Training the network</h3>
+<p>Let's call <span class="math">\(\theta\)</span> the set of weights <span class="math">\(\alpha\)</span> and <span class="math">\(\beta\)</span>: <span class="math">\(\theta = (\{\alpha_{0m}, \alpha_{m}; m=1, \ldots M\}, \{\beta_{0k}, \beta_{k}; k=1, \ldots K\})\)</span></p>
+<p>Training is achieved by minimizing a loss function <span class="math">\(R(\theta)\)</span> that we define depending on the task we want to achieve:
+- For regression, we use sum of squared error:
+</p>
+<div class="math">\begin{equation}
+    R(\theta) = \sum_{k=1}^{K} \sum_{i=1}^{N} (y_{ik} - f_k(x_i))^2
+\end{equation}</div>
+<p>
+- For classification, we use cros entropy: 
+</p>
+<div class="math">\begin{equation}
+    R(\theta) = - \sum_{i=1}^{N} \sum_{k=1}^{K} y_{ik} log(f_k(x_i))
+\end{equation}</div>
+<p>We minimize the loss function using gradient descent</p>
+<h2>Sources</h2>
+<p>[0] <a href="#">The Elements of Statistical Learning</a><br>
+ [1] <a href="http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/">Implementing a Neural Network from scratch</a></p>
+<h2>Code</h2>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_moons</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">y_onehot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">y_onehot</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> 
+            <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> 
+            <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span> <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;b&#39;</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="png" src="/images/slnn-moons.png"></p>
+<h2>Implementation from scratch</h2>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SingleLayerNeuralNetwork</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_layer_size</span><span class="p">,</span> <span class="n">hidden_layer_size</span><span class="p">,</span> <span class="n">output_layer_size</span><span class="p">,</span> 
+                 <span class="n">learning_rate</span><span class="p">,</span> <span class="n">regularization_rate</span><span class="p">):</span>
+        <span class="c1"># neural network parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_layer_size</span> <span class="o">=</span> <span class="n">input_layer_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hidden_layer_size</span> <span class="o">=</span> <span class="n">hidden_layer_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_layer_size</span> <span class="o">=</span> <span class="n">output_layer_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_regularization_rate</span> <span class="o">=</span> <span class="n">regularization_rate</span>
+
+
+        <span class="c1"># parameters random initilization</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_W_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_layer_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hidden_layer_size</span><span class="p">)</span> \
+                        <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_layer_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_b_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hidden_layer_size</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_W_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hidden_layer_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_layer_size</span><span class="p">)</span> \
+                        <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_layer_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_b_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_layer_size</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_softmax</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Takes an input matrix X, returns an array of probabilities.</span>
+<span class="sd">        This function takes the input layer X through the entire network</span>
+<span class="sd">        and returns the softmax function result, corresponding to the</span>
+<span class="sd">        output layer. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">z_h</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_W_h</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_b_h</span>
+        <span class="n">h_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z_h</span><span class="p">)</span>
+        <span class="n">z_o</span> <span class="o">=</span> <span class="n">h_1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_W_o</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_b_o</span>
+        <span class="n">softmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z_o</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z_o</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">softmax</span>
+
+    <span class="k">def</span> <span class="nf">_calculate_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Takes an input matrix X and one hot encoded output values y,</span>
+<span class="sd">        returns the loss function result.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">softmax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_softmax</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">softmax</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Takes an input matrix X, returns the predicted class</span>
+<span class="sd">        according to the argmax over the softmax function result. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">softmax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_softmax</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">softmax</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Takes an input matrix X, one hot encoded output matrix y </span>
+<span class="sd">        and number ofepochs. Trains the network with gradient descent and</span>
+<span class="sd">        returns an array of loss function results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+            <span class="c1"># forward propagation</span>
+            <span class="n">z_h</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_W_h</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_b_h</span>
+            <span class="n">h_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">z_h</span><span class="p">)</span>
+            <span class="n">z_o</span> <span class="o">=</span> <span class="n">h_1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_W_o</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_b_o</span>
+            <span class="n">exp_z_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">z_o</span><span class="p">)</span>
+            <span class="n">softmax</span> <span class="o">=</span> <span class="n">exp_z_o</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp_z_o</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+            <span class="c1"># compute loss for debug</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_loss</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;loss after {0}-th iteration: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">loss</span><span class="p">))</span>
+
+            <span class="c1"># back propagation</span>
+            <span class="c1">## computing output layer weight updates</span>
+            <span class="n">delta_o</span> <span class="o">=</span> <span class="n">softmax</span> <span class="o">-</span> <span class="n">y</span>
+            <span class="n">dW_o</span> <span class="o">=</span> <span class="n">h_1</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">delta_o</span><span class="p">)</span>
+            <span class="n">db_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">delta_o</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="c1">## computing hidden layer weight updates</span>
+            <span class="n">delta_h</span> <span class="o">=</span> <span class="n">delta_o</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_W_o</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">h_1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="n">dW_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">delta_h</span><span class="p">)</span>
+            <span class="n">db_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">delta_h</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1">## applying regularization</span>
+            <span class="n">dW_h</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_regularization_rate</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_W_h</span>
+            <span class="n">dW_o</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_regularization_rate</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_W_o</span>
+
+            <span class="c1">## parameters update controled by learning rate</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_W_h</span> <span class="o">+=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span> <span class="o">*</span> <span class="n">dW_h</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_b_h</span> <span class="o">+=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span> <span class="o">*</span> <span class="n">db_h</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_W_o</span> <span class="o">+=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span> <span class="o">*</span> <span class="n">dW_o</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_b_o</span> <span class="o">+=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span> <span class="o">*</span> <span class="n">db_o</span>
+
+        <span class="k">return</span> <span class="n">losses</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="n">slnn</span> <span class="o">=</span> <span class="n">SingleLayerNeuralNetwork</span><span class="p">(</span>
+        <span class="n">input_layer_size</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">hidden_layer_size</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">output_layer_size</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">regularization_rate</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="p">)</span>
+
+<span class="o">%</span><span class="n">time</span> <span class="n">losses</span> <span class="o">=</span> <span class="n">slnn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_onehot</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="n">slnn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="mi">2</span><span class="p">))))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>CPU times: user 217 ms, sys: 2.91 ms, total: 220 ms
+Wall time: 220 ms
+</pre></div>
+
+
+<p><img alt="png" src="/images/slnn-loss.png"></p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></div>
+	<hr>
+	<h2>Comments</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href=".">Eric's Blog</a></li>
+							<li><a href=".//archives.html"><i class="fa fa-Archives "></i> Archives</a></li>
+							<li><a href=".//categories.html"><i class="fa fa-Categories "></i> Categories</a></li>
+							<li><a href=".//tags.html"><i class="fa fa-Tags "></i> Tags</a></li>
+							<li><a href="./pages/about-me.html"><i class="fa fa-About me "></i> About me</a></li>
+							<li><a href="./pages/contact-me.html"><i class="fa fa-Contact me "></i> Contact me</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="#">Github</a></li>
+							<li><a href="#">Twitter</a></li>
+							<li><a href="#">Youtube</a></li>
+							<li><a href="#">Linkedin</a></li>
+							<li><a href="#">500px</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="./category/data-science.html">Data Science (1)</a></li>
+							<li><a href="./category/programming.html">Programming (1)</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; Eric Daoud 2016</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+</body>
+</html>
