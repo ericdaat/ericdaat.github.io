@@ -1,17 +1,17 @@
 Title: Python Tips and Tools
 Date: 2017-05-28 10:20
-Modified: 2017-05-28 10:20
+Modified: 2017-07-29 10:20
 Category: Programming
 Tags: python, code
 Slug: python-tips-and-tools
 Authors: Eric Daoud
-Summary: There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments. 
+Summary: There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.
 Status: published
 
 
-I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored ! 
+I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !
 
-> *Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).*  
+> *Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).*
 
 > -- Guido Van Rossum, 1996
 
@@ -30,7 +30,7 @@ A python code doesn't need to be Object Oriented, as opposed to Java for instanc
 
 ### Simple Class
 
-We create a basic class `MyClass` with a constructor `__init__` that takes no argument. Our class is very simple and has no attribute. Note that `self` is just a keyword, it serves as a placeholder for the instance object. 
+We create a basic class `MyClass` with a constructor `__init__` that takes no argument. Our class is very simple and has no attribute. Note that `self` is just a keyword, it serves as a placeholder for the instance object.
 
 ``` python
 class MyClass(object):
@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
 ### Passing arguments
 
-Let's improve our class by changing the constructor and adding arguments. Arguments in the constructor (or in any method) go after the `self` keyword. 
+Let's improve our class by changing the constructor and adding arguments. Arguments in the constructor (or in any method) go after the `self` keyword.
 
 ``` python
 class MyClass(object):
@@ -85,13 +85,13 @@ if __name__ == '__main__':
 
 ### Inheritance
 
-Here we create two Classes `A` and `B`, where `B` inherits from `A`. Notice how `B` can use `a_method` even though it is defined in `A`. Indeed, a subclass has access to every method and attribute from its superclass. 
+Here we create two Classes `A` and `B`, where `B` inherits from `A`. Notice how `B` can use `a_method` even though it is defined in `A`. Indeed, a subclass has access to every method and attribute from its superclass.
 
 ``` python
 class A(object):
     def __init__(self, arg):
         self.arg = arg
-    
+
     def a_method(self, value):
         return value
 
@@ -112,7 +112,7 @@ A subclas can redefine its superclass behavior. This is called overidding. Here 
 class A(object):
     def __init__(self, arg):
         self.arg = arg
-    
+
     def a_method(self, value):
         return value
 
@@ -130,7 +130,7 @@ if __name__ == '__main__':
 
 ### instance method vs. Class method
 
-An instance method is called on an instance of the Class. Here, `Animal` is our class, and `bob` is an instance of `Animal`. 
+An instance method is called on an instance of the Class. Here, `Animal` is our class, and `bob` is an instance of `Animal`.
 
 ``` python
 class Animal(object):
@@ -233,11 +233,11 @@ if __name__ == '__main__':
     print c.private_attribute     # will print 2
 ```
 
-That's about it for Object Oriented Programming. Knowing these little snippets, you should be able to build a decent Object Oriented Program. Don't hesitate to learn more on the subject, as this post is not exhaustive. 
+That's about it for Object Oriented Programming. Knowing these little snippets, you should be able to build a decent Object Oriented Program. Don't hesitate to learn more on the subject, as this post is not exhaustive.
 
 ## Useful tools and functions
 
-Now I'd like to show you some of my favorite python tools and handy functions. We often hear people asking for a "pythonic" way to do something, and it sometimes refer to taking advantage of some python built in tools that makes it so easy to use and elegant to read. The following paragraphs will demonstrate some of these techniques. 
+Now I'd like to show you some of my favorite python tools and handy functions. We often hear people asking for a "pythonic" way to do something, and it sometimes refer to taking advantage of some python built in tools that makes it so easy to use and elegant to read. The following paragraphs will demonstrate some of these techniques.
 
 ### Comprehension lists
 
@@ -246,8 +246,8 @@ Comprehension lists allow creating arrays faster and in a more much more elegant
 ``` python
 # The normal way:
 l = []
-for i in xrange(5): 
-"""   
+for i in xrange(5):
+"""
 You should use xrange instead of range in
 python2 as it avoids load an entire array in memory.
 In python3, xrange is implicitly used when typing range.
@@ -322,7 +322,7 @@ l = [1, 2, 3]
 def f(value):
     return 2 * value
 
-print map(f, l) 
+print map(f, l)
 ```
 
 Do we really need to declare a function for such an easy operation ? Nope:
@@ -424,7 +424,7 @@ Here are some keywords that can be used within a python loop:
 - `break`: terminates the current loop
 - `continue`: returns to the top of the loop, ignoring future statements
 - `pass`: when a statement is required, but we don't want to do anything
-- `else`: 
+- `else`:
     1. in for loops, executed when the loop is done iterrating the list
     2. in while loops, executed when the condition becomes False
 
@@ -526,7 +526,7 @@ my_python_project/
     └── __init__.py
 ```
 
-Within `my_python_project.__init__.py`, we write: 
+Within `my_python_project.__init__.py`, we write:
 ``` python
 from my_module import some_function
 
@@ -544,16 +544,16 @@ def some_function():
     return "hi"
 ```
 
-## Sulbime Text
+## Sublime Text
 I personally use Sublime Text 3 when writing python code for production. I like that it is lightweight and very extensible thanks to so many third parties packages. In the following, I share with you some of my favorite packages.
 
 ### Install Sublime Text 3 & Package Control
 
-1. Download from [here](https://www.sublimetext.com/3)  
+1. Download from [here](https://www.sublimetext.com/3)
 
 2. Install Package Control from [here](https://packagecontrol.io/installation).
 Package control will enable you to browse and install awesome packages to make
-Sublime Text even better.  
+Sublime Text even better.
 
 3. Launch Package Control from Sublime Text with `CTRL` + `MAJ` + `P` and
 search for Package Control. Autocomplete should bring you a list of various commands.
@@ -564,11 +564,14 @@ search for Package Control. Autocomplete should bring you a list of various comm
 adds tons of options to the Sublime Text sidebar.
 2. [GitGutter](https://packagecontrol.io/packages/GitGutter): See git diff in Sublime Text
 3. [BracketHighlighter](https://packagecontrol.io/packages/BracketHighlighter): Bracket and tag highlighter for Sublime Text
-4. [All Autocomplete](https://packagecontrol.io/packages/All%20Autocomplete): Extend Sublime Text autocompletion to find matches 
+4. [All Autocomplete](https://packagecontrol.io/packages/All%20Autocomplete): Extend Sublime Text autocompletion to find matches
 in all open files.
 5. [Markdown Preview](https://packagecontrol.io/packages/Markdown%20Preview): Write markdown and then render as HTML
 6. [SublimeCodeIntel](https://packagecontrol.io/packages/SublimeCodeIntel): Smart autocompletion for Sublime Text
 7. [Agila Theme](https://packagecontrol.io/packages/Agila%20Theme): One theme among others
+
+## Vim
+I recently switched from Sublime Text to Vim even though I don't master all the commands available. I was inspired by my coworker at ManoMano [Francois](https://choiz.fr) who taught me a lot about Vim, what configuration I should have, and which plugins I should install. I forked his configuration [repository](https://github.com/ChoiZ/Micro-Vim-config) and added my own plugins and preferences. You can find my repository [here](https://github.com/ericdaat/Micro-Vim-Config).
 
 ## Virtual Environments
 ### What is it ?
@@ -584,7 +587,7 @@ $ sudo pip install whatever                     # bad
 Instead, pip install any library you want **inside** a virtualenv:
 ``` console
 $ (your-virtualenv) pip install whatever        # good
-``
+```
 
 ### Getting started
 
@@ -623,7 +626,7 @@ $ (your-virtualenv) pip freeze > requirements.txt
 
 Install back your pip libraries in another virtualenv:
 ```shell
-$ (your-virtualenv2) pip install requirements.txt
+$ (your-virtualenv2) pip install -r requirements.txt
 ```
 
 ## Writing Beautiful Python
@@ -635,7 +638,7 @@ Taken from [python.org](https://www.python.org/dev/peps/pep-0008/):
 - [Code layout](https://www.python.org/dev/peps/pep-0008/#code-lay-out)
 - [Naming conventions](https://www.python.org/dev/peps/pep-0008/#naming-conventions)
 
-## Thank you 
+## Thank you
 That's it ! I hope this post made sense and helped you a little ! Have fun progamming in this beautiful language that is Python.
 
 <iframe src="https://giphy.com/embed/ZVik7pBtu9dNS" width="480" height="268" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/life-interesting-footage-ZVik7pBtu9dNS">via GIPHY</a></p>
