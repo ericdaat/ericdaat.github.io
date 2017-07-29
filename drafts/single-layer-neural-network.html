@@ -51,8 +51,15 @@
 			<a href="https://ericdaat.github.io/tag/neural-networks.html" rel="tag">neural-networks</a>
 		</span>
 	</div>
-	<div itemprop="articleBody" class="article-body"><h1>Neural Networks</h1>
+	<div itemprop="articleBody" class="article-body"><p>Neural Networks are a really hot topic right now and are used in so many applications, from face recognition to Natural Language Processing. The core concept of Neural Networks is however quite old and many large discoveries have been made during the 70s. At the time, computers weren't efficient enough to run large computations, and not a lot of data were available to feed the networks. Recently, with the "Big Data" era and the progress made in computing, we can train very large Neural Networks on huge amounts of data to solve complex problems. It is a new way of programming based on a simplified version of how a brain works. Very simplified actually, I heard that the State of the Art deep Neural Networks used by giant tech companies are solely comparable to worm's brain, and yet they can perform some quite amazing tasks !</p>
+<p>In this post we are going to introduce Single Layer Neural Networks and understand how they work by implementing one from scratch in Python (without using Deep Learning Frameworks such as TensorFlow or Keras).</p>
 <h2>About neural networks</h2>
+<p>Neural networks are a succession of layers composed by nodes (similar to neurons). All the nodes from each layer are fully connected to the nodes from the surrounding layers by connections (similar to synapses). The neurons and connections hold float values that change when the network is training:</p>
+<ul>
+<li>The values hold by connections are called weights. The set of weights between two fully connected layers forms a matrix that we call <span class="math">\(W\)</span></li>
+<li>The values hold by neurons are usually obtained by a transformation that involves the weights previously defined.</li>
+</ul>
+<p>A very simplified Neural Network could look like this:</p>
 <h3>Layers</h3>
 <p>A single hidden layer neural network has 3 different layers:</p>
 <ul>
@@ -61,7 +68,7 @@
 <li>An output layer <span class="math">\(Y\)</span> of size <span class="math">\(K\)</span></li>
 </ul>
 <p><img src="/images/neural-net.png" width=400px/></p>
-<p>Each layer is computed from the layer below using weights and an activation function. </p>
+<p>Each layer is computed from the layer below using weights and an activation function.</p>
 <p>The hidden layer is computed by <span class="math">\(Z_m = \sigma (\alpha_{0m} + \alpha_{m}^{T} X)\)</span>; with <span class="math">\(m = 1, \ldots, M\)</span> and the output layer with <span class="math">\(Y_k = g_k(\beta_{0k} + \beta_{k}^{T} Z)\)</span>; with <span class="math">\(k = 1, \ldots, K\)</span>.</p>
 <p>The two matrices <span class="math">\(\alpha\)</span> and <span class="math">\(\beta\)</span> contain the parameters of the model, composed by weights and biases. For instance, the <span class="math">\(\alpha\)</span> matrix contains both biases and weights between the input and the hidden layer.</p>
 <div class="math">\begin{equation}
@@ -97,14 +104,14 @@
     R(\theta) = \sum_{k=1}^{K} \sum_{i=1}^{N} (y_{ik} - f_k(x_i))^2
 \end{equation}</div>
 <p>
-- For classification, we use cros entropy: 
+- For classification, we use cros entropy:
 </p>
 <div class="math">\begin{equation}
     R(\theta) = - \sum_{i=1}^{N} \sum_{k=1}^{K} y_{ik} log(f_k(x_i))
 \end{equation}</div>
 <p>We minimize the loss function using gradient descent</p>
 <h2>Sources</h2>
-<p>[0] <a href="#">The Elements of Statistical Learning</a><br>
+<p>[0] <a href="#">The Elements of Statistical Learning</a>
  [1] <a href="http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/">Implementing a Neural Network from scratch</a></p>
 <h2>Code</h2>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_moons</span>
@@ -122,8 +129,8 @@
 
 <div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> 
-            <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>
             <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span> <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;b&#39;</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
@@ -132,7 +139,7 @@
 <p><img alt="png" src="/images/slnn-moons.png"></p>
 <h2>Implementation from scratch</h2>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SingleLayerNeuralNetwork</span><span class="p">():</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_layer_size</span><span class="p">,</span> <span class="n">hidden_layer_size</span><span class="p">,</span> <span class="n">output_layer_size</span><span class="p">,</span> 
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_layer_size</span><span class="p">,</span> <span class="n">hidden_layer_size</span><span class="p">,</span> <span class="n">output_layer_size</span><span class="p">,</span>
                  <span class="n">learning_rate</span><span class="p">,</span> <span class="n">regularization_rate</span><span class="p">):</span>
         <span class="c1"># neural network parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_input_layer_size</span> <span class="o">=</span> <span class="n">input_layer_size</span>
@@ -155,7 +162,7 @@
         <span class="sd">&quot;&quot;&quot; Takes an input matrix X, returns an array of probabilities.</span>
 <span class="sd">        This function takes the input layer X through the entire network</span>
 <span class="sd">        and returns the softmax function result, corresponding to the</span>
-<span class="sd">        output layer. </span>
+<span class="sd">        output layer.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">z_h</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_W_h</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_b_h</span>
@@ -175,14 +182,14 @@
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Takes an input matrix X, returns the predicted class</span>
-<span class="sd">        according to the argmax over the softmax function result. </span>
+<span class="sd">        according to the argmax over the softmax function result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">softmax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_softmax</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">softmax</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Takes an input matrix X, one hot encoded output matrix y </span>
+        <span class="sd">&quot;&quot;&quot; Takes an input matrix X, one hot encoded output matrix y</span>
 <span class="sd">        and number ofepochs. Trains the network with gradient descent and</span>
 <span class="sd">        returns an array of loss function results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-05-28T10:20:00+02:00</updated><entry><title>Python Tips and Tools</title><link href="https://ericdaat.github.io/python-tips-and-tools.html" rel="alternate"></link><published>2017-05-28T10:20:00+02:00</published><updated>2017-05-28T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-05-28:/python-tips-and-tools.html</id><summary type="html">&lt;p&gt;There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored ! &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-05-28T10:20:00+02:00</updated><entry><title>Python Tips and Tools</title><link href="https://ericdaat.github.io/python-tips-and-tools.html" rel="alternate"></link><published>2017-05-28T10:20:00+02:00</published><updated>2017-05-28T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-05-28:/python-tips-and-tools.html</id><summary type="html">&lt;p&gt;There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).&lt;/em&gt;  &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;-- Guido Van Rossum, 1996&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments. Before we dive in this article, let me mention a few things:&lt;/p&gt;
@@ -18,7 +18,7 @@
 &lt;h2&gt;Object Oriented Programming&lt;/h2&gt;
 &lt;p&gt;A python code doesn't need to be Object Oriented, as opposed to Java for instance: It can be used as a scripting language. However in many projects you will need classes and methods. This section will explain how to write Object Oriented code in Python. Note that this assumes that you know of Object Oriented Programming, I am not going to explain the theory behind it. If you are not familiar with it, I recommended checking out this &lt;a href="https://en.wikipedia.org/wiki/Object-oriented_programming"&gt;Wikipedia&lt;/a&gt; post.&lt;/p&gt;
 &lt;h3&gt;Simple Class&lt;/h3&gt;
-&lt;p&gt;We create a basic class &lt;code&gt;MyClass&lt;/code&gt; with a constructor &lt;code&gt;__init__&lt;/code&gt; that takes no argument. Our class is very simple and has no attribute. Note that &lt;code&gt;self&lt;/code&gt; is just a keyword, it serves as a placeholder for the instance object. &lt;/p&gt;
+&lt;p&gt;We create a basic class &lt;code&gt;MyClass&lt;/code&gt; with a constructor &lt;code&gt;__init__&lt;/code&gt; that takes no argument. Our class is very simple and has no attribute. Note that &lt;code&gt;self&lt;/code&gt; is just a keyword, it serves as a placeholder for the instance object.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyClass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;pass&lt;/span&gt;
@@ -29,7 +29,7 @@
 
 
 &lt;h3&gt;Passing arguments&lt;/h3&gt;
-&lt;p&gt;Let's improve our class by changing the constructor and adding arguments. Arguments in the constructor (or in any method) go after the &lt;code&gt;self&lt;/code&gt; keyword. &lt;/p&gt;
+&lt;p&gt;Let's improve our class by changing the constructor and adding arguments. Arguments in the constructor (or in any method) go after the &lt;code&gt;self&lt;/code&gt; keyword.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyClass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt;
@@ -66,7 +66,7 @@
 
 
 &lt;h3&gt;Inheritance&lt;/h3&gt;
-&lt;p&gt;Here we create two Classes &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;B&lt;/code&gt;, where &lt;code&gt;B&lt;/code&gt; inherits from &lt;code&gt;A&lt;/code&gt;. Notice how &lt;code&gt;B&lt;/code&gt; can use &lt;code&gt;a_method&lt;/code&gt; even though it is defined in &lt;code&gt;A&lt;/code&gt;. Indeed, a subclass has access to every method and attribute from its superclass. &lt;/p&gt;
+&lt;p&gt;Here we create two Classes &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;B&lt;/code&gt;, where &lt;code&gt;B&lt;/code&gt; inherits from &lt;code&gt;A&lt;/code&gt;. Notice how &lt;code&gt;B&lt;/code&gt; can use &lt;code&gt;a_method&lt;/code&gt; even though it is defined in &lt;code&gt;A&lt;/code&gt;. Indeed, a subclass has access to every method and attribute from its superclass.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;A&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;arg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt;
@@ -107,7 +107,7 @@
 
 
 &lt;h3&gt;instance method vs. Class method&lt;/h3&gt;
-&lt;p&gt;An instance method is called on an instance of the Class. Here, &lt;code&gt;Animal&lt;/code&gt; is our class, and &lt;code&gt;bob&lt;/code&gt; is an instance of &lt;code&gt;Animal&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;An instance method is called on an instance of the Class. Here, &lt;code&gt;Animal&lt;/code&gt; is our class, and &lt;code&gt;bob&lt;/code&gt; is an instance of &lt;code&gt;Animal&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Animal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
@@ -199,15 +199,15 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;That's about it for Object Oriented Programming. Knowing these little snippets, you should be able to build a decent Object Oriented Program. Don't hesitate to learn more on the subject, as this post is not exhaustive. &lt;/p&gt;
+&lt;p&gt;That's about it for Object Oriented Programming. Knowing these little snippets, you should be able to build a decent Object Oriented Program. Don't hesitate to learn more on the subject, as this post is not exhaustive.&lt;/p&gt;
 &lt;h2&gt;Useful tools and functions&lt;/h2&gt;
-&lt;p&gt;Now I'd like to show you some of my favorite python tools and handy functions. We often hear people asking for a "pythonic" way to do something, and it sometimes refer to taking advantage of some python built in tools that makes it so easy to use and elegant to read. The following paragraphs will demonstrate some of these techniques. &lt;/p&gt;
+&lt;p&gt;Now I'd like to show you some of my favorite python tools and handy functions. We often hear people asking for a "pythonic" way to do something, and it sometimes refer to taking advantage of some python built in tools that makes it so easy to use and elegant to read. The following paragraphs will demonstrate some of these techniques.&lt;/p&gt;
 &lt;h3&gt;Comprehension lists&lt;/h3&gt;
 &lt;p&gt;Comprehension lists allow creating arrays faster and in a more much more elegant way. The first approach one might think of for creating an array in python would be to declare an empty one and then append some values to it, like in this snippet:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# The normal way:&lt;/span&gt;
 &lt;span class="n"&gt;l&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; 
-&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;   &lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="sd"&gt;You should use xrange instead of range in&lt;/span&gt;
 &lt;span class="sd"&gt;python2 as it avoids load an entire array in memory.&lt;/span&gt;
 &lt;span class="sd"&gt;In python3, xrange is implicitly used when typing range.&lt;/span&gt;
@@ -274,7 +274,7 @@
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
 
-&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nb"&gt;map&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -365,7 +365,7 @@
 - &lt;code&gt;break&lt;/code&gt;: terminates the current loop
 - &lt;code&gt;continue&lt;/code&gt;: returns to the top of the loop, ignoring future statements
 - &lt;code&gt;pass&lt;/code&gt;: when a statement is required, but we don't want to do anything
-- &lt;code&gt;else&lt;/code&gt;: 
+- &lt;code&gt;else&lt;/code&gt;:
     1. in for loops, executed when the loop is done iterrating the list
     2. in while loops, executed when the condition becomes False&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -457,7 +457,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Within &lt;code&gt;my_python_project.__init__.py&lt;/code&gt;, we write: &lt;/p&gt;
+&lt;p&gt;Within &lt;code&gt;my_python_project.__init__.py&lt;/code&gt;, we write:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;my_module&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;some_function&lt;/span&gt;
 
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -474,17 +474,17 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Sulbime Text&lt;/h2&gt;
+&lt;h2&gt;Sublime Text&lt;/h2&gt;
 &lt;p&gt;I personally use Sublime Text 3 when writing python code for production. I like that it is lightweight and very extensible thanks to so many third parties packages. In the following, I share with you some of my favorite packages.&lt;/p&gt;
 &lt;h3&gt;Install Sublime Text 3 &amp;amp; Package Control&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
-&lt;p&gt;Download from &lt;a href="https://www.sublimetext.com/3"&gt;here&lt;/a&gt;  &lt;/p&gt;
+&lt;p&gt;Download from &lt;a href="https://www.sublimetext.com/3"&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Install Package Control from &lt;a href="https://packagecontrol.io/installation"&gt;here&lt;/a&gt;.
 Package control will enable you to browse and install awesome packages to make
-Sublime Text even better.  &lt;/p&gt;
+Sublime Text even better.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Launch Package Control from Sublime Text with &lt;code&gt;CTRL&lt;/code&gt; + &lt;code&gt;MAJ&lt;/code&gt; + &lt;code&gt;P&lt;/code&gt; and
@@ -497,7 +497,7 @@ search for Package Control. Autocomplete should bring you a list of various comm
 adds tons of options to the Sublime Text sidebar.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://packagecontrol.io/packages/GitGutter"&gt;GitGutter&lt;/a&gt;: See git diff in Sublime Text&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://packagecontrol.io/packages/BracketHighlighter"&gt;BracketHighlighter&lt;/a&gt;: Bracket and tag highlighter for Sublime Text&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://packagecontrol.io/packages/All%20Autocomplete"&gt;All Autocomplete&lt;/a&gt;: Extend Sublime Text autocompletion to find matches 
+&lt;li&gt;&lt;a href="https://packagecontrol.io/packages/All%20Autocomplete"&gt;All Autocomplete&lt;/a&gt;: Extend Sublime Text autocompletion to find matches
 in all open files.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://packagecontrol.io/packages/Markdown%20Preview"&gt;Markdown Preview&lt;/a&gt;: Write markdown and then render as HTML&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://packagecontrol.io/packages/SublimeCodeIntel"&gt;SublimeCodeIntel&lt;/a&gt;: Smart autocompletion for Sublime Text&lt;/li&gt;
@@ -516,13 +516,12 @@ in all open files.&lt;/li&gt;
 
 &lt;p&gt;Instead, pip install any library you want &lt;strong&gt;inside&lt;/strong&gt; a virtualenv:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gp"&gt;$&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;your-virtualenv&lt;span class="o"&gt;)&lt;/span&gt; pip install whatever        &lt;span class="c1"&gt;# good&lt;/span&gt;
-&lt;span class="go"&gt;``&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&lt;span class="gp"&gt;#&lt;/span&gt;&lt;span class="c1"&gt;## Getting started&lt;/span&gt;
 
-&lt;span class="go"&gt;Install virtualenv with pip&lt;/span&gt;
-&lt;span class="go"&gt;``` shell&lt;/span&gt;
-&lt;span class="gp"&gt;$&lt;/span&gt; pip install virtualenv  &lt;span class="c1"&gt;# you may need sudo&lt;/span&gt;
+&lt;h3&gt;Getting started&lt;/h3&gt;
+&lt;p&gt;Install virtualenv with pip&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ pip install virtualenv  &lt;span class="c1"&gt;# you may need sudo&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -554,7 +553,7 @@ $ &lt;span class="o"&gt;(&lt;/span&gt;your-virtualenv&lt;span class="o"&gt;)&lt;
 
 
 &lt;p&gt;Install back your pip libraries in another virtualenv:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="o"&gt;(&lt;/span&gt;your-virtualenv2&lt;span class="o"&gt;)&lt;/span&gt; pip install requirements.txt
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="o"&gt;(&lt;/span&gt;your-virtualenv2&lt;span class="o"&gt;)&lt;/span&gt; pip install -r requirements.txt
 &lt;/pre&gt;&lt;/div&gt;
 
 

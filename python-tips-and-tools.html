@@ -48,9 +48,9 @@
 			<a href="https://ericdaat.github.io/tag/code.html" rel="tag">code</a>
 		</span>
 	</div>
-	<div itemprop="articleBody" class="article-body"><p>I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored ! </p>
+	<div itemprop="articleBody" class="article-body"><p>I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !</p>
 <blockquote>
-<p><em>Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).</em>  </p>
+<p><em>Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).</em></p>
 <p>-- Guido Van Rossum, 1996</p>
 </blockquote>
 <p>There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments. Before we dive in this article, let me mention a few things:</p>
@@ -67,7 +67,7 @@
 <h2>Object Oriented Programming</h2>
 <p>A python code doesn't need to be Object Oriented, as opposed to Java for instance: It can be used as a scripting language. However in many projects you will need classes and methods. This section will explain how to write Object Oriented code in Python. Note that this assumes that you know of Object Oriented Programming, I am not going to explain the theory behind it. If you are not familiar with it, I recommended checking out this <a href="https://en.wikipedia.org/wiki/Object-oriented_programming">Wikipedia</a> post.</p>
 <h3>Simple Class</h3>
-<p>We create a basic class <code>MyClass</code> with a constructor <code>__init__</code> that takes no argument. Our class is very simple and has no attribute. Note that <code>self</code> is just a keyword, it serves as a placeholder for the instance object. </p>
+<p>We create a basic class <code>MyClass</code> with a constructor <code>__init__</code> that takes no argument. Our class is very simple and has no attribute. Note that <code>self</code> is just a keyword, it serves as a placeholder for the instance object.</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
@@ -78,7 +78,7 @@
 
 
 <h3>Passing arguments</h3>
-<p>Let's improve our class by changing the constructor and adding arguments. Arguments in the constructor (or in any method) go after the <code>self</code> keyword. </p>
+<p>Let's improve our class by changing the constructor and adding arguments. Arguments in the constructor (or in any method) go after the <code>self</code> keyword.</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
@@ -115,7 +115,7 @@
 
 
 <h3>Inheritance</h3>
-<p>Here we create two Classes <code>A</code> and <code>B</code>, where <code>B</code> inherits from <code>A</code>. Notice how <code>B</code> can use <code>a_method</code> even though it is defined in <code>A</code>. Indeed, a subclass has access to every method and attribute from its superclass. </p>
+<p>Here we create two Classes <code>A</code> and <code>B</code>, where <code>B</code> inherits from <code>A</code>. Notice how <code>B</code> can use <code>a_method</code> even though it is defined in <code>A</code>. Indeed, a subclass has access to every method and attribute from its superclass.</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span>
@@ -156,7 +156,7 @@
 
 
 <h3>instance method vs. Class method</h3>
-<p>An instance method is called on an instance of the Class. Here, <code>Animal</code> is our class, and <code>bob</code> is an instance of <code>Animal</code>. </p>
+<p>An instance method is called on an instance of the Class. Here, <code>Animal</code> is our class, and <code>bob</code> is an instance of <code>Animal</code>.</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
@@ -248,15 +248,15 @@
 </pre></div>
 
 
-<p>That's about it for Object Oriented Programming. Knowing these little snippets, you should be able to build a decent Object Oriented Program. Don't hesitate to learn more on the subject, as this post is not exhaustive. </p>
+<p>That's about it for Object Oriented Programming. Knowing these little snippets, you should be able to build a decent Object Oriented Program. Don't hesitate to learn more on the subject, as this post is not exhaustive.</p>
 <h2>Useful tools and functions</h2>
-<p>Now I'd like to show you some of my favorite python tools and handy functions. We often hear people asking for a "pythonic" way to do something, and it sometimes refer to taking advantage of some python built in tools that makes it so easy to use and elegant to read. The following paragraphs will demonstrate some of these techniques. </p>
+<p>Now I'd like to show you some of my favorite python tools and handy functions. We often hear people asking for a "pythonic" way to do something, and it sometimes refer to taking advantage of some python built in tools that makes it so easy to use and elegant to read. The following paragraphs will demonstrate some of these techniques.</p>
 <h3>Comprehension lists</h3>
 <p>Comprehension lists allow creating arrays faster and in a more much more elegant way. The first approach one might think of for creating an array in python would be to declare an empty one and then append some values to it, like in this snippet:</p>
 <div class="highlight"><pre><span></span><span class="c1"># The normal way:</span>
 <span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span> 
-<span class="sd">&quot;&quot;&quot;   </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">You should use xrange instead of range in</span>
 <span class="sd">python2 as it avoids load an entire array in memory.</span>
 <span class="sd">In python3, xrange is implicitly used when typing range.</span>
@@ -323,7 +323,7 @@
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">value</span>
 
-<span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> 
+<span class="k">print</span> <span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
 </pre></div>
 
 
@@ -414,7 +414,7 @@
 - <code>break</code>: terminates the current loop
 - <code>continue</code>: returns to the top of the loop, ignoring future statements
 - <code>pass</code>: when a statement is required, but we don't want to do anything
-- <code>else</code>: 
+- <code>else</code>:
     1. in for loops, executed when the loop is done iterrating the list
     2. in while loops, executed when the condition becomes False</p>
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -506,7 +506,7 @@
 </pre></div>
 
 
-<p>Within <code>my_python_project.__init__.py</code>, we write: </p>
+<p>Within <code>my_python_project.__init__.py</code>, we write:</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">my_module</span> <span class="kn">import</span> <span class="n">some_function</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -523,17 +523,17 @@
 </pre></div>
 
 
-<h2>Sulbime Text</h2>
+<h2>Sublime Text</h2>
 <p>I personally use Sublime Text 3 when writing python code for production. I like that it is lightweight and very extensible thanks to so many third parties packages. In the following, I share with you some of my favorite packages.</p>
 <h3>Install Sublime Text 3 &amp; Package Control</h3>
 <ol>
 <li>
-<p>Download from <a href="https://www.sublimetext.com/3">here</a>  </p>
+<p>Download from <a href="https://www.sublimetext.com/3">here</a></p>
 </li>
 <li>
 <p>Install Package Control from <a href="https://packagecontrol.io/installation">here</a>.
 Package control will enable you to browse and install awesome packages to make
-Sublime Text even better.  </p>
+Sublime Text even better.</p>
 </li>
 <li>
 <p>Launch Package Control from Sublime Text with <code>CTRL</code> + <code>MAJ</code> + <code>P</code> and
@@ -546,7 +546,7 @@ search for Package Control. Autocomplete should bring you a list of various comm
 adds tons of options to the Sublime Text sidebar.</li>
 <li><a href="https://packagecontrol.io/packages/GitGutter">GitGutter</a>: See git diff in Sublime Text</li>
 <li><a href="https://packagecontrol.io/packages/BracketHighlighter">BracketHighlighter</a>: Bracket and tag highlighter for Sublime Text</li>
-<li><a href="https://packagecontrol.io/packages/All%20Autocomplete">All Autocomplete</a>: Extend Sublime Text autocompletion to find matches 
+<li><a href="https://packagecontrol.io/packages/All%20Autocomplete">All Autocomplete</a>: Extend Sublime Text autocompletion to find matches
 in all open files.</li>
 <li><a href="https://packagecontrol.io/packages/Markdown%20Preview">Markdown Preview</a>: Write markdown and then render as HTML</li>
 <li><a href="https://packagecontrol.io/packages/SublimeCodeIntel">SublimeCodeIntel</a>: Smart autocompletion for Sublime Text</li>
@@ -565,13 +565,12 @@ in all open files.</li>
 
 <p>Instead, pip install any library you want <strong>inside</strong> a virtualenv:</p>
 <div class="highlight"><pre><span></span><span class="gp">$</span> <span class="o">(</span>your-virtualenv<span class="o">)</span> pip install whatever        <span class="c1"># good</span>
-<span class="go">``</span>
+</pre></div>
 
-<span class="gp">#</span><span class="c1">## Getting started</span>
 
-<span class="go">Install virtualenv with pip</span>
-<span class="go">``` shell</span>
-<span class="gp">$</span> pip install virtualenv  <span class="c1"># you may need sudo</span>
+<h3>Getting started</h3>
+<p>Install virtualenv with pip</p>
+<div class="highlight"><pre><span></span>$ pip install virtualenv  <span class="c1"># you may need sudo</span>
 </pre></div>
 
 
@@ -603,7 +602,7 @@ $ <span class="o">(</span>your-virtualenv<span class="o">)</span> pip list <span
 
 
 <p>Install back your pip libraries in another virtualenv:</p>
-<div class="highlight"><pre><span></span>$ <span class="o">(</span>your-virtualenv2<span class="o">)</span> pip install requirements.txt
+<div class="highlight"><pre><span></span>$ <span class="o">(</span>your-virtualenv2<span class="o">)</span> pip install -r requirements.txt
 </pre></div>
 
 
