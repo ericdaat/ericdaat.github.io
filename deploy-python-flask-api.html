@@ -50,7 +50,7 @@
 	</div>
 	<div itemprop="articleBody" class="article-body"><p>In this post we are going to see how we can efficiently deploy a web application powered by Flask (a Python framework) to production. We won't code a complex application, actually we will just stick to the Flask Hello World example.</p>
 <h2>Basic Flask application</h2>
-<p>If you've never heard of Flask before, I recommend you to visit the <a href="#">website</a> and read about it.</p>
+<p>If you've never heard of Flask before, I recommend you to visit its <a href="http://flask.pocoo.org/">website</a> and read about it.</p>
 <p>To create a Hello World application in Flask, just write the following code in a file called <code>application.py</code>.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
@@ -73,7 +73,7 @@
 <p>Now run <code>python main.py</code> and your app should be visible in your browser at <code>localhost:5000</code>.</p>
 <h2>WSGI server</h2>
 <p>So far we have a working application, but it won't be enough to serve a production environment. Python applications can't be directly deployed in a webserver, because python is not a web compatible language like Javascript or PHP for instance. Hence, we need an additional layer: a WSGI server.</p>
-<p>There are various WSGI servers on the market, <a href="#">Gunicorn</a> is a popular choice but my favorite is <a href="#">uWSGI</a>.</p>
+<p>There are various WSGI servers on the market, <a href="http://gunicorn.org/">Gunicorn</a> is a popular choice but my favorite is <a href="https://uwsgi-docs.readthedocs.io/en/latest/">uWSGI</a>.</p>
 <h3>Getting started</h3>
 <p>You can install uWSGI with pip: <code>pip install uwsgi</code>. Once you have it installed, you can run our previous python application within a WSGI webserver by simply doing <code>uwsgi main.py</code>. You can pass many arguments to the <code>uwsgi</code> command, but it is often prefered to have them all in a single configuration file. uWSGI can just do that, let's create a <code>uwsgi.ini</code> configuration file that looks like this:</p>
 <div class="highlight"><pre><span></span>[uwsgi]
@@ -88,7 +88,7 @@ die-on-term = true
 
 <p>Now we can run the app with <code>uwsgi wsgi.ini</code>. With such configuration, our Flask application will be hosted on 2 processes. This is an arbiratry number we set, but you can increase it either manually or automatically if you need to handle more trafic. The server will respond on <code>0.0.0.0:9000</code>, which means that every client on the local network will be able to access the app on port 9000 using the HTTP protocol. Check that you can still see your app at <code>localhost:9000</code>. You should also be able to see it from another device connected to the same network at <code>&lt;your-ip&gt;:9000</code>.</p>
 <h2>Putting uWSGI behing NGINX reverse proxy</h2>
-<p>The document from uWSGI states that you should use uWSGI behind a reverse proxy such as NGINX. This is fairly easy with this configuration file:</p>
+<p>I like to run uWSGI behind a reverse proxy such as NGINX. This is fairly easy with this configuration file:</p>
 <div class="highlight"><pre><span></span>upstream backend {
     least_conn;
     server localhost:9000;
@@ -115,38 +115,11 @@ die-on-term = true
 </pre></div>
 
 
-<h2>Run NGINX and uWSGI in Docker</h2>
-<p>I love <a href="#">Docker</a>, and I tend to use it more and more for about everything I build. To run this python application, I chose to build two containers, one for NGINX reverse proxy and one for our uWSGI application. I personnally run my Docker containers with <a href="#">docker-compose</a>, that makes it easy to configure multiple containers.</p>
-<div class="highlight"><pre><span></span>FROM python:2.7
-MAINTAINER eric &lt;eric@eric.com&gt;
-
-RUN pip install flask uwsgi
-
-RUN useradd -ms /bin/bash flask-app
-USER flask-app
-WORKDIR /home/flask-app
-
-EXPOSE 9000
-CMD uwsgi uwsgi.ini
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>version: &#39;2&#39;
-services:
-    flask-app:
-        build: ./flask-app
-        volumes:
-            - ./flask-app:/home/flask-app
-        logging:
-            driver: &quot;json-file&quot;
-            options:
-            max-size: &quot;10m&quot;
-            max-file: &quot;2&quot;
-    nginx:
-        image: nginx:latest
-        volumes:
-            - ./nginx.conf:/etc/nginx/nginx.conf
-</pre></div></div>
+<p>Now, just run the application with <code>uwsgi wsgi.ini</code> and it will launch the
+application with the configuration you just wrote. You can then write a startup
+script with <em>upstart</em> or <em>systemd</em> to make your application run in the
+background and easily start/stop it.</p>
+<p>In another post, I'll cover how to run all this with <a href="https://www.docker.com/">Docker</a>, as it is what I tend to use now to deploy apps in production. </p></div>
 	<hr>
 	<h2>Comments</h2>
 </div>
@@ -182,7 +155,7 @@ services:
 					<div class="col-md-3">
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
-							<li><a href="https://ericdaat.github.io/category/programming.html">Programming (1)</a></li>
+							<li><a href="https://ericdaat.github.io/category/programming.html">Programming (2)</a></li>
 						</ul>
 					</div>
 				</div>

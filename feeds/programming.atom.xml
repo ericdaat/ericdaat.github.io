@@ -1,5 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-07-29T10:20:00+02:00</updated><entry><title>Python Tips and Tools</title><link href="https://ericdaat.github.io/python-tips-and-tools.html" rel="alternate"></link><published>2017-05-28T10:20:00+02:00</published><updated>2017-07-29T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-05-28:/python-tips-and-tools.html</id><summary type="html">&lt;p&gt;There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-07-29T10:20:00+02:00</updated><entry><title>Deploying a Python Flask application to production</title><link href="https://ericdaat.github.io/deploy-python-flask-api.html" rel="alternate"></link><published>2017-05-28T10:20:00+02:00</published><updated>2017-05-28T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-05-28:/deploy-python-flask-api.html</id><summary type="html">&lt;p&gt;In this post we are going to see how we can efficiently deploy a web application powered by Flask (a Python framework) to production. We won't code a complex application, actually we will just stick to the Flask Hello World example.&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post we are going to see how we can efficiently deploy a web application powered by Flask (a Python framework) to production. We won't code a complex application, actually we will just stick to the Flask Hello World example.&lt;/p&gt;
+&lt;h2&gt;Basic Flask application&lt;/h2&gt;
+&lt;p&gt;If you've never heard of Flask before, I recommend you to visit its &lt;a href="http://flask.pocoo.org/"&gt;website&lt;/a&gt; and read about it.&lt;/p&gt;
+&lt;p&gt;To create a Hello World application in Flask, just write the following code in a file called &lt;code&gt;application.py&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;index&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello, World!&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And then run the application with this code in a &lt;code&gt;main.py&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;application&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now run &lt;code&gt;python main.py&lt;/code&gt; and your app should be visible in your browser at &lt;code&gt;localhost:5000&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;WSGI server&lt;/h2&gt;
+&lt;p&gt;So far we have a working application, but it won't be enough to serve a production environment. Python applications can't be directly deployed in a webserver, because python is not a web compatible language like Javascript or PHP for instance. Hence, we need an additional layer: a WSGI server.&lt;/p&gt;
+&lt;p&gt;There are various WSGI servers on the market, &lt;a href="http://gunicorn.org/"&gt;Gunicorn&lt;/a&gt; is a popular choice but my favorite is &lt;a href="https://uwsgi-docs.readthedocs.io/en/latest/"&gt;uWSGI&lt;/a&gt;.&lt;/p&gt;
+&lt;h3&gt;Getting started&lt;/h3&gt;
+&lt;p&gt;You can install uWSGI with pip: &lt;code&gt;pip install uwsgi&lt;/code&gt;. Once you have it installed, you can run our previous python application within a WSGI webserver by simply doing &lt;code&gt;uwsgi main.py&lt;/code&gt;. You can pass many arguments to the &lt;code&gt;uwsgi&lt;/code&gt; command, but it is often prefered to have them all in a single configuration file. uWSGI can just do that, let's create a &lt;code&gt;uwsgi.ini&lt;/code&gt; configuration file that looks like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[uwsgi]
+wsgi-file = main.py
+master = true
+processes = 2
+http = 0.0.0.0:9000
+vacuum = true
+die-on-term = true
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now we can run the app with &lt;code&gt;uwsgi wsgi.ini&lt;/code&gt;. With such configuration, our Flask application will be hosted on 2 processes. This is an arbiratry number we set, but you can increase it either manually or automatically if you need to handle more trafic. The server will respond on &lt;code&gt;0.0.0.0:9000&lt;/code&gt;, which means that every client on the local network will be able to access the app on port 9000 using the HTTP protocol. Check that you can still see your app at &lt;code&gt;localhost:9000&lt;/code&gt;. You should also be able to see it from another device connected to the same network at &lt;code&gt;&amp;lt;your-ip&amp;gt;:9000&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Putting uWSGI behing NGINX reverse proxy&lt;/h2&gt;
+&lt;p&gt;I like to run uWSGI behind a reverse proxy such as NGINX. This is fairly easy with this configuration file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;upstream backend {
+    least_conn;
+    server localhost:9000;
+}
+
+server {
+    listen 80;
+    location {
+        uwsgi_pass backend;
+        include uwsgi_params;
+    }
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With such a configuration, NGINX listens on port 80 and redirects the requests to &lt;code&gt;localhost:9000&lt;/code&gt; which is our uwsgi server. Be careful though, since we use &lt;code&gt;uwsgi_pass&lt;/code&gt; command, the uwsgi application must run in a socket and not on http. Just change your &lt;code&gt;uwsgi.ini&lt;/code&gt; configuration file accordingly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[uwsgi]
+wsgi-file = main.py
+master = true
+processes = 2
+socket = 0.0.0.0:9000
+vacuum = true
+die-on-term = true
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, just run the application with &lt;code&gt;uwsgi wsgi.ini&lt;/code&gt; and it will launch the
+application with the configuration you just wrote. You can then write a startup
+script with &lt;em&gt;upstart&lt;/em&gt; or &lt;em&gt;systemd&lt;/em&gt; to make your application run in the
+background and easily start/stop it.&lt;/p&gt;
+&lt;p&gt;In another post, I'll cover how to run all this with &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt;, as it is what I tend to use now to deploy apps in production. &lt;/p&gt;</content><category term="python"></category><category term="code"></category></entry><entry><title>Python Tips and Tools</title><link href="https://ericdaat.github.io/python-tips-and-tools.html" rel="alternate"></link><published>2017-05-28T10:20:00+02:00</published><updated>2017-07-29T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-05-28:/python-tips-and-tools.html</id><summary type="html">&lt;p&gt;There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;-- Guido Van Rossum, 1996&lt;/p&gt;
