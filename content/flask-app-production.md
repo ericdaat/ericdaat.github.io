@@ -6,14 +6,14 @@ Tags: python, code
 Slug: deploy-python-flask-api
 Authors: Eric Daoud
 Summary: In this post we are going to see how we can efficiently deploy a web application powered by Flask (a Python framework) to production. We won't code a complex application, actually we will just stick to the Flask Hello World example.
-Status: draft
+Status: published
 
 
 In this post we are going to see how we can efficiently deploy a web application powered by Flask (a Python framework) to production. We won't code a complex application, actually we will just stick to the Flask Hello World example.
 
 
 ## Basic Flask application
-If you've never heard of Flask before, I recommend you to visit the [website](#) and read about it.
+If you've never heard of Flask before, I recommend you to visit its [website](http://flask.pocoo.org/) and read about it.
 
 To create a Hello World application in Flask, just write the following code in a file called ```application.py```.
 
@@ -42,7 +42,7 @@ Now run ```python main.py``` and your app should be visible in your browser at `
 ## WSGI server
 So far we have a working application, but it won't be enough to serve a production environment. Python applications can't be directly deployed in a webserver, because python is not a web compatible language like Javascript or PHP for instance. Hence, we need an additional layer: a WSGI server.
 
-There are various WSGI servers on the market, [Gunicorn](#) is a popular choice but my favorite is [uWSGI](#).
+There are various WSGI servers on the market, [Gunicorn](http://gunicorn.org/) is a popular choice but my favorite is [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/).
 
 ### Getting started
 
@@ -62,7 +62,7 @@ Now we can run the app with ```uwsgi wsgi.ini```. With such configuration, our F
 
 
 ## Putting uWSGI behing NGINX reverse proxy
-The document from uWSGI states that you should use uWSGI behind a reverse proxy such as NGINX. This is fairly easy with this configuration file:
+I like to run uWSGI behind a reverse proxy such as NGINX. This is fairly easy with this configuration file:
 
 ``` text
 upstream backend {
@@ -91,39 +91,9 @@ vacuum = true
 die-on-term = true
 ```
 
-## Run NGINX and uWSGI in Docker
-I love [Docker](#), and I tend to use it more and more for about everything I build. To run this python application, I chose to build two containers, one for NGINX reverse proxy and one for our uWSGI application. I personnally run my Docker containers with [docker-compose](#), that makes it easy to configure multiple containers.
+Now, just run the application with ```uwsgi wsgi.ini``` and it will launch the
+application with the configuration you just wrote. You can then write a startup
+script with *upstart* or *systemd* to make your application run in the
+background and easily start/stop it.
 
-```text
-FROM python:2.7
-MAINTAINER eric <eric@eric.com>
-
-RUN pip install flask uwsgi
-
-RUN useradd -ms /bin/bash flask-app
-USER flask-app
-WORKDIR /home/flask-app
-
-EXPOSE 9000
-CMD uwsgi uwsgi.ini
-```
-
-```text
-version: '2'
-services:
-	flask-app:
-		build: ./flask-app
-		volumes:
-			- ./flask-app:/home/flask-app
-		logging:
-			driver: "json-file"
-			options:
-			max-size: "10m"
-			max-file: "2"
- 	nginx:
- 		image: nginx:latest
- 		volumes:
- 			- ./nginx.conf:/etc/nginx/nginx.conf
-```
-
-
+In another post, I'll cover how to run all this with [Docker](https://www.docker.com/), as it is what I tend to use now to deploy apps in production. 

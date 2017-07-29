@@ -1,17 +1,17 @@
-Title: Single Layer Neural Network
+Title: Single Layer Neural Network from scratch in Python
 Date: 2010-12-03 10:20
 Modified: 2010-12-03 10:20
 Category: Data Science
-Tags: python, machine-learning, neural-networks
-Slug: single-layer-neural-network
+Tags: python, machine-learning, neural-networks, code
+Slug: single-layer-neural-network-from-scratch
 Authors: Eric Daoud
 Summary: In this post we are going to introduce Single Layer Neural Networks and understand how they work by implementing one from scratch in Python (without using Deep Learning Frameworks such as TensorFlow or Keras).
-Status: draft
+Status: published
 
 
 Neural Networks are a really hot topic right now and are used in so many applications, from face recognition to Natural Language Processing. The core concept of Neural Networks is however quite old and many large discoveries have been made during the 70s. At the time, computers weren't efficient enough to run large computations, and not a lot of data were available to feed the networks. Recently, with the "Big Data" era and the progress made in computing, we can train very large Neural Networks on huge amounts of data to solve complex problems. It is a new way of programming based on a simplified version of how a brain works. Very simplified actually, I heard that the State of the Art deep Neural Networks used by giant tech companies are solely comparable to worm's brain, and yet they can perform some quite amazing tasks !
 
-In this post we are going to introduce Single Layer Neural Networks and understand how they work by implementing one from scratch in Python (without using Deep Learning Frameworks such as TensorFlow or Keras).
+In this post we are going to introduce Single Layer Neural Networks and understand how they work by implementing one from scratch in Python (without using Deep Learning Frameworks such as TensorFlow or Keras). Coding a Neural Network from scratch is not particularly efficient, but it helps understanding how they work. Deep Learning libraries provide such a level of abstraction that Neural Networks appear like magical black boxes that just work. I found it useful to dive into what's really happening for a simple network and my understanding got a little better after that.
 
 ## About neural networks
 
@@ -63,6 +63,7 @@ The two matrices $\alpha$ and $\beta$ contain the parameters of the model, compo
 \end{equation}
 
 To compute the hidden layer neurons, we use a non linear function $\sigma$ which is typically a sigmoid or tanh function. Regarding the output layer neurons, there are two cases:
+
  - For a regression problem, $K=1$ and we use the identity function
  - For a $K$ class classifiction problem, we often use a softmax function $g_k(T) = \frac{e^{T_k}}{\sum_{l=1}{K}e^{T_l}}$. The softmax function outputs probabilities of each class corresponding to our input. We simply use $argmax_k(g_k(T))$ as our classifier to keep the class with the largest probability.
 
@@ -71,23 +72,27 @@ To compute the hidden layer neurons, we use a non linear function $\sigma$ which
 Let's call $\theta$ the set of weights $\alpha$ and $\beta$: $\theta = (\{\alpha_{0m}, \alpha_{m}; m=1, \ldots M\}, \{\beta_{0k}, \beta_{k}; k=1, \ldots K\})$
 
 Training is achieved by minimizing a loss function $R(\theta)$ that we define depending on the task we want to achieve:
-- For regression, we use sum of squared error:
+
+ - For regression, we use sum of squared error:
 \begin{equation}
     R(\theta) = \sum_{k=1}^{K} \sum_{i=1}^{N} (y_{ik} - f_k(x_i))^2
 \end{equation}
-- For classification, we use cros entropy:
+ - For classification, we use cros entropy:
 \begin{equation}
     R(\theta) = - \sum_{i=1}^{N} \sum_{k=1}^{K} y_{ik} log(f_k(x_i))
 \end{equation}
 
-We minimize the loss function using gradient descent
+We minimize the loss function using optimizers such as Gradient Descent,
+Stochastic Gradient Descent, or fancier approaches like ADAM. I won't cover
+these in this post. You can read about it online, or have a look at *The Elements of Statistical Learning* book which is considered as a reference for Machine Learning and Deep Learning.
 
 ## Sources
- [0] [The Elements of Statistical Learning](#)
- [1] [Implementing a Neural Network from scratch](http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/)
+
+ - [The Elements of Statistical Learning](http://web.stanford.edu/~hastie/ElemStatLearn/)
+ - [Implementing a Neural Network from scratch](http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/)
 
 ## Code
-
+Let's look at the code to train such a network.
 
 ```python
 from sklearn.datasets import make_moons
