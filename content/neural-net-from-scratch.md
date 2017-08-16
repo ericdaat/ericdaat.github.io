@@ -6,7 +6,7 @@ Tags: python, machine-learning, neural-networks, code
 Slug: single-layer-neural-network-from-scratch
 Authors: Eric Daoud
 Summary: In this post we are going to introduce Single Layer Neural Networks and understand how they work by implementing one from scratch in Python (without using Deep Learning Frameworks such as TensorFlow or Keras).
-Status: published
+Status: draft
 
 
 Neural Networks are a really hot topic right now and are used in so many applications, from face recognition to Natural Language Processing. The core concept of Neural Networks is however quite old and many large discoveries have been made during the 70s. At the time, computers weren't efficient enough to run large computations, and not a lot of data were available to feed the networks. Recently, with the "Big Data" era and the progress made in computing, we can train very large Neural Networks on huge amounts of data to solve complex problems. It is a new way of programming based on a simplified version of how a brain works. Very simplified actually, I heard that the State of the Art deep Neural Networks used by giant tech companies are solely comparable to worm's brain, and yet they can perform some quite amazing tasks !
