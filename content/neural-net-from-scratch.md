@@ -219,7 +219,6 @@ class SingleLayerNeuralNetwork():
 
 
 ```python
-%matplotlib inline
 
 slnn = SingleLayerNeuralNetwork(
         input_layer_size = 2,
@@ -234,10 +233,6 @@ accuracy = (len(X) - float(np.sum(np.power((slnn.predict(X) - y), 2)))) / len(X)
 logging.info(accuracy)
 plt.plot(losses)
 ```
-
-    CPU times: user 217 ms, sys: 2.91 ms, total: 220 ms
-    Wall time: 220 ms
-
 
 ![png](/images/slnn-loss.png)
 
