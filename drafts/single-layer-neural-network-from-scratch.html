@@ -243,9 +243,7 @@ these in this post. You can read about it online, or have a look at <em>The Elem
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
-
-<span class="n">slnn</span> <span class="o">=</span> <span class="n">SingleLayerNeuralNetwork</span><span class="p">(</span>
+<div class="highlight"><pre><span></span><span class="n">slnn</span> <span class="o">=</span> <span class="n">SingleLayerNeuralNetwork</span><span class="p">(</span>
         <span class="n">input_layer_size</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
         <span class="n">hidden_layer_size</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
         <span class="n">output_layer_size</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
@@ -257,11 +255,6 @@ these in this post. You can read about it online, or have a look at <em>The Elem
 <span class="n">accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="n">slnn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">),</span> <span class="mi">2</span><span class="p">))))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>CPU times: user 217 ms, sys: 2.91 ms, total: 220 ms
-Wall time: 220 ms
 </pre></div>
 
 
@@ -358,6 +351,7 @@ Wall time: 220 ms
 					<div class="col-md-3">
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
+							<li><a href="https://ericdaat.github.io/category/photography.html">Photography (1)</a></li>
 							<li><a href="https://ericdaat.github.io/category/programming.html">Programming (3)</a></li>
 						</ul>
 					</div>
