@@ -10,6 +10,8 @@ SITESUBTITLE = 'Jr. Data Scientist'
 SITEDESCRIPTION = 'Foo Bar\'s Thoughts and Writings'
 SITELOGO = '/images/eric.jpg'
 # FAVICON = SITEURL + '/images/favicon.ico'
+GOOGLE_ANALYTICS = 'UA-105599779-1'
+TWITTER_USERNAME = 'ericdaoud'
 
 PATH = 'content'
 STATIC_PATHS = ['images']
