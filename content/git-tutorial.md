@@ -1,14 +1,15 @@
-Title: Python Tips and Tools
-Date: 2017-09-20 10:20
-Modified: 2017-09-20 10:20
+Title: A short introduction to Git
+Date: 2017-10-24 10:20
+Modified: 2017-10-24 10:20
 Category: Programming
 Tags: git, code
-Slug: git-tutorial
 Authors: Eric Daoud
+Slug: git-tutorial
 Summary: A short introduction to git, the very famous version control system
 created by Linus Torvalds in 2005. This post shows some useful commands and
 tips.
 Status: published
+
 
 # Some History
 
@@ -127,19 +128,12 @@ git checkout hi.py
 
 ## A visual recap
 
-![](https://marklodato.github.io/visual-git-guide/basic-usage.svg)
+![git_basic_usage](https://marklodato.github.io/visual-git-guide/basic-usage.svg)
 
 *Source: [marklodato.github.io](https://marklodato.github.io/visual-git-guide/index-en.html)*
 
 
 # Collaborating with other people
-
-<iframe src="https://giphy.com/embed/u8mNsDNfHCTUQ"
-        height="400"
-        frameBorder="0"
-        class="giphy-embed"
-        allowFullScreen></iframe>
-
 
 ## Common configuration
 
@@ -199,13 +193,6 @@ When all the conflicts are resolved, push again, *still on your branch*, to the 
 *Source: [tuleap.org](https://www.tuleap.org/tuleap-pull-request-open-source-code-review-tool)*
 
 # More useful tools
-
-<iframe src="https://giphy.com/embed/l0HlDtKDqfGGQtwic"
-        width="480"
-        height="225"
-        frameBorder="0"
-        class="giphy-embed"
-        allowFullScreen></iframe>
 
 ## Stash your local changes
 
