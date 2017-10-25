@@ -1,5 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-08-16T10:20:00+02:00</updated><entry><title>From KSHE 95 radio website to Spotify Playlist</title><link href="https://ericdaat.github.io/scraping-kshe-radio-to-spotify-playlist.html" rel="alternate"></link><published>2017-08-16T10:20:00+02:00</published><updated>2017-08-16T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-08-16:/scraping-kshe-radio-to-spotify-playlist.html</id><summary type="html">&lt;p&gt;This post shows how to scrap a list of songs from the &lt;a href="http://www.kshe95.com/"&gt;KSHE 95&lt;/a&gt; radio website and upload them to a Spotify playlist using the &lt;a href="https://developer.spotify.com/web-api/"&gt;Spotify Web API&lt;/a&gt;. I used Python programming language along with &lt;a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/"&gt;Beautiful Soup&lt;/a&gt; for scraping, &lt;a href="http://docs.python-requests.org/en/master/"&gt;Requests&lt;/a&gt; for HTTP requests and &lt;a href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; for deploying the application.&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a big fan of Classic Rock living in France, I am very frustrated by the lack of good classic rock radio we have. I spent four months in St Louis, MO, and I had the chance to listen to &lt;a href="http://www.kshe95.com/"&gt;KSHE 95&lt;/a&gt; every day, playing some of my favorite classic rock tunes. Unfortunately, I can't listen to this radio in France as they block it. Fortunately, their website shows the &lt;a href="http://player.listenlive.co/20101/en/songhistory"&gt;songs that have been playing earlier&lt;/a&gt;. I decided to scrap this page, make myself an empty &lt;a href="https://open.spotify.com/user/ericda/playlist/3BCcE8T945z1MnfPWkFsfX"&gt;Spotify playlist&lt;/a&gt;, and automatically add in the KSHE tracks.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-10-20T10:20:00+02:00</updated><entry><title>An introduction to Git</title><link href="https://ericdaat.github.io/git-tutorial.html" rel="alternate"></link><published>2017-10-20T10:20:00+02:00</published><updated>2017-10-20T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-20:/git-tutorial.html</id><summary type="html">&lt;p&gt;A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some History&lt;/h1&gt;
+&lt;p&gt;Git was created by Linus Torvalds in 2005 for development of the Linux kernel,
+with other kernel developers contributing to its initial development.
+Its current maintainer since 2005 is Junio Hamano.&lt;/p&gt;
+&lt;p&gt;The name "git" was given by Linus Torvalds when he wrote the very first version. He described the tool as "the stupid content tracker" and the name as (depending on your way):
+ 1. random three-letter combination that is pronounceable, and not actually used by any common UNIX command. The fact that it is a mispronunciation of "get" may or may not be relevant.
+ 2. stupid. contemptible and despicable. simple. Take your pick from the dictionary of slang.
+ 3. "global information tracker": you're in a good mood, and it actually works for you. Angels sing, and a light suddenly fills the room.
+ 4. "g&lt;em&gt;dd&lt;/em&gt;mn idiotic truckload of sh&lt;em&gt;t": when it breaks
+&lt;/em&gt;Source: &lt;a href="https://en.wikipedia.org/wiki/Git"&gt;Wikipedia&lt;/a&gt;*&lt;/p&gt;
+&lt;h1&gt;First Steps&lt;/h1&gt;
+&lt;h2&gt;Install git&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Configure git&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git config --global user.name &lt;span class="s2"&gt;&amp;quot;John Doe&amp;quot;&lt;/span&gt;
+git config --global user.email &lt;span class="s2"&gt;&amp;quot;john@example.com&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Init an empty repository&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir lab-git &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; lab-git
+git init
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;... Or clone an exisiting one&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone git://github.com/schacon/grit.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Create a file&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;touch hi.py
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So far we have:
+ 1. A local git repository
+ 2. A &lt;code&gt;hi.py&lt;/code&gt; file that is not being tracked&lt;/p&gt;
+&lt;p&gt;What we need to do:
+ 1. Tell git to track the file
+ 2. Create a remote repository to store our code
+ 3. Push our code to the remote repository&lt;/p&gt;
+&lt;h2&gt;Tracking a file&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git status &lt;span class="c1"&gt;# our file is untracked&lt;/span&gt;
+git add hi.py
+git status &lt;span class="c1"&gt;# our file is tracked!&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Setting a remote repository&lt;/h2&gt;
+&lt;p&gt;Usually done through websites like &lt;a href="https://github.com"&gt;github&lt;/a&gt;, &lt;a href="https://bitbucket.org/"&gt;bitbucket&lt;/a&gt;, &lt;a href="https://about.gitlab.com/"&gt;gitlab&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once a remote repository is created, we are provided its url. Then, tell the local repository what its remote url is.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git remote add origin https://github.com/user/repo.git &lt;span class="c1"&gt;# origin is our remote name&lt;/span&gt;
+git remote -V &lt;span class="c1"&gt;# verify the remote&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Commit and push to the remote repository&lt;/h2&gt;
+&lt;p&gt;Even though we tracked our file, we didn't commit anything. When commiting, we provide a message explaining what we changes within the tracked files.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git commit -m &lt;span class="s2"&gt;&amp;quot;started tracking hi.py&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, we commited our change. Although, everything is still local, nothing is published on the remote repository yet. To do so, we must &lt;code&gt;push&lt;/code&gt; our last commit.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git push origin master &lt;span class="c1"&gt;# push to the branch master on the origin remote repository&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To get the latest changes on remote, use &lt;code&gt;pull&lt;/code&gt; command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git pull origin master
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Additional useful commands&lt;/h2&gt;
+&lt;p&gt;Display last commits&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git log
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Display what has been changed since the last commit&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git diff
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Cancels all local changes and rolls back to how the file was at latest commit&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git checkout hi.py
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;A visual recap&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="git_basic_usage" src="https://marklodato.github.io/visual-git-guide/basic-usage.svg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Source: &lt;a href="https://marklodato.github.io/visual-git-guide/index-en.html"&gt;marklodato.github.io&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h1&gt;Collaborating with other people&lt;/h1&gt;
+&lt;h2&gt;Common configuration&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;n&lt;/em&gt; co-workers, one repository, one production server.&lt;/p&gt;
+&lt;p&gt;Co-workers work on the same project and can edit the same files simultaneously. Updates are pushed on the distant repository, and pulled from the production server.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://i.stack.imgur.com/9TtPl.png" height="180px"/&gt;&lt;/p&gt;
+&lt;p&gt;NEVER EVER commit, push or edit anything on the production server.&lt;/p&gt;
+&lt;h2&gt;Branches&lt;/h2&gt;
+&lt;p&gt;Branches allow people to work on separate tasks without messing with the master branch code. It is useful to experiment, or add functionalities. Branches can start from the master branch, or from another branch.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://backlogtool.com/git-tutorial/en/img/post/stepup/capture_stepup1_5_6.png"
+     height="250px"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Source : &lt;a href="https://backlogtool.com/git-tutorial/en/stepup/stepup1_5.html"&gt;backlogtool.com&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Check branches within local repository&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git branch
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create a branch named &lt;code&gt;awesome-feature&lt;/code&gt; from the active branch&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git checkout -b awesome-feature
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Edit some code, add and commit files. Then push them to the remote server, but not on master.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git push origin awesome-feature &lt;span class="c1"&gt;# create branch on the remote repo&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Delete local branch&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git branch -d awesome-feature
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Merging and pull requests&lt;/h2&gt;
+&lt;p&gt;When we are finished working on our feature-branch, we must check for conflicts before pushing to master. To do so, pull the master branch into your branch, and fix your conflicts locally.&lt;/p&gt;
+&lt;p&gt;When all the conflicts are resolved, push again, &lt;em&gt;still on your branch&lt;/em&gt;, to the remote repository. Then, make a pull request, that will eventually get merged on the master branch by the repository administrator.&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://www.tuleap.org/sites/default/files/simplified-pull-request-process.jpeg"
+     height="200px"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Source: &lt;a href="https://www.tuleap.org/tuleap-pull-request-open-source-code-review-tool"&gt;tuleap.org&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h1&gt;More useful tools&lt;/h1&gt;
+&lt;h2&gt;Stash your local changes&lt;/h2&gt;
+&lt;p&gt;When your &lt;code&gt;git pull&lt;/code&gt; fails because you are editing a file that has been changed by someone else, temporarily stash your changes, pull the recent modifications, then apply your changes again.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git pull origin awesome-feature &lt;span class="c1"&gt;# fails&lt;/span&gt;
+
+git stash conflict-file.py &lt;span class="c1"&gt;# stash changes&lt;/span&gt;
+git pull origin awesome-feature &lt;span class="c1"&gt;# works but your changes are temporarily gone&lt;/span&gt;
+git stash apply &lt;span class="c1"&gt;# re-apply your changes&lt;/span&gt;
+git commit -m &lt;span class="s2"&gt;&amp;quot;made the world a better place&amp;quot;&lt;/span&gt;
+git push origin awesome-feature &lt;span class="c1"&gt;# now the world really is a better place&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Ignore unnecessary files&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;You can't always git what you want -- The Rolling Stones&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Please never add anything other than code/configuration files in a git repository. This is not Google Drive.&lt;/p&gt;
+&lt;p&gt;Create a &lt;code&gt;.gitignore&lt;/code&gt; file at the root of your repository, with the following content:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;*.pyc
+*.csv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This tells git to never track &lt;code&gt;.pyc&lt;/code&gt; or &lt;code&gt;.csv&lt;/code&gt; files, because who needs to ?&lt;/p&gt;
+&lt;p&gt;You can also ignore entire directories. You should avoid using &lt;code&gt;git add *&lt;/code&gt; if you're not sure you're ignoring unnecessary files.&lt;/p&gt;
+&lt;h2&gt;Remove files on the repository&lt;/h2&gt;
+&lt;p&gt;What if you no longer want to track something ?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git rm go_away.py &lt;span class="c1"&gt;# will also delete the file from your disk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git rm --cached go_away.py &lt;span class="c1"&gt;# will only delete on the remote repository&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Versioning configuration files or critical files&lt;/h2&gt;
+&lt;p&gt;Sometimes you want to track files that contain passwords, or configuration
+variables.&lt;br&gt;
+Those files are likely to change independently from the code, so
+you don't want to commit every single change in those.&lt;br&gt;
+They might also
+contain sensitive information that you don't want to store within the
+repository.&lt;/p&gt;
+&lt;p&gt;What you should is tracking a &lt;code&gt;.dist&lt;/code&gt; version of the file that has all the
+required fields, but without any value.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;DB_HOST=
+DB_USER=
+DB_PASSWORD=
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you are refering to a conf file named &lt;code&gt;variables.env&lt;/code&gt;, name you dist file
+&lt;code&gt;variables.env.dist&lt;/code&gt;. Track the &lt;code&gt;.dist&lt;/code&gt; file, but ignore &lt;code&gt;variables.env&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;README.md&lt;/h2&gt;
+&lt;p&gt;Every repository should have a decent README.md file, explaining what it is
+about, and how to configure and install the dependencies to start the
+application.&lt;br&gt;
+This file is written using the &lt;em&gt;Markdown&lt;/em&gt; syntax. You can read about it and
+have look at this &lt;a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf"&gt;cheat
+sheet&lt;/a&gt; to get
+started.&lt;/p&gt;
+&lt;p&gt;Go ahead and do this tutorial if you have 15 minutes to spare: &lt;a href="https://try.github.io/levels/1/challenges/1"&gt;try.github.io&lt;/a&gt;&lt;/p&gt;</content><category term="code"></category><category term="git"></category><category term="tutorial"></category></entry><entry><title>From KSHE 95 radio website to Spotify Playlist</title><link href="https://ericdaat.github.io/scraping-kshe-radio-to-spotify-playlist.html" rel="alternate"></link><published>2017-08-16T10:20:00+02:00</published><updated>2017-08-16T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-08-16:/scraping-kshe-radio-to-spotify-playlist.html</id><summary type="html">&lt;p&gt;This post shows how to scrap a list of songs from the &lt;a href="http://www.kshe95.com/"&gt;KSHE 95&lt;/a&gt; radio website and upload them to a Spotify playlist using the &lt;a href="https://developer.spotify.com/web-api/"&gt;Spotify Web API&lt;/a&gt;. I used Python programming language along with &lt;a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/"&gt;Beautiful Soup&lt;/a&gt; for scraping, &lt;a href="http://docs.python-requests.org/en/master/"&gt;Requests&lt;/a&gt; for HTTP requests and &lt;a href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; for deploying the application.&lt;/p&gt;</summary><content type="html">&lt;p&gt;As a big fan of Classic Rock living in France, I am very frustrated by the lack of good classic rock radio we have. I spent four months in St Louis, MO, and I had the chance to listen to &lt;a href="http://www.kshe95.com/"&gt;KSHE 95&lt;/a&gt; every day, playing some of my favorite classic rock tunes. Unfortunately, I can't listen to this radio in France as they block it. Fortunately, their website shows the &lt;a href="http://player.listenlive.co/20101/en/songhistory"&gt;songs that have been playing earlier&lt;/a&gt;. I decided to scrap this page, make myself an empty &lt;a href="https://open.spotify.com/user/ericda/playlist/3BCcE8T945z1MnfPWkFsfX"&gt;Spotify playlist&lt;/a&gt;, and automatically add in the KSHE tracks.&lt;/p&gt;
 &lt;p&gt;So far, I am able to:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Scrap KSHE's web page, and get a list of 10 songs they've played&lt;/li&gt;
