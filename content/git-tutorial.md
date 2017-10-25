@@ -1,13 +1,11 @@
-Title: A short introduction to Git
-Date: 2017-10-24 10:20
-Modified: 2017-10-24 10:20
+Title: An introduction to Git
+Date: 2017-10-20 10:20
+Modified: 2017-10-20 10:20
 Category: Programming
-Tags: git, code
-Authors: Eric Daoud
+Tags: code, git, tutorial
 Slug: git-tutorial
-Summary: A short introduction to git, the very famous version control system
-created by Linus Torvalds in 2005. This post shows some useful commands and
-tips.
+Authors: Eric Daoud
+Summary: A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.
 Status: published
 
 
@@ -22,7 +20,6 @@ The name "git" was given by Linus Torvalds when he wrote the very first version.
  2. stupid. contemptible and despicable. simple. Take your pick from the dictionary of slang.
  3. "global information tracker": you're in a good mood, and it actually works for you. Angels sing, and a light suddenly fills the room.
  4. "g*dd*mn idiotic truckload of sh*t": when it breaks
-
 *Source: [Wikipedia](https://en.wikipedia.org/wiki/Git)*
 
 # First Steps
@@ -269,9 +266,6 @@ This file is written using the *Markdown* syntax. You can read about it and
 have look at this [cheat
 sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf) to get
 started.
-
-<img src="https://www.martin-brennan.com/images/github_print_before.png"
-     height="250px">
 
 
 Go ahead and do this tutorial if you have 15 minutes to spare: [try.github.io](https://try.github.io/levels/1/challenges/1)
