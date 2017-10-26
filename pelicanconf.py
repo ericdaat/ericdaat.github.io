@@ -23,8 +23,7 @@ DEFAULT_LANG = 'en'
 MAIN_MENU = True
 
 MENUITEMS = (('Archives', '/archives.html'),
-             ('Categories', '/categories.html'),
-             ('Tags', '/tags.html'),)
+             ('Categories', '/categories.html'))
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -55,7 +54,7 @@ DEFAULT_METADATA = {
 
 # Plugins
 PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['ipynb.markup', 'render_math']
+PLUGINS = ['render_math']
 
 # Themes
 THEME = 'aboutwilson'
