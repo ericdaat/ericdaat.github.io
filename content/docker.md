@@ -8,6 +8,8 @@ Slug: docker-introduction
 Summary: A tutorial on how to get started with Docker.
 Status: published
 
+This post is a short tutorial to Docker. We will first talk about what Docker is and how it differs from virtual machines. Then, we will learn how to get started and run your first container.
+
 # Introduction
 ## What is Docker ?
 > “Docker containers wrap a piece of software in a complete filesystem that
@@ -96,3 +98,77 @@ docker-compose --version
 ```
 
 # First steps
+
+Let's get started and run our first container. A container runs from an image, just like an object is instanciated from an image in Object Oriented Programming. This means that before running a container, we must build or download an existing image.
+
+Just like OOP, you don't have to start from scratch and you can use prebuilt images to get started. For instance, if you want to run a website in an apache webserver, you can use apache's docker image, and customize it to your needs. You could also start from a lower level, and use a Debian image on which you'd install apache webserver.
+
+We said earlier that images could be built or downloaded. To build an image, you can use a Dockerfile which is a text file in which you specify the commands to build your docker image. The Dockerfile reference can be found on Docker's website following [this link](https://docs.docker.com/engine/reference/builder/). Note that this file must be named "Dockerfile" (keep the capital D).
+
+A very simple Dockerfile may look like this:
+
+```
+FROM ubuntu
+CMD echo "This is a test."
+```
+
+This will pull the ubuntu Docker image, run it and display "This is a test.". After this commands succeeds, the container will stop. This is very important, a container lives as long as the command assigned to it runs. This also means that you must not run more than one application per container.
+
+In the previous example, we used ubuntu image by pulling it to our own image. A lot of pre-existing images are stored and usable by everybody. They are all available on [Docker Hub](https://hub.docker.com/explore/). You can find official images like Debian, Ubuntu, Nginx... But also images than other people built.
+
+Here are some basic commands to get you started with Docker:
+
+``` bash
+docker build . # builds a container from a Dockerfile (using the Dockerfile is in the active directory)
+docker pull debian:latest # pulls the latest version of the debian image
+docker run <image-name> # runs a container from an imqge
+docker ps # lists the running containers
+docker ps -a # lists all the containers
+docker images # lists the built images
+docker rm <container-id> # removes a stopped container
+docker rm -f <container-id> # force remove a container
+docker rmi <image-id> # removes a built image
+```
+
+# Running your first container
+Let's run an apache webserver, using the [Apache HTTP](https://hub.docker.com/r/_/httpd/) image.
+
+``` bash
+docker pull httpd:latest
+```
+
+Now you should see the httpd image when running `docker images` command.
+
+When you run a container, you can give it several options. Let's have a look at this command:
+
+``` bash
+docker run -d -p 80:80 my_image
+```
+
+Here, we asked docker to run an image called *my_image* with the following options:
+
+ - \-d: The container runs in *detached* mode (in background)
+ - \-p: We are mapping the container's port 80 to our localhost:80. This means that we can access the container's application on our host. Without this option, the container would still run, but we woudldn't be able to access its application.
+
+With such a configuration, you can open a web browser and visit *localhost*. This will display the container's apache web server content.
+
+## Attaching volumes
+Let's say we created a very cool static website in HTML/CSS, and we stored it in our */var/www/html* local directory. So far our apache container only displays the defaut *index.html* file. How can we pass the container the awesome website we built ? There are several options, including:
+
+ - Copy the content from the host to the container when building the image. This means that the data will be stored within the image. If you save the image and pull it somewhere, you will have a copy of the data with it. If you delete the container, you delete the data. If you want to launch the same container several times, they will all have a distinct copy of the data.
+ - Link the data between the host and the container. This is often a preferred option. By doing this, you don't store the data within the container, you simply create a link from a folder on your host, to the container. This is called volume mapping. Doing so is much more lightweight, but requires to have the data locally. Another advantage is that if you want to run multiple containers from the same image, they can use the same data. If you change the data locally, the containers will render the newer data.
+
+To copy data from the host to the container image, add a *COPY* command to your Dockerfile, like so:
+
+```
+FROM httpd
+COPY /var/www/html:/var/www/html
+```
+
+To link a volume, add the *-v* option to the *run* command:
+
+``` bash
+docker run -d -p 80:80 -v /var/www/html:/var/www/html httpd
+```
+
+Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on *localhost* is exactly what we have under the local */var/www/html* directory.

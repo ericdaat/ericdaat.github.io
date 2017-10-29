@@ -11,7 +11,6 @@ SITEDESCRIPTION = 'Foo Bar\'s Thoughts and Writings'
 SITELOGO = '/images/eric.jpg'
 # FAVICON = SITEURL + '/images/favicon.ico'
 GOOGLE_ANALYTICS = 'UA-105599779-1'
-TWITTER_USERNAME = 'ericdaoud'
 
 PATH = 'content'
 STATIC_PATHS = ['images']
@@ -36,13 +35,11 @@ AUTHOR_FEED_RSS = None
 LINKS = ()
 
 # Social widget
-SOCIAL = (
-	('Github', 'https://github.com/ericdaat'),
-	('Twitter', 'https://twitter.com/ericdaoud'),
-	('Youtube', 'https://www.youtube.com/user/ericmusic13'),
-	('Linkedin', 'https://www.linkedin.com/in/ericdaoud/'),
-	('500px', 'https://500px.com/ericda'),
-	)
+SOCIAL = (('Github', 'https://github.com/ericdaat'),
+          ('Twitter', 'https://twitter.com/ericdaoud'),
+          ('Youtube', 'https://www.youtube.com/user/ericmusic13'),
+          ('Linkedin', 'https://www.linkedin.com/in/ericdaoud/'),
+          ('500px', 'https://500px.com/ericda'),)
 
 DEFAULT_PAGINATION = 10
 
