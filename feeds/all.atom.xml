@@ -1,5 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/all.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-10-20T10:20:00+02:00</updated><entry><title>An introduction to Git</title><link href="https://ericdaat.github.io/git-tutorial.html" rel="alternate"></link><published>2017-10-20T10:20:00+02:00</published><updated>2017-10-20T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-20:/git-tutorial.html</id><summary type="html">&lt;p&gt;A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some History&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/all.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-10-25T10:20:00+02:00</updated><entry><title>An introduction to Docker</title><link href="https://ericdaat.github.io/docker-introduction.html" rel="alternate"></link><published>2017-10-25T10:20:00+02:00</published><updated>2017-10-25T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-25:/docker-introduction.html</id><summary type="html">&lt;p&gt;A tutorial on how to get started with Docker.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post is a short tutorial to Docker. We will first talk about what Docker is and how it differs from virtual machines. Then, we will learn how to get started and run your first container.&lt;/p&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;h2&gt;What is Docker ?&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“Docker containers wrap a piece of software in a complete filesystem that
+contains everything needed to run: code, runtime, system tools, system libraries
+– anything that can be installed on a server. This guarantees that the software
+will always run the same, regardless of its environment.”&lt;br&gt;
+&lt;em&gt;Source: &lt;a href="https://www.docker.com/what-docker"&gt;Docker Website&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Advantages&lt;/h2&gt;
+&lt;p&gt;Docker has some of the following advantages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lightweight&lt;ul&gt;
+&lt;li&gt;Containers share the same kernel (unlike Virtual Machines)&lt;/li&gt;
+&lt;li&gt;Use less RAM&lt;/li&gt;
+&lt;li&gt;Share common files (No need to duplicate files on each container)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Open&lt;ul&gt;
+&lt;li&gt;Run all major Linux distributions … as well as Windows, on top of any
+infrastructure&lt;/li&gt;
+&lt;li&gt;Can pull images from official sources (OS like Ubuntu, Debian … or even
+pre-configured applications like Redis, Nginx, …)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Secure&lt;ul&gt;
+&lt;li&gt;Containers isolate applications from one another&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Virtual Machines vs. Containers&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Virtual Machines include the application, necessary binaries and libraries and
+entire guest OS&lt;/li&gt;
+&lt;li&gt;Containers include application and all of its dependencies, but share the kernel!
+ They can run on any computer/infrastructure/cloud&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="vms-vs-containers" src="https://www.docker.com/sites/default/files/containers-vms-together%402x.png"&gt;&lt;/p&gt;
+&lt;h1&gt;Installation&lt;/h1&gt;
+&lt;p&gt;You will need to do 3 things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://docs.docker.com/engine/installation/"&gt;Install Docker Engine&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.docker.com/engine/installation/"&gt;Post steps installation if you use Linux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://docs.docker.com/compose/install/"&gt;Install Docker Compose&lt;/a&gt; (&lt;em&gt;optional&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Below are the commands you will need to install Docker Community Edition (Docker
+CE) on Ubuntu/Debian.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
+
+sudo apt-get install &lt;span class="se"&gt;\&lt;/span&gt;
+    apt-transport-https &lt;span class="se"&gt;\&lt;/span&gt;
+    ca-certificates &lt;span class="se"&gt;\&lt;/span&gt;
+    curl &lt;span class="se"&gt;\&lt;/span&gt;
+    software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg &lt;span class="p"&gt;|&lt;/span&gt; sudo apt-key add -
+
+sudo add-apt-repository &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \&lt;/span&gt;
+&lt;span class="s2"&gt;    &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;lsb_release -cs&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt; \&lt;/span&gt;
+&lt;span class="s2"&gt;    stable&amp;quot;&lt;/span&gt;
+
+sudo apt-get update
+
+sudo apt-get install docker-ce
+
+sudo docker run hello-world
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;From now on the Docker Engine is installed, but you will only be able to run it
+with &lt;em&gt;sudo&lt;/em&gt;, which is not ideal. To fix this, Docker provides some post
+installation steps, that correspond to the following commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo groupadd docker
+sudo usermod -aG docker &lt;span class="nv"&gt;$USER&lt;/span&gt;
+docker run hello-world &lt;span class="c1"&gt;# works without sudo!&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I like to use Docker Compose to deploy my containers. You can specify your
+containers and their configuration in a &lt;em&gt;yaml&lt;/em&gt; file, and then run them all at
+once. To install Docker Compose, run the following commands:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-&lt;span class="sb"&gt;`&lt;/span&gt;uname -s&lt;span class="sb"&gt;`&lt;/span&gt;-&lt;span class="sb"&gt;`&lt;/span&gt;uname -m&lt;span class="sb"&gt;`&lt;/span&gt; -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
+
+docker-compose --version
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;First steps&lt;/h1&gt;
+&lt;p&gt;Let's get started and run our first container. A container runs from an image, just like an object is instanciated from an image in Object Oriented Programming. This means that before running a container, we must build or download an existing image.&lt;/p&gt;
+&lt;p&gt;Just like OOP, you don't have to start from scratch and you can use prebuilt images to get started. For instance, if you want to run a website in an apache webserver, you can use apache's docker image, and customize it to your needs. You could also start from a lower level, and use a Debian image on which you'd install apache webserver.&lt;/p&gt;
+&lt;p&gt;We said earlier that images could be built or downloaded. To build an image, you can use a Dockerfile which is a text file in which you specify the commands to build your docker image. The Dockerfile reference can be found on Docker's website following &lt;a href="https://docs.docker.com/engine/reference/builder/"&gt;this link&lt;/a&gt;. Note that this file must be named "Dockerfile" (keep the capital D).&lt;/p&gt;
+&lt;p&gt;A very simple Dockerfile may look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FROM ubuntu
+CMD echo &amp;quot;This is a test.&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will pull the ubuntu Docker image, run it and display "This is a test.". After this commands succeeds, the container will stop. This is very important, a container lives as long as the command assigned to it runs. This also means that you must not run more than one application per container.&lt;/p&gt;
+&lt;p&gt;In the previous example, we used ubuntu image by pulling it to our own image. A lot of pre-existing images are stored and usable by everybody. They are all available on &lt;a href="https://hub.docker.com/explore/"&gt;Docker Hub&lt;/a&gt;. You can find official images like Debian, Ubuntu, Nginx... But also images than other people built.&lt;/p&gt;
+&lt;p&gt;Here are some basic commands to get you started with Docker:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker build . &lt;span class="c1"&gt;# builds a container from a Dockerfile (using the Dockerfile is in the active directory)&lt;/span&gt;
+docker pull debian:latest &lt;span class="c1"&gt;# pulls the latest version of the debian image&lt;/span&gt;
+docker run &amp;lt;image-name&amp;gt; &lt;span class="c1"&gt;# runs a container from an imqge&lt;/span&gt;
+docker ps &lt;span class="c1"&gt;# lists the running containers&lt;/span&gt;
+docker ps -a &lt;span class="c1"&gt;# lists all the containers&lt;/span&gt;
+docker images &lt;span class="c1"&gt;# lists the built images&lt;/span&gt;
+docker rm &amp;lt;container-id&amp;gt; &lt;span class="c1"&gt;# removes a stopped container&lt;/span&gt;
+docker rm -f &amp;lt;container-id&amp;gt; &lt;span class="c1"&gt;# force remove a container&lt;/span&gt;
+docker rmi &amp;lt;image-id&amp;gt; &lt;span class="c1"&gt;# removes a built image&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Running your first container&lt;/h1&gt;
+&lt;p&gt;Let's run an apache webserver, using the &lt;a href="https://hub.docker.com/r/_/httpd/"&gt;Apache HTTP&lt;/a&gt; image.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker pull httpd:latest
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now you should see the httpd image when running &lt;code&gt;docker images&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;When you run a container, you can give it several options. Let's have a look at this command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker run -d -p &lt;span class="m"&gt;80&lt;/span&gt;:80 my_image
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here, we asked docker to run an image called &lt;em&gt;my_image&lt;/em&gt; with the following options:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;-d: The container runs in &lt;em&gt;detached&lt;/em&gt; mode (in background)&lt;/li&gt;
+&lt;li&gt;-p: We are mapping the container's port 80 to our localhost:80. This means that we can access the container's application on our host. Without this option, the container would still run, but we woudldn't be able to access its application.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With such a configuration, you can open a web browser and visit &lt;em&gt;localhost&lt;/em&gt;. This will display the container's apache web server content.&lt;/p&gt;
+&lt;h2&gt;Attaching volumes&lt;/h2&gt;
+&lt;p&gt;Let's say we created a very cool static website in HTML/CSS, and we stored it in our &lt;em&gt;/var/www/html&lt;/em&gt; local directory. So far our apache container only displays the defaut &lt;em&gt;index.html&lt;/em&gt; file. How can we pass the container the awesome website we built ? There are several options, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Copy the content from the host to the container when building the image. This means that the data will be stored within the image. If you save the image and pull it somewhere, you will have a copy of the data with it. If you delete the container, you delete the data. If you want to launch the same container several times, they will all have a distinct copy of the data.&lt;/li&gt;
+&lt;li&gt;Link the data between the host and the container. This is often a preferred option. By doing this, you don't store the data within the container, you simply create a link from a folder on your host, to the container. This is called volume mapping. Doing so is much more lightweight, but requires to have the data locally. Another advantage is that if you want to run multiple containers from the same image, they can use the same data. If you change the data locally, the containers will render the newer data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To copy data from the host to the container image, add a &lt;em&gt;COPY&lt;/em&gt; command to your Dockerfile, like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FROM httpd
+COPY /var/www/html:/var/www/html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To link a volume, add the &lt;em&gt;-v&lt;/em&gt; option to the &lt;em&gt;run&lt;/em&gt; command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker run -d -p &lt;span class="m"&gt;80&lt;/span&gt;:80 -v /var/www/html:/var/www/html httpd
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on &lt;em&gt;localhost&lt;/em&gt; is exactly what we have under the local &lt;em&gt;/var/www/html&lt;/em&gt; directory.&lt;/p&gt;</content><category term="docker"></category><category term="code"></category><category term="devops"></category></entry><entry><title>An introduction to Git</title><link href="https://ericdaat.github.io/git-tutorial.html" rel="alternate"></link><published>2017-10-20T10:20:00+02:00</published><updated>2017-10-20T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-20:/git-tutorial.html</id><summary type="html">&lt;p&gt;A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some History&lt;/h1&gt;
 &lt;p&gt;Git was created by Linus Torvalds in 2005 for development of the Linux kernel,
 with other kernel developers contributing to its initial development.
 Its current maintainer since 2005 is Junio Hamano.&lt;/p&gt;

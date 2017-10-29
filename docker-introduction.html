@@ -50,7 +50,8 @@
 			<a href="https://ericdaat.github.io/tag/devops.html" rel="tag">devops</a>
 		</span>
 	</div>
-	<div itemprop="articleBody" class="article-body"><h1>Introduction</h1>
+	<div itemprop="articleBody" class="article-body"><p>This post is a short tutorial to Docker. We will first talk about what Docker is and how it differs from virtual machines. Then, we will learn how to get started and run your first container.</p>
+<h1>Introduction</h1>
 <h2>What is Docker ?</h2>
 <blockquote>
 <p>“Docker containers wrap a piece of software in a complete filesystem that
@@ -140,7 +141,67 @@ docker-compose --version
 </pre></div>
 
 
-<h1>First steps</h1></div>
+<h1>First steps</h1>
+<p>Let's get started and run our first container. A container runs from an image, just like an object is instanciated from an image in Object Oriented Programming. This means that before running a container, we must build or download an existing image.</p>
+<p>Just like OOP, you don't have to start from scratch and you can use prebuilt images to get started. For instance, if you want to run a website in an apache webserver, you can use apache's docker image, and customize it to your needs. You could also start from a lower level, and use a Debian image on which you'd install apache webserver.</p>
+<p>We said earlier that images could be built or downloaded. To build an image, you can use a Dockerfile which is a text file in which you specify the commands to build your docker image. The Dockerfile reference can be found on Docker's website following <a href="https://docs.docker.com/engine/reference/builder/">this link</a>. Note that this file must be named "Dockerfile" (keep the capital D).</p>
+<p>A very simple Dockerfile may look like this:</p>
+<div class="highlight"><pre><span></span>FROM ubuntu
+CMD echo &quot;This is a test.&quot;
+</pre></div>
+
+
+<p>This will pull the ubuntu Docker image, run it and display "This is a test.". After this commands succeeds, the container will stop. This is very important, a container lives as long as the command assigned to it runs. This also means that you must not run more than one application per container.</p>
+<p>In the previous example, we used ubuntu image by pulling it to our own image. A lot of pre-existing images are stored and usable by everybody. They are all available on <a href="https://hub.docker.com/explore/">Docker Hub</a>. You can find official images like Debian, Ubuntu, Nginx... But also images than other people built.</p>
+<p>Here are some basic commands to get you started with Docker:</p>
+<div class="highlight"><pre><span></span>docker build . <span class="c1"># builds a container from a Dockerfile (using the Dockerfile is in the active directory)</span>
+docker pull debian:latest <span class="c1"># pulls the latest version of the debian image</span>
+docker run &lt;image-name&gt; <span class="c1"># runs a container from an imqge</span>
+docker ps <span class="c1"># lists the running containers</span>
+docker ps -a <span class="c1"># lists all the containers</span>
+docker images <span class="c1"># lists the built images</span>
+docker rm &lt;container-id&gt; <span class="c1"># removes a stopped container</span>
+docker rm -f &lt;container-id&gt; <span class="c1"># force remove a container</span>
+docker rmi &lt;image-id&gt; <span class="c1"># removes a built image</span>
+</pre></div>
+
+
+<h1>Running your first container</h1>
+<p>Let's run an apache webserver, using the <a href="https://hub.docker.com/r/_/httpd/">Apache HTTP</a> image.</p>
+<div class="highlight"><pre><span></span>docker pull httpd:latest
+</pre></div>
+
+
+<p>Now you should see the httpd image when running <code>docker images</code> command.</p>
+<p>When you run a container, you can give it several options. Let's have a look at this command:</p>
+<div class="highlight"><pre><span></span>docker run -d -p <span class="m">80</span>:80 my_image
+</pre></div>
+
+
+<p>Here, we asked docker to run an image called <em>my_image</em> with the following options:</p>
+<ul>
+<li>-d: The container runs in <em>detached</em> mode (in background)</li>
+<li>-p: We are mapping the container's port 80 to our localhost:80. This means that we can access the container's application on our host. Without this option, the container would still run, but we woudldn't be able to access its application.</li>
+</ul>
+<p>With such a configuration, you can open a web browser and visit <em>localhost</em>. This will display the container's apache web server content.</p>
+<h2>Attaching volumes</h2>
+<p>Let's say we created a very cool static website in HTML/CSS, and we stored it in our <em>/var/www/html</em> local directory. So far our apache container only displays the defaut <em>index.html</em> file. How can we pass the container the awesome website we built ? There are several options, including:</p>
+<ul>
+<li>Copy the content from the host to the container when building the image. This means that the data will be stored within the image. If you save the image and pull it somewhere, you will have a copy of the data with it. If you delete the container, you delete the data. If you want to launch the same container several times, they will all have a distinct copy of the data.</li>
+<li>Link the data between the host and the container. This is often a preferred option. By doing this, you don't store the data within the container, you simply create a link from a folder on your host, to the container. This is called volume mapping. Doing so is much more lightweight, but requires to have the data locally. Another advantage is that if you want to run multiple containers from the same image, they can use the same data. If you change the data locally, the containers will render the newer data.</li>
+</ul>
+<p>To copy data from the host to the container image, add a <em>COPY</em> command to your Dockerfile, like so:</p>
+<div class="highlight"><pre><span></span>FROM httpd
+COPY /var/www/html:/var/www/html
+</pre></div>
+
+
+<p>To link a volume, add the <em>-v</em> option to the <em>run</em> command:</p>
+<div class="highlight"><pre><span></span>docker run -d -p <span class="m">80</span>:80 -v /var/www/html:/var/www/html httpd
+</pre></div>
+
+
+<p>Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on <em>localhost</em> is exactly what we have under the local <em>/var/www/html</em> directory.</p></div>
 	<hr>
     <!-- <h2>Comments</h2> -->
 </div>
@@ -176,7 +237,7 @@ docker-compose --version
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
 							<li><a href="https://ericdaat.github.io/category/photography.html">Photography (1)</a></li>
-							<li><a href="https://ericdaat.github.io/category/programming.html">Programming (4)</a></li>
+							<li><a href="https://ericdaat.github.io/category/programming.html">Programming (5)</a></li>
 						</ul>
 					</div>
 				</div>
