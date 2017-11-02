@@ -185,23 +185,23 @@ docker rmi &lt;image-id&gt; <span class="c1"># removes a built image</span>
 </ul>
 <p>With such a configuration, you can open a web browser and visit <em>localhost</em>. This will display the container's apache web server content.</p>
 <h2>Attaching volumes</h2>
-<p>Let's say we created a very cool static website in HTML/CSS, and we stored it in our <em>/var/www/html</em> local directory. So far our apache container only displays the defaut <em>index.html</em> file. How can we pass the container the awesome website we built ? There are several options, including:</p>
+<p>Let's say we created a very cool static website in HTML/CSS, and we stored it in our <em>./mywebsite</em> local directory. So far our apache container only displays the defaut <em>index.html</em> file. How can we pass the container the awesome website we built ? There are several options, including:</p>
 <ul>
 <li>Copy the content from the host to the container when building the image. This means that the data will be stored within the image. If you save the image and pull it somewhere, you will have a copy of the data with it. If you delete the container, you delete the data. If you want to launch the same container several times, they will all have a distinct copy of the data.</li>
 <li>Link the data between the host and the container. This is often a preferred option. By doing this, you don't store the data within the container, you simply create a link from a folder on your host, to the container. This is called volume mapping. Doing so is much more lightweight, but requires to have the data locally. Another advantage is that if you want to run multiple containers from the same image, they can use the same data. If you change the data locally, the containers will render the newer data.</li>
 </ul>
 <p>To copy data from the host to the container image, add a <em>COPY</em> command to your Dockerfile, like so:</p>
 <div class="highlight"><pre><span></span>FROM httpd
-COPY /var/www/html:/var/www/html
+COPY ./mywebsite/:/usr/local/apache2/htdocs/
 </pre></div>
 
 
 <p>To link a volume, add the <em>-v</em> option to the <em>run</em> command:</p>
-<div class="highlight"><pre><span></span>docker run -d -p <span class="m">80</span>:80 -v /var/www/html:/var/www/html httpd
+<div class="highlight"><pre><span></span>docker run -d -p <span class="m">80</span>:80 -v ./mywebsite/:/usr/local/apache2/htdocs/ httpd
 </pre></div>
 
 
-<p>Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on <em>localhost</em> is exactly what we have under the local <em>/var/www/html</em> directory.</p></div>
+<p>Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on <em>localhost</em> is exactly what we have under the local <em>./mywebsite</em> directory.</p></div>
 	<hr>
     <!-- <h2>Comments</h2> -->
 </div>

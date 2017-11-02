@@ -134,23 +134,23 @@ docker rmi &amp;lt;image-id&amp;gt; &lt;span class="c1"&gt;# removes a built ima
 &lt;/ul&gt;
 &lt;p&gt;With such a configuration, you can open a web browser and visit &lt;em&gt;localhost&lt;/em&gt;. This will display the container's apache web server content.&lt;/p&gt;
 &lt;h2&gt;Attaching volumes&lt;/h2&gt;
-&lt;p&gt;Let's say we created a very cool static website in HTML/CSS, and we stored it in our &lt;em&gt;/var/www/html&lt;/em&gt; local directory. So far our apache container only displays the defaut &lt;em&gt;index.html&lt;/em&gt; file. How can we pass the container the awesome website we built ? There are several options, including:&lt;/p&gt;
+&lt;p&gt;Let's say we created a very cool static website in HTML/CSS, and we stored it in our &lt;em&gt;./mywebsite&lt;/em&gt; local directory. So far our apache container only displays the defaut &lt;em&gt;index.html&lt;/em&gt; file. How can we pass the container the awesome website we built ? There are several options, including:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Copy the content from the host to the container when building the image. This means that the data will be stored within the image. If you save the image and pull it somewhere, you will have a copy of the data with it. If you delete the container, you delete the data. If you want to launch the same container several times, they will all have a distinct copy of the data.&lt;/li&gt;
 &lt;li&gt;Link the data between the host and the container. This is often a preferred option. By doing this, you don't store the data within the container, you simply create a link from a folder on your host, to the container. This is called volume mapping. Doing so is much more lightweight, but requires to have the data locally. Another advantage is that if you want to run multiple containers from the same image, they can use the same data. If you change the data locally, the containers will render the newer data.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;To copy data from the host to the container image, add a &lt;em&gt;COPY&lt;/em&gt; command to your Dockerfile, like so:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FROM httpd
-COPY /var/www/html:/var/www/html
+COPY ./mywebsite/:/usr/local/apache2/htdocs/
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;To link a volume, add the &lt;em&gt;-v&lt;/em&gt; option to the &lt;em&gt;run&lt;/em&gt; command:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker run -d -p &lt;span class="m"&gt;80&lt;/span&gt;:80 -v /var/www/html:/var/www/html httpd
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker run -d -p &lt;span class="m"&gt;80&lt;/span&gt;:80 -v ./mywebsite/:/usr/local/apache2/htdocs/ httpd
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on &lt;em&gt;localhost&lt;/em&gt; is exactly what we have under the local &lt;em&gt;/var/www/html&lt;/em&gt; directory.&lt;/p&gt;</content><category term="docker"></category><category term="code"></category><category term="devops"></category></entry><entry><title>An introduction to Git</title><link href="https://ericdaat.github.io/git-tutorial.html" rel="alternate"></link><published>2017-10-20T10:20:00+02:00</published><updated>2017-10-20T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-20:/git-tutorial.html</id><summary type="html">&lt;p&gt;A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some History&lt;/h1&gt;
+&lt;p&gt;Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on &lt;em&gt;localhost&lt;/em&gt; is exactly what we have under the local &lt;em&gt;./mywebsite&lt;/em&gt; directory.&lt;/p&gt;</content><category term="docker"></category><category term="code"></category><category term="devops"></category></entry><entry><title>An introduction to Git</title><link href="https://ericdaat.github.io/git-tutorial.html" rel="alternate"></link><published>2017-10-20T10:20:00+02:00</published><updated>2017-10-20T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-20:/git-tutorial.html</id><summary type="html">&lt;p&gt;A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some History&lt;/h1&gt;
 &lt;p&gt;Git was created by Linus Torvalds in 2005 for development of the Linux kernel,
 with other kernel developers contributing to its initial development.
 Its current maintainer since 2005 is Junio Hamano.&lt;/p&gt;
