@@ -153,7 +153,7 @@ Here, we asked docker to run an image called *my_image* with the following optio
 With such a configuration, you can open a web browser and visit *localhost*. This will display the container's apache web server content.
 
 ## Attaching volumes
-Let's say we created a very cool static website in HTML/CSS, and we stored it in our */var/www/html* local directory. So far our apache container only displays the defaut *index.html* file. How can we pass the container the awesome website we built ? There are several options, including:
+Let's say we created a very cool static website in HTML/CSS, and we stored it in our *./mywebsite* local directory. So far our apache container only displays the defaut *index.html* file. How can we pass the container the awesome website we built ? There are several options, including:
 
  - Copy the content from the host to the container when building the image. This means that the data will be stored within the image. If you save the image and pull it somewhere, you will have a copy of the data with it. If you delete the container, you delete the data. If you want to launch the same container several times, they will all have a distinct copy of the data.
  - Link the data between the host and the container. This is often a preferred option. By doing this, you don't store the data within the container, you simply create a link from a folder on your host, to the container. This is called volume mapping. Doing so is much more lightweight, but requires to have the data locally. Another advantage is that if you want to run multiple containers from the same image, they can use the same data. If you change the data locally, the containers will render the newer data.
@@ -162,13 +162,13 @@ To copy data from the host to the container image, add a *COPY* command to your 
 
 ```
 FROM httpd
-COPY /var/www/html:/var/www/html
+COPY ./mywebsite:/usr/local/apache2/htdocs/
 ```
 
 To link a volume, add the *-v* option to the *run* command:
 
 ``` bash
-docker run -d -p 80:80 -v /var/www/html:/var/www/html httpd
+docker run -d -p 80:80 -v ./mywebsite:/usr/local/apache2/htdocs/ httpd
 ```
 
 Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on *localhost* is exactly what we have under the local */var/www/html* directory.
