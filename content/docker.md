@@ -162,13 +162,13 @@ To copy data from the host to the container image, add a *COPY* command to your 
 
 ```
 FROM httpd
-COPY ./mywebsite:/usr/local/apache2/htdocs/
+COPY ./mywebsite/:/usr/local/apache2/htdocs/
 ```
 
 To link a volume, add the *-v* option to the *run* command:
 
 ``` bash
-docker run -d -p 80:80 -v ./mywebsite:/usr/local/apache2/htdocs/ httpd
+docker run -d -p 80:80 -v ./mywebsite/:/usr/local/apache2/htdocs/ httpd
 ```
 
-Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on *localhost* is exactly what we have under the local */var/www/html* directory.
+Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on *localhost* is exactly what we have under the local *./mywebsite* directory.
