@@ -172,3 +172,40 @@ docker run -d -p 80:80 -v ./mywebsite/:/usr/local/apache2/htdocs/ httpd
 ```
 
 Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on *localhost* is exactly what we have under the local *./mywebsite* directory.
+
+## Docker Compose
+
+Often, you will need to build and run many different containers, and using the previously seen commands for each container can become very dull. In this section we will introduce Docker Compose, which is a very handy tool for defining and running multiple containers from a YAML configuration file. Here is how this file might look like for the apache webserver we had before.
+
+``` yaml
+version: '3'
+services:
+  website:
+   image: httpd:latest
+   ports:
+    - 80:80
+   volumes:
+    - ./mywebsite/:/usr/local/apache2/htdocs/
+```
+
+## Linking containers
+Now imagine you are running a web application in a container, and you need access to various services such as a relational database and a cache server. These three services can be run in different containers talking to each others via links. You might notice the *expose* keyword. Containers by default have all their ports closed. We previously seen that we could map a container's port to the host by using *ports*. Thanks to *expose*, we tell a container to open its port to other containers. Exposing a container's port does not make it accessible from the host.
+
+``` yaml
+version: '3'
+services:
+  website:
+   image: httpd:latest
+   ports:
+    - 80:80
+   volumes:
+    - ./mywebsite/:/usr/local/apache2/htdocs/
+   links:
+    - redis
+  cache:
+   image: redis:latest
+   expose:
+    - 6379
+```
+
+This post is certainly not exhaustive. It is just a quick introduction to Docker, and I emphasized on commands and practices I am using most of the time. Of course Docker has a very large number of additional functionnalities, and you should explore them while you work with containers. I hope this post was useful to get you started.
