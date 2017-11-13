@@ -150,7 +150,40 @@ COPY ./mywebsite/:/usr/local/apache2/htdocs/
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on &lt;em&gt;localhost&lt;/em&gt; is exactly what we have under the local &lt;em&gt;./mywebsite&lt;/em&gt; directory.&lt;/p&gt;</content><category term="docker"></category><category term="code"></category><category term="devops"></category></entry><entry><title>An introduction to Git</title><link href="https://ericdaat.github.io/git-tutorial.html" rel="alternate"></link><published>2017-10-20T10:20:00+02:00</published><updated>2017-10-20T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-20:/git-tutorial.html</id><summary type="html">&lt;p&gt;A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some History&lt;/h1&gt;
+&lt;p&gt;Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on &lt;em&gt;localhost&lt;/em&gt; is exactly what we have under the local &lt;em&gt;./mywebsite&lt;/em&gt; directory.&lt;/p&gt;
+&lt;h2&gt;Docker Compose&lt;/h2&gt;
+&lt;p&gt;Often, you will need to build and run many different containers, and using the previously seen commands for each container can become very dull. In this section we will introduce Docker Compose, which is a very handy tool for defining and running multiple containers from a YAML configuration file. Here is how this file might look like for the apache webserver we had before.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;version&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;services&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;website&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;httpd:latest&lt;/span&gt;
+   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;ports&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;80:80&lt;/span&gt;
+   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;volumes&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;./mywebsite/:/usr/local/apache2/htdocs/&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Linking containers&lt;/h2&gt;
+&lt;p&gt;Now imagine you are running a web application in a container, and you need access to various services such as a relational database and a cache server. These three services can be run in different containers talking to each others via links. You might notice the &lt;em&gt;expose&lt;/em&gt; keyword. Containers by default have all their ports closed. We previously seen that we could map a container's port to the host by using &lt;em&gt;ports&lt;/em&gt;. Thanks to &lt;em&gt;expose&lt;/em&gt;, we tell a container to open its port to other containers. Exposing a container's port does not make it accessible from the host.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;version&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;services&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;website&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;httpd:latest&lt;/span&gt;
+   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;ports&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;80:80&lt;/span&gt;
+   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;volumes&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;./mywebsite/:/usr/local/apache2/htdocs/&lt;/span&gt;
+   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;links&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;redis&lt;/span&gt;
+  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;cache&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;redis:latest&lt;/span&gt;
+   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;expose&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;6379&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This post is certainly not exhaustive. It is just a quick introduction to Docker, and I emphasized on commands and practices I am using most of the time. Of course Docker has a very large number of additional functionnalities, and you should explore them while you work with containers. I hope this post was useful to get you started.&lt;/p&gt;</content><category term="docker"></category><category term="code"></category><category term="devops"></category></entry><entry><title>An introduction to Git</title><link href="https://ericdaat.github.io/git-tutorial.html" rel="alternate"></link><published>2017-10-20T10:20:00+02:00</published><updated>2017-10-20T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-20:/git-tutorial.html</id><summary type="html">&lt;p&gt;A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some History&lt;/h1&gt;
 &lt;p&gt;Git was created by Linus Torvalds in 2005 for development of the Linux kernel,
 with other kernel developers contributing to its initial development.
 Its current maintainer since 2005 is Junio Hamano.&lt;/p&gt;
