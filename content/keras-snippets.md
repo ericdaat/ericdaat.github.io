@@ -5,12 +5,16 @@ Category: Programming
 Tags: python, keras, code, deep-learning
 Slug: keras-snippets
 Authors: Eric Daoud
-Summary: Some Keras snippets
+Summary: I started to use Keras for Deep Learning months ago, and as I was using it, I thought I should make a memo of all the cool features and network architectures I was using. This post aims at sharing some snippets I have found useful, so I can reuse them later. Maybe it will be useful to you as well !
 Status: published
+
+
+I started to use Keras for Deep Learning months ago, and as I was using it, I thought I should make a memo of all the cool features and network architectures I was using. This post aims at sharing some snippets I have found useful, so I can reuse them later. Maybe it will be useful to you as well !
 
 
 # Networks example
 
+Let's start with some networks example. Those are really similar to the examples you'd find in the [Keras Docs](https://keras.io/getting-started/sequential-model-guide/), but I added a few things here and there to better understand what they do.
 
 ## Regression
 
@@ -30,11 +34,13 @@ model.add(Dense(1, activation='relu', input_shape=(10,)))
 model.compile('sgd', 'mse')
 
 # SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
-plot_model(model, to_file='regression.png')
+plot_model(model, to_file='regression.png', show_shapes=True)
 
 model.fit(X, y, epochs=5)
 model.predict(np.random.rand(1, 10))
 ```
+
+![regression](images/keras_nn/regression.png)
 
 
 ## Binary Classification
@@ -55,11 +61,13 @@ model.add(Dense(1, activation='relu', input_shape=(10,)))
 model.compile('sgd', 'binary_crossentropy')
 
 # SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
-plot_model(model, to_file='binary_classifier.png')
+plot_model(model, to_file='binary_classifier.png', show_shapes=True)
 
 model.fit(X, y, epochs=5)
 model.predict(np.random.rand(1, 10))
 ```
+
+![binary](images/keras_nn/binary_classifier.png)
 
 
 ## Multiclass Classification
@@ -67,7 +75,7 @@ model.predict(np.random.rand(1, 10))
 ``` python
 from keras.models import Sequential
 from keras.layers import Dense
-from keras.utils import plot_model
+from keras.utils import plot_model, to_cateorical
 from keras.utils.vis_utils import model_to_dot
 import numpy as np
 from IPython.display import SVG
@@ -83,19 +91,21 @@ model.add(Dense(100, activation='softmax', input_shape=(10,)))
 model.compile('sgd', 'categorical_crossentropy')
 
 # SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
-plot_model(model, to_file='multiclass_classifier.png')
+plot_model(model, to_file='multiclass_classifier.png', show_shapes=True)
 
 model.fit(X, y, epochs=5)
 model.predict(np.random.rand(1, 10))
 ```
+
+![multiclass](images/keras_nn/multiclass_classifier.png)
 
 
 ## Embeddings
 
 ``` python
 from keras.models import Sequential
-from keras.layers import Dense, Embedding
-from keras.utils import plot_model
+from keras.layers import Dense, Embedding, Flatten
+from keras.utils import plot_model, to_categorical
 from keras.utils.vis_utils import model_to_dot
 import numpy as np
 from IPython.display import SVG
@@ -115,11 +125,13 @@ model.add(Dense(100, activation='softmax'))
 model.compile('sgd', 'categorical_crossentropy')
 
 # SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
-plot_model(model, to_file='embeddings_classifier.png')
+plot_model(model, to_file='embeddings_classifier.png', show_shapes=True)
 
 model.fit(X, y, epochs=5)
 model.predict(np.random.rand(1, 10))
 ```
+
+![embeddings](images/keras_nn/embeddings_classifier.png)
 
 
 ## Embeddings with the functional API
@@ -128,6 +140,7 @@ model.predict(np.random.rand(1, 10))
 ``` python
 from keras.models import Model
 from keras.layers import Dense, Embedding, Lambda, Input
+from keras.backend import mean
 from keras.utils import plot_model
 from keras.utils.vis_utils import model_to_dot
 import numpy as np
@@ -145,11 +158,13 @@ model = Model(inputs=[x], outputs=[o])
 model.compile('sgd', 'sparse_categorical_crossentropy')
 
 # SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
-plot_model(model, to_file='embeddings_classifier_functional.png')
+plot_model(model, to_file='embeddings_classifier_functional.png', show_shapes=True)
 
 model.fit(X, y, epochs=5)
 model.predict(np.random.rand(1, 10))
 ```
+
+![embeddings_functional](images/keras_nn/embeddings_classifier_functional.png)
 
 
 ## Handling multiple inputs
@@ -183,7 +198,7 @@ model = Model(inputs=[x1, x2, x3], outputs=[o])
 model.compile('sgd', 'sparse_categorical_crossentropy')
 
 # SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
-plot_model(model, to_file='multi_embeddings_classifier_functional.png')
+plot_model(model, to_file='multi_embeddings_classifier_functional.png', show_shapes=True)
 
 model.fit([X1, X2, X3], y, epochs=5)
 model.predict([np.random.rand(1, 10),
@@ -191,15 +206,19 @@ model.predict([np.random.rand(1, 10),
                np.random.rand(1, 10)])
 ```
 
+![embeddings_functional](images/keras_nn/multi_embeddings_classifier_functional.png)
+
 
 # Callbacks
+
+Keras has many awesome callbacks that can be used during training. You can find them in the docs and I won't cover them all here. The one I recently discovered and particularly liked is Tensorboard. I am not very familiar with Tensorflow yet, but I love the fact that Tensorboard works with Keras. You can visualize how your model trains, your embeddings, and much more. 
 
 ``` python
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.utils import plot_model
 from keras.utils.vis_utils import model_to_dot
-from keras.callbacks import TensorBoard, History, EarlyStopping
+from keras.callbacks import TensorBoard
 import numpy as np
 from IPython.display import SVG
 
@@ -210,16 +229,12 @@ model = Sequential()
 model.add(Dense(1, activation='relu', input_shape=(10,)))
 model.compile('sgd', 'mse')
 
-# SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
-plot_model(model, to_file='regression.png')
-
-history = History()
 tensorboard = TensorBoard(log_dir='./logs/run1')
 
 model.fit(X,
           y,
           epochs=5,
-          callbacks=[history, tensorboard])
+          callbacks=[tensorboard])
 
 model.predict(np.random.rand(1, 10))
 
