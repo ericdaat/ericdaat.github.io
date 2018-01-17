@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-12-16T10:20:00+01:00</updated><entry><title>Some Keras snippets</title><link href="https://ericdaat.github.io/keras-snippets.html" rel="alternate"></link><published>2017-12-16T10:20:00+01:00</published><updated>2017-12-16T10:20:00+01:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-12-16:/keras-snippets.html</id><summary type="html">&lt;p&gt;I started to use Keras for Deep Learning months ago, and as I was using it, I thought I should make a memo of all the cool features and network architectures I was using. This post aims at sharing some snippets I have found useful, so I can reuse them later. Maybe it will be useful to you as well !&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started to use Keras for Deep Learning months ago, and as I was using it, I thought I should make a memo of all the cool features and network architectures I was using. This post aims at sharing some snippets I have found useful, so I can reuse them later. Maybe it will be useful to you as well !&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2018-01-16T10:20:00+01:00</updated><entry><title>Installing Tensorflow with GPU support on Linux (Debian)</title><link href="https://ericdaat.github.io/install-tensorflow-gpu.html" rel="alternate"></link><published>2018-01-16T10:20:00+01:00</published><updated>2018-01-16T10:20:00+01:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2018-01-16:/install-tensorflow-gpu.html</id><summary type="html">&lt;p&gt;Lately I spent some time using Deep Learning and configuring Linux servers with GPUs so the models train faster. In this short blog post I am going to list all what you have to follow in order to properly install the nvidia drivers, cuda, and other tools you'll need before running Tensorflow (or Keras) with GPU support. Let's get to it !&lt;/p&gt;</summary><content type="html">&lt;p&gt;Lately I spent some time using Deep Learning and configuring Linux servers with GPUs so the models train faster. In this short blog post I am going to list all what you have to follow in order to properly install the nvidia drivers, cuda, and other tools you'll need before running Tensorflow (or Keras) with GPU support. Let's get to it !&lt;/p&gt;
+&lt;h1&gt;Installing Nvidia Graphic Drivers and Cuda&lt;/h1&gt;
+&lt;p&gt;For this part, I followed instructions from the &lt;a href="https://wiki.debian.org/NvidiaGraphicsDrivers"&gt;Debian Wiki&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;deb http://httpredir.debian.org/debian/ stretch main contrib non-free&amp;quot;&lt;/span&gt; /etc/apt/sources.list
+apt update
+apt install linux-headers-&lt;span class="k"&gt;$(&lt;/span&gt;uname -r&lt;span class="p"&gt;|&lt;/span&gt;sed &lt;span class="s1"&gt;&amp;#39;s/[^-]*-[^-]*-//&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; nvidia-driver
+apt install nvidia-xconfig
+
+reboot
+
+apt-get install nvidia-cuda-dev nvidia-cuda-toolkit  nvidia-driver
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Installing Cudnn&lt;/h1&gt;
+&lt;p&gt;For this part, you're going to need to register as an Nvidia Developer. Then, download Cuda v6 (Tensorflow needs this version, at least it does while I'm writing these lines) from the &lt;a href="https://developer.nvidia.com/rdp/cudnn-download"&gt;Nvidia Developer Website&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /home/user
+tar xvzf cudnn-8.0-linux-x64-v6-ga.tgz
+mkdir /usr/local/cuda
+mkdir /usr/local/cuda/include
+mkdir /usr/local/cuda/lib64
+cp -P cuda/include/cudnn.h /usr/local/cuda/include
+cp -P cuda/lib64/libcudnn* /usr/local/cuda/lib64
+chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;export LD_LIBRARY_PATH=&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$LD_LIBRARY_PATH&lt;/span&gt;:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &amp;gt; .bashrc
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;export CUDA_HOME=/usr/local/cuda&amp;quot;&lt;/span&gt; &amp;gt; .bashrc
+
+apt-get install libcupti-dev
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Installing Python and virtualenv&lt;/h1&gt;
+&lt;p&gt;This part is the easiest. You can see more details on the &lt;a href="https://www.tensorflow.org/install/install_linux#InstallingVirtualenv"&gt;Tensorflow&lt;/a&gt; page.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get install python python-pip
+virtualenv tensorflow
+&lt;span class="nb"&gt;source&lt;/span&gt; tensorflow/bin/activate
+pip install tensorflow-gpu
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Et voila ! You should be able to run Tensorflow using GPUs on your Linux server. Just make sure it works by running this simple program:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Python&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;tensorflow&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;tf&lt;/span&gt;
+&lt;span class="n"&gt;hello&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;constant&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Hello, TensorFlow!&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;sess&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;iframe src="https://giphy.com/embed/W9zNtyI9I4lG" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href="https://giphy.com/gifs/neural-networks-W9zNtyI9I4lG"&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;</content><category term="tensorflow"></category><category term="keras"></category><category term="code"></category><category term="config"></category><category term="server"></category><category term="deep-learning"></category></entry><entry><title>Some Keras snippets</title><link href="https://ericdaat.github.io/keras-snippets.html" rel="alternate"></link><published>2017-12-16T10:20:00+01:00</published><updated>2017-12-16T10:20:00+01:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-12-16:/keras-snippets.html</id><summary type="html">&lt;p&gt;I started to use Keras for Deep Learning months ago, and as I was using it, I thought I should make a memo of all the cool features and network architectures I was using. This post aims at sharing some snippets I have found useful, so I can reuse them later. Maybe it will be useful to you as well !&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started to use Keras for Deep Learning months ago, and as I was using it, I thought I should make a memo of all the cool features and network architectures I was using. This post aims at sharing some snippets I have found useful, so I can reuse them later. Maybe it will be useful to you as well !&lt;/p&gt;
 &lt;h1&gt;Networks example&lt;/h1&gt;
 &lt;p&gt;Let's start with some networks example. Those are really similar to the examples you'd find in the &lt;a href="https://keras.io/getting-started/sequential-model-guide/"&gt;Keras Docs&lt;/a&gt;, but I added a few things here and there to better understand what they do.&lt;/p&gt;
 &lt;h2&gt;Regression&lt;/h2&gt;
