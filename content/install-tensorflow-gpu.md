@@ -15,7 +15,7 @@ Lately I spent some time using Deep Learning and configuring Linux servers with 
 For this part, I followed instructions from the [Debian Wiki](https://wiki.debian.org/NvidiaGraphicsDrivers).
 
 ``` bash
-echo "deb http://httpredir.debian.org/debian/ stretch main contrib non-free" /etc/apt/sources.list
+echo "deb http://httpredir.debian.org/debian/ stretch main contrib non-free" > /etc/apt/sources.list
 apt update
 apt install linux-headers-$(uname -r|sed 's/[^-]*-[^-]*-//') nvidia-driver
 apt install nvidia-xconfig
