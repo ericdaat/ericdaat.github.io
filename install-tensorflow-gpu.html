@@ -62,7 +62,7 @@
 	<div itemprop="articleBody" class="article-body"><p>Lately I spent some time using Deep Learning and configuring Linux servers with GPUs so the models train faster. In this short blog post I am going to list all what you have to follow in order to properly install the nvidia drivers, cuda, and other tools you'll need before running Tensorflow (or Keras) with GPU support. Let's get to it !</p>
 <h1>Installing Nvidia Graphic Drivers and Cuda</h1>
 <p>For this part, I followed instructions from the <a href="https://wiki.debian.org/NvidiaGraphicsDrivers">Debian Wiki</a>.</p>
-<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;deb http://httpredir.debian.org/debian/ stretch main contrib non-free&quot;</span> /etc/apt/sources.list
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;deb http://httpredir.debian.org/debian/ stretch main contrib non-free&quot;</span> &gt; /etc/apt/sources.list
 apt update
 apt install linux-headers-<span class="k">$(</span>uname -r<span class="p">|</span>sed <span class="s1">&#39;s/[^-]*-[^-]*-//&#39;</span><span class="k">)</span> nvidia-driver
 apt install nvidia-xconfig
