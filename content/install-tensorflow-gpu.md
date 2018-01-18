@@ -27,11 +27,11 @@ apt-get install nvidia-cuda-dev nvidia-cuda-toolkit  nvidia-driver
 
 # Installing Cudnn
 
-For this part, you're going to need to register as an Nvidia Developer. Then, download Cuda v6 (Tensorflow needs this version, at least it does while I'm writing these lines) from the [Nvidia Developer Website](https://developer.nvidia.com/rdp/cudnn-download)
+For this part, you're going to need to register as an Nvidia Developer. Then, download cudnn v6 (Tensorflow needs this version, at least it does while I'm writing these lines) from the [Nvidia Developer Website](https://developer.nvidia.com/rdp/cudnn-download)
 
 ``` bash
 cd /home/user
-tar xvzf cudnn-8.0-linux-x64-v6-ga.tgz
+tar xvzf cudnn-8.0-linux-x64-v6.0.tgz
 mkdir /usr/local/cuda
 mkdir /usr/local/cuda/include
 mkdir /usr/local/cuda/lib64
