@@ -6,7 +6,7 @@ Tags: keras, code, deep-learning
 Slug: deep-learning-convnets-cifar
 Authors: Eric Daoud
 Summary: ConvNets related post
-Status: published
+Status: draft
 
 ## The Dataset
 

@@ -45,6 +45,19 @@ Our input data will be *text*, and the target *sentiment*.
 
 ## The Classifier Model
 
+Now that the dataset is ready, we shall turn our input text data into something that a computer might understand. We want to map the reviews as vectors in a fixed size space: the vocabulary. Scikit-learn offers tons of ways of doing it, like [CountVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer) or [TfidfVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html), etc ...
+
+These are great, but they won't work for a larger than RAM dataset, specifically because we can't load the full corpus in RAM, hence we can't learn the full vocabulary base. Instead, we are going to use the [HashingVectorizer](http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer) which uses the hashing trick: every word gets hashed into an integer index that we then use to compute the term-document matrix. Hence, not much has to fit in memory and this approach can scale to very large datasets.
+
+``` python
+v = HashingVectorizer()
+v.transform(['some text']) # a 1*N matrix where every
+                           # number is 0 except for two
+```
+
+Now, we can train a classifier on top of this incoming data. Although, the classifier has to support the `partial_fit` method, otherwise the model will be overridden at each epoch. [SGDClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html) is among the classifiers that supports that, and it works pretty well so we will use this one.  
+From there it is very similar to other classifiers, except we use `partial_fit` instead of `fit`. We will simply loop over the incoming data chunks, transform the raw text into a term-document matrix thanks to the vectorizer, and then train the model, effectively keeping the previously learned weights.
+
 ## Full Code
 
 ``` python
@@ -75,7 +88,7 @@ for i, df_ in enumerate(dfs):
     print 'Batch {0}, val score {1}'.format(i+1, val_score)
 ```
 
-And our model learns pretty well !
+And here is the output of our program: our model learns pretty well ! Note that I haven't done any preprocessing or fine tuning other than what's set by default.
 
 ``` text
 Batch 1, val score 0.8376
@@ -105,3 +118,5 @@ Batch 427, val score 0.9184
 Batch 428, val score 0.916
 Batch 429, val score 0.9072
 ```
+
+I hope this post was useful. Don't hesitate to have a look at scikit-learn documentation on this topic: [Strategies to scale computationally: bigger data](http://scikit-learn.org/stable/modules/scaling_strategies.html).

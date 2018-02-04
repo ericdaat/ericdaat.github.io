@@ -2,7 +2,8 @@ Title: About me
 Date: 2017-05-28
 Status: published
 
-I am a Junior Data Scientist from France, currently working for [ManoMano](https://manomano.fr), a fast growing e-commerce startup specialized in DIY and gardening. I graduated from [ECAM Lyon](https://ecam.fr) where I got a Master of Science in General Engineering, and [Ecole Centrale Paris](https://ecp.fr) with a Master of Science in Software Engineering.
-I have experience in Software Engineering (mostly Python) and Machine Learning, more specifically within Recommender Systems and Natural Language Processing. I also have some DevOps skills that I gained deploying Cloud Based architectures with Amazon Web Services and Docker.
+Data Scientist and Full Stack Developer with additional Data Engineering and DevOps skills. I am currently working for ManoMano, a fast growing marketplace startup specialized in gardening and DIY that raised 73 million euros in two rounds.
 
-Besides studies and work, I have been playing guitar since 2004 and I spend some time composing and recording songs or [videos](https://youtube.com/ericmusic13). I am also very keen on [photography](https://500px.com/ericda), karate, golf and biking.
+My area of expertise resides within Machine Learning, more specifically Recommender Systems and Natural Language Processing. Since I joined ManoMano, I built their recommendation engines from scratch, implementing state of the art Machine Learning algorithms deployed in an fast and scalable cloud based architecture. I also built their event tracking system, by designing a Lambda Architecture that collects more than 5 million events daily. Finally, I worked on automatic item classification using Deep Learning.
+
+Besides work, I enjoy music, I have been playing guitar for more than 13 years. I have been with several bands, and I am also composing songs and recording videos on YouTube. Still related to art, I am very keen on photography. Sports wise, I love karate, golf and biking. Finally, when I find the time, I write some articles about Software Engineering and Data Science on this personal tech blog.
