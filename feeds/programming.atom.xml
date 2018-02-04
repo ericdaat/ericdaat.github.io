@@ -1,5 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2018-01-16T10:20:00+01:00</updated><entry><title>Installing Tensorflow with GPU support on Linux (Debian)</title><link href="https://ericdaat.github.io/install-tensorflow-gpu.html" rel="alternate"></link><published>2018-01-16T10:20:00+01:00</published><updated>2018-01-16T10:20:00+01:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2018-01-16:/install-tensorflow-gpu.html</id><summary type="html">&lt;p&gt;Lately I spent some time using Deep Learning and configuring Linux servers with GPUs so the models train faster. In this short blog post I am going to list all what you have to follow in order to properly install the nvidia drivers, cuda, and other tools you'll need before running Tensorflow (or Keras) with GPU support. Let's get to it !&lt;/p&gt;</summary><content type="html">&lt;p&gt;Lately I spent some time using Deep Learning and configuring Linux servers with GPUs so the models train faster. In this short blog post I am going to list all what you have to follow in order to properly install the nvidia drivers, cuda, and other tools you'll need before running Tensorflow (or Keras) with GPU support. Let's get to it !&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - Programming</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/programming.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2018-02-02T10:20:00+01:00</updated><entry><title>Out of core text classification with Scikit Learn</title><link href="https://ericdaat.github.io/out-of-core-text-classification-scikit-learn.html" rel="alternate"></link><published>2018-02-02T10:20:00+01:00</published><updated>2018-02-02T10:20:00+01:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2018-02-02:/out-of-core-text-classification-scikit-learn.html</id><summary type="html">&lt;p&gt;In this article, we are going to demonstrate how to build a simple text classifier for larger than RAM datasets. This approach is called Out of Core Learning, and many python Machine Learning librairies make this very easy to implement. For this example I used reviews from the &lt;a href="https://www.yelp.com/dataset/challenge"&gt;Yelp Dataset Challenge&lt;/a&gt; and Python &lt;a href="http://scikit-learn.org/stable/"&gt;scikit-learn&lt;/a&gt; library.&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this article, we are going to demonstrate how to build a simple text classifier for larger than RAM datasets. This approach is called Out of Core Learning, and many python Machine Learning librairies make this very easy to implement. For this example I used reviews from the &lt;a href="https://www.yelp.com/dataset/challenge"&gt;Yelp Dataset Challenge&lt;/a&gt; and Python &lt;a href="http://scikit-learn.org/stable/"&gt;scikit-learn&lt;/a&gt; library.&lt;/p&gt;
+&lt;h2&gt;The Dataset&lt;/h2&gt;
+&lt;p&gt;First, download the dataset from the &lt;a href="https://www.yelp.com/dataset/challenge"&gt;Yelp website&lt;/a&gt;. Once you're done, we are going to work with the the reviews file. It contains one Json per row, and I like to use the &lt;a href="https://pandas.pydata.org/"&gt;Python Pandas&lt;/a&gt; library to read datasets.&lt;br&gt;
+Pandas has a nice function called &lt;code&gt;read_json&lt;/code&gt; that we are going to use for reading the dataset. However we have to be careful of two things:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The dataset is really large, so we don't want to fully load it in RAM&lt;/li&gt;
+&lt;li&gt;It's not really a Json file, it has one Json per line&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Thankfully, Pandas is so awesome that it provides everything we need to address these two issues. We are going to use &lt;code&gt;chunksize&lt;/code&gt; to tell pandas to load the file chunk by chunk, and &lt;code&gt;lines=True&lt;/code&gt; to tell Pandas that the file is not one full json but multiple json rows.&lt;/p&gt;
+&lt;p&gt;The function will look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dfs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_json&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./yelp_academic_dataset_review.json&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                   &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                   &lt;span class="n"&gt;chunksize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The &lt;code&gt;dfs&lt;/code&gt; variable is a generator, on which we will iterate to get the Dataframe chunks.&lt;/p&gt;
+&lt;p&gt;We are mainly interested in two columns from this dataframe:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;text&lt;/em&gt;: The text from the user review.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;stars&lt;/em&gt;: How many stars did the user give.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We will simply do a binary classification, and predict whether the review was positive or negative. For this, we take the assumption that a positive review has a rating greater than 3. We can create a new column called &lt;em&gt;sentiment&lt;/em&gt; with the following code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;df_&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sentiment&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df_&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;stars&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Our input data will be &lt;em&gt;text&lt;/em&gt;, and the target &lt;em&gt;sentiment&lt;/em&gt;.&lt;/p&gt;
+&lt;h2&gt;The Classifier Model&lt;/h2&gt;
+&lt;p&gt;Now that the dataset is ready, we shall turn our input text data into something that a computer might understand. We want to map the reviews as vectors in a fixed size space: the vocabulary. Scikit-learn offers tons of ways of doing it, like &lt;a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html#sklearn.feature_extraction.text.CountVectorizer"&gt;CountVectorizer&lt;/a&gt; or &lt;a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html"&gt;TfidfVectorizer&lt;/a&gt;, etc ...&lt;/p&gt;
+&lt;p&gt;These are great, but they won't work for a larger than RAM dataset, specifically because we can't load the full corpus in RAM, hence we can't learn the full vocabulary base. Instead, we are going to use the &lt;a href="http://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.HashingVectorizer.html#sklearn.feature_extraction.text.HashingVectorizer"&gt;HashingVectorizer&lt;/a&gt; which uses the hashing trick: every word gets hashed into an integer index that we then use to compute the term-document matrix. Hence, not much has to fit in memory and this approach can scale to very large datasets.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HashingVectorizer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;some text&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="c1"&gt;# a 1*N matrix where every&lt;/span&gt;
+                           &lt;span class="c1"&gt;# number is 0 except for two&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, we can train a classifier on top of this incoming data. Although, the classifier has to support the &lt;code&gt;partial_fit&lt;/code&gt; method, otherwise the model will be overridden at each epoch. &lt;a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html"&gt;SGDClassifier&lt;/a&gt; is among the classifiers that supports that, and it works pretty well so we will use this one.&lt;br&gt;
+From there it is very similar to other classifiers, except we use &lt;code&gt;partial_fit&lt;/code&gt; instead of &lt;code&gt;fit&lt;/code&gt;. We will simply loop over the incoming data chunks, transform the raw text into a term-document matrix thanks to the vectorizer, and then train the model, effectively keeping the previously learned weights.&lt;/p&gt;
+&lt;h2&gt;Full Code&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.model_selection&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;train_test_split&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.feature_extraction.text&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HashingVectorizer&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sklearn.linear_model&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SGDClassifier&lt;/span&gt;
+
+
+&lt;span class="n"&gt;dfs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_json&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./yelp_academic_dataset_review.json&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                   &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                   &lt;span class="n"&gt;chunksize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HashingVectorizer&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;clf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SGDClassifier&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;df_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;dfs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;df_&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sentiment&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;df_&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;stars&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;text_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;text_val&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;target_val&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; \
+        &lt;span class="n"&gt;train_test_split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;df_&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;text&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;df_&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sentiment&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+    &lt;span class="n"&gt;clf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;partial_fit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text_train&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                    &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;target_train&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                    &lt;span class="n"&gt;classes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+    &lt;span class="n"&gt;val_score&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;clf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transform&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;text_val&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;target_val&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Batch {0}, val score {1}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;val_score&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And here is the output of our program: our model learns pretty well ! Note that I haven't done any preprocessing or fine tuning other than what's set by default.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Batch 1, val score 0.8376
+Batch 2, val score 0.7568
+Batch 3, val score 0.8472
+Batch 4, val score 0.8504
+Batch 5, val score 0.8272
+Batch 6, val score 0.7992
+Batch 7, val score 0.8096
+Batch 8, val score 0.812
+Batch 9, val score 0.8496
+Batch 10, val score 0.8072
+Batch 11, val score 0.8944
+Batch 12, val score 0.8304
+Batch 13, val score 0.8096
+...
+Batch 418, val score 0.9248
+Batch 419, val score 0.92
+Batch 420, val score 0.9136
+Batch 421, val score 0.9216
+Batch 422, val score 0.9088
+Batch 423, val score 0.9136
+Batch 424, val score 0.916
+Batch 425, val score 0.9096
+Batch 426, val score 0.9248
+Batch 427, val score 0.9184
+Batch 428, val score 0.916
+Batch 429, val score 0.9072
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I hope this post was useful. Don't hesitate to have a look at scikit-learn documentation on this topic: &lt;a href="http://scikit-learn.org/stable/modules/scaling_strategies.html"&gt;Strategies to scale computationally: bigger data&lt;/a&gt;.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="code"></category><category term="machine-learning"></category><category term="classification"></category></entry><entry><title>Installing Tensorflow with GPU support on Linux (Debian)</title><link href="https://ericdaat.github.io/install-tensorflow-gpu.html" rel="alternate"></link><published>2018-01-16T10:20:00+01:00</published><updated>2018-01-16T10:20:00+01:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2018-01-16:/install-tensorflow-gpu.html</id><summary type="html">&lt;p&gt;Lately I spent some time using Deep Learning and configuring Linux servers with GPUs so the models train faster. In this short blog post I am going to list all what you have to follow in order to properly install the nvidia drivers, cuda, and other tools you'll need before running Tensorflow (or Keras) with GPU support. Let's get to it !&lt;/p&gt;</summary><content type="html">&lt;p&gt;Lately I spent some time using Deep Learning and configuring Linux servers with GPUs so the models train faster. In this short blog post I am going to list all what you have to follow in order to properly install the nvidia drivers, cuda, and other tools you'll need before running Tensorflow (or Keras) with GPU support. Let's get to it !&lt;/p&gt;
 &lt;h1&gt;Installing Nvidia Graphic Drivers and Cuda&lt;/h1&gt;
 &lt;p&gt;For this part, I followed instructions from the &lt;a href="https://wiki.debian.org/NvidiaGraphicsDrivers"&gt;Debian Wiki&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;deb http://httpredir.debian.org/debian/ stretch main contrib non-free&amp;quot;&lt;/span&gt; &amp;gt; /etc/apt/sources.list
