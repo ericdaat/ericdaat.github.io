@@ -84,8 +84,8 @@ cp -P cuda/include/cudnn.h /usr/local/cuda/include
 cp -P cuda/lib64/libcudnn* /usr/local/cuda/lib64
 chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 
-<span class="nb">echo</span> <span class="s2">&quot;export LD_LIBRARY_PATH=&quot;</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64<span class="s2">&quot;&quot;</span> &gt; .bashrc
-<span class="nb">echo</span> <span class="s2">&quot;export CUDA_HOME=/usr/local/cuda&quot;</span> &gt; .bashrc
+<span class="nb">echo</span> <span class="s2">&quot;export LD_LIBRARY_PATH=&quot;</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64<span class="s2">&quot;&quot;</span> &gt;&gt; .bashrc
+<span class="nb">echo</span> <span class="s2">&quot;export CUDA_HOME=/usr/local/cuda&quot;</span> &gt;&gt; .bashrc
 
 apt-get install libcupti-dev
 </pre></div>
@@ -96,13 +96,12 @@ apt-get install libcupti-dev
 <div class="highlight"><pre><span></span>apt-get install python python-pip
 virtualenv tensorflow
 <span class="nb">source</span> tensorflow/bin/activate
-pip install tensorflow-gpu
+pip install tensorflow-gpu<span class="o">==</span><span class="m">1</span>.4 <span class="c1"># change to the version you need</span>
 </pre></div>
 
 
 <p>Et voila ! You should be able to run Tensorflow using GPUs on your Linux server. Just make sure it works by running this simple program:</p>
-<div class="highlight"><pre><span></span><span class="c1"># Python</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
 <span class="n">hello</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="s1">&#39;Hello, TensorFlow!&#39;</span><span class="p">)</span>
 <span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
 <span class="k">print</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">hello</span><span class="p">))</span>
