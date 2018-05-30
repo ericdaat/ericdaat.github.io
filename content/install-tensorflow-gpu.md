@@ -39,8 +39,8 @@ cp -P cuda/include/cudnn.h /usr/local/cuda/include
 cp -P cuda/lib64/libcudnn* /usr/local/cuda/lib64
 chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
 
-echo "export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"" > .bashrc
-echo "export CUDA_HOME=/usr/local/cuda" > .bashrc
+echo "export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"" >> .bashrc
+echo "export CUDA_HOME=/usr/local/cuda" >> .bashrc
 
 apt-get install libcupti-dev
 ```
@@ -53,13 +53,12 @@ This part is the easiest. You can see more details on the [Tensorflow](https://w
 apt-get install python python-pip
 virtualenv tensorflow
 source tensorflow/bin/activate
-pip install tensorflow-gpu
+pip install tensorflow-gpu==1.4 # change to the version you need
 ```
 
 Et voila ! You should be able to run Tensorflow using GPUs on your Linux server. Just make sure it works by running this simple program:
 
 ``` python
-# Python
 import tensorflow as tf
 hello = tf.constant('Hello, TensorFlow!')
 sess = tf.Session()
