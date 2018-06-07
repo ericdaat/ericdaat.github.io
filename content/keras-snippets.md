@@ -209,6 +209,45 @@ model.predict([np.random.rand(1, 10),
 ![embeddings_functional](images/keras_nn/multi_embeddings_classifier_functional.png)
 
 
+## Shared Embeddings
+
+``` python
+from keras.models import Model
+from keras.layers import Dense, Embedding, Lambda, Input, concatenate 
+from keras.utils import plot_model
+from keras.utils.vis_utils import model_to_dot
+from keras.backend import mean
+import numpy as np
+from IPython.display import SVG
+
+X1 = np.random.randint(100, size=(200, 10))
+X2 = np.random.randint(100, size=(200, 10))
+y = np.random.randint(0, 100, 200)
+
+x1 = Input(shape=(10,), dtype='int32')
+x2 = Input(shape=(10,), dtype='int32')
+
+shared_embedding= Embedding(output_dim=64, input_dim=100)
+
+h1 = shared_embedding(x1)
+h1 = Lambda(lambda x: mean(x, axis=1))(h1)
+h2 = shared_embedding(x2)
+h2 = Lambda(lambda x: mean(x, axis=1))(h2)
+
+h = concatenate([h1, h2])
+h = Dense(64, activation='relu')(h)
+o = Dense(100, activation='softmax')(h)
+
+model = Model(inputs=[x1, x2], outputs=[o])
+model.compile('sgd', 'sparse_categorical_crossentropy')
+
+#SVG(model_to_dot(model, show_shapes=True).create(prog='dot', format='svg'))
+plot_model(model, to_file='shared_embeddings_averaged_dot.png', show_shapes=True)
+```
+
+![shared_embeddings](images/keras_nn/shared_embeddings.png)
+
+
 # Callbacks
 
 Keras has many awesome callbacks that can be used during training. You can find them in the docs and I won't cover them all here. The one I recently discovered and particularly liked is Tensorboard. I am not very familiar with Tensorflow yet, but I love the fact that Tensorboard works with Keras. You can visualize how your model trains, your embeddings, and much more. 
