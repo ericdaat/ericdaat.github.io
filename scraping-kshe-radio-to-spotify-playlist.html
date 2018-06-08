@@ -152,7 +152,6 @@
 
 <h1>Uploading the songs to a Spotify Playlist</h1>
 <p>During this part, we are going to use the <a href="https://developer.spotify.com/web-api/">Spotify Web API</a>. I found the API very straightforward and easy to deal with. The documentation is clear and they show a lot of examples that help. You will need to setup a Developer account and register an Application. This will provide you credentials that you will need for the rest of this post.</p>
-<p>Note: There exists a Python library called <a href="https://spotipy.readthedocs.io/en/latest/">Spotipy</a> to deal with the Spotify API. While this library is very complete and super easy to use, I wanted to code my application from scratch and follow the Spotify API documentation. It may take more time, but it's good fun.</p>
 <h2>Authorization</h2>
 <p>I had some trouble figuring this part at first, but it's not that big of a deal once you understand the logic behind it. The <a href="https://developer.spotify.com/web-api/authorization-guide/">Spotify documentation</a> explains it really well, but I will do a little recap here. There is basically three ways you can authenticate, which will give you an access token you will send within your HTTP requests. I only tried two out of three:</p>
 <ul>
@@ -160,7 +159,7 @@
 <li>Client Credentials: will only let you retrieve public informations about artists, tracks, albums, but nothing involving user's data.</li>
 </ul>
 <p>For our purpose, we will need <em>Authorization Code Flow</em> because we want to modify our own playlist. Let's see how we do this. The following picture taken from Spotify documentation explains it well how the authorization code flow works. </p>
-<p><img src="https://developer.spotify.com/wp-content/uploads/2014/04/Authorization-Code-Flow-Diagram.png" width=600px/></p>
+<p><img src="images/spotify-auth.png" width=600px/></p>
 <p>What happens is:</p>
 <ul>
 <li>We need a web application (can run on <em>localhost</em>) from where we will send an authentication request, using a simple HTTP <em>GET</em> method along with some credentials and a <em>redirect-uri</em> (our web application's url).</li>

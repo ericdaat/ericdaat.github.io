@@ -875,7 +875,6 @@ started.&lt;/p&gt;
 
 &lt;h1&gt;Uploading the songs to a Spotify Playlist&lt;/h1&gt;
 &lt;p&gt;During this part, we are going to use the &lt;a href="https://developer.spotify.com/web-api/"&gt;Spotify Web API&lt;/a&gt;. I found the API very straightforward and easy to deal with. The documentation is clear and they show a lot of examples that help. You will need to setup a Developer account and register an Application. This will provide you credentials that you will need for the rest of this post.&lt;/p&gt;
-&lt;p&gt;Note: There exists a Python library called &lt;a href="https://spotipy.readthedocs.io/en/latest/"&gt;Spotipy&lt;/a&gt; to deal with the Spotify API. While this library is very complete and super easy to use, I wanted to code my application from scratch and follow the Spotify API documentation. It may take more time, but it's good fun.&lt;/p&gt;
 &lt;h2&gt;Authorization&lt;/h2&gt;
 &lt;p&gt;I had some trouble figuring this part at first, but it's not that big of a deal once you understand the logic behind it. The &lt;a href="https://developer.spotify.com/web-api/authorization-guide/"&gt;Spotify documentation&lt;/a&gt; explains it really well, but I will do a little recap here. There is basically three ways you can authenticate, which will give you an access token you will send within your HTTP requests. I only tried two out of three:&lt;/p&gt;
 &lt;ul&gt;
@@ -883,7 +882,7 @@ started.&lt;/p&gt;
 &lt;li&gt;Client Credentials: will only let you retrieve public informations about artists, tracks, albums, but nothing involving user's data.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;For our purpose, we will need &lt;em&gt;Authorization Code Flow&lt;/em&gt; because we want to modify our own playlist. Let's see how we do this. The following picture taken from Spotify documentation explains it well how the authorization code flow works. &lt;/p&gt;
-&lt;p&gt;&lt;img src="https://developer.spotify.com/wp-content/uploads/2014/04/Authorization-Code-Flow-Diagram.png" width=600px/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="images/spotify-auth.png" width=600px/&gt;&lt;/p&gt;
 &lt;p&gt;What happens is:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;We need a web application (can run on &lt;em&gt;localhost&lt;/em&gt;) from where we will send an authentication request, using a simple HTTP &lt;em&gt;GET&lt;/em&gt; method along with some credentials and a &lt;em&gt;redirect-uri&lt;/em&gt; (our web application's url).&lt;/li&gt;
