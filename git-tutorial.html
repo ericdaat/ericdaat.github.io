@@ -50,7 +50,7 @@
 			<a href="https://ericdaat.github.io/tag/tutorial.html" rel="tag">tutorial</a>
 		</span>
 	</div>
-	<div itemprop="articleBody" class="article-body"><h1>Some History</h1>
+	<div itemprop="articleBody" class="article-body"><h2>Some History</h2>
 <p>Git was created by Linus Torvalds in 2005 for development of the Linux kernel,
 with other kernel developers contributing to its initial development.
 Its current maintainer since 2005 is Junio Hamano.</p>
@@ -60,30 +60,30 @@ Its current maintainer since 2005 is Junio Hamano.</p>
  3. "global information tracker": you're in a good mood, and it actually works for you. Angels sing, and a light suddenly fills the room.
  4. "g<em>dd</em>mn idiotic truckload of sh<em>t": when it breaks
 </em>Source: <a href="https://en.wikipedia.org/wiki/Git">Wikipedia</a>*</p>
-<h1>First Steps</h1>
-<h2>Install git</h2>
+<h2>First Steps</h2>
+<h3>Install git</h3>
 <div class="highlight"><pre><span></span>sudo apt-get install git
 </pre></div>
 
 
-<h2>Configure git</h2>
+<h3>Configure git</h3>
 <div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;John Doe&quot;</span>
 git config --global user.email <span class="s2">&quot;john@example.com&quot;</span>
 </pre></div>
 
 
-<h2>Init an empty repository</h2>
+<h3>Init an empty repository</h3>
 <div class="highlight"><pre><span></span>mkdir lab-git <span class="o">&amp;&amp;</span> <span class="nb">cd</span> lab-git
 git init
 </pre></div>
 
 
-<h2>... Or clone an exisiting one</h2>
+<h3>... Or clone an exisiting one</h3>
 <div class="highlight"><pre><span></span>git clone git://github.com/schacon/grit.git
 </pre></div>
 
 
-<h2>Create a file</h2>
+<h3>Create a file</h3>
 <div class="highlight"><pre><span></span>touch hi.py
 </pre></div>
 
@@ -95,14 +95,14 @@ git init
  1. Tell git to track the file
  2. Create a remote repository to store our code
  3. Push our code to the remote repository</p>
-<h2>Tracking a file</h2>
+<h3>Tracking a file</h3>
 <div class="highlight"><pre><span></span>git status <span class="c1"># our file is untracked</span>
 git add hi.py
 git status <span class="c1"># our file is tracked!</span>
 </pre></div>
 
 
-<h2>Setting a remote repository</h2>
+<h3>Setting a remote repository</h3>
 <p>Usually done through websites like <a href="https://github.com">github</a>, <a href="https://bitbucket.org/">bitbucket</a>, <a href="https://about.gitlab.com/">gitlab</a>.</p>
 <p>Once a remote repository is created, we are provided its url. Then, tell the local repository what its remote url is.</p>
 <div class="highlight"><pre><span></span>git remote add origin https://github.com/user/repo.git <span class="c1"># origin is our remote name</span>
@@ -110,7 +110,7 @@ git remote -V <span class="c1"># verify the remote</span>
 </pre></div>
 
 
-<h2>Commit and push to the remote repository</h2>
+<h3>Commit and push to the remote repository</h3>
 <p>Even though we tracked our file, we didn't commit anything. When commiting, we provide a message explaining what we changes within the tracked files.</p>
 <div class="highlight"><pre><span></span>git commit -m <span class="s2">&quot;started tracking hi.py&quot;</span>
 </pre></div>
@@ -126,7 +126,7 @@ git remote -V <span class="c1"># verify the remote</span>
 </pre></div>
 
 
-<h2>Additional useful commands</h2>
+<h3>Additional useful commands</h3>
 <p>Display last commits</p>
 <div class="highlight"><pre><span></span>git log
 </pre></div>
@@ -142,18 +142,18 @@ git remote -V <span class="c1"># verify the remote</span>
 </pre></div>
 
 
-<h2>A visual recap</h2>
-<p><img alt="git_basic_usage" src="https://marklodato.github.io/visual-git-guide/basic-usage.svg"></p>
+<h3>A visual recap</h3>
+<p><img alt="git_basic_usage" src="images/git-stages.png"></p>
 <p><em>Source: <a href="https://marklodato.github.io/visual-git-guide/index-en.html">marklodato.github.io</a></em></p>
-<h1>Collaborating with other people</h1>
-<h2>Common configuration</h2>
+<h2>Collaborating with other people</h2>
+<h3>Common configuration</h3>
 <p><em>n</em> co-workers, one repository, one production server.</p>
 <p>Co-workers work on the same project and can edit the same files simultaneously. Updates are pushed on the distant repository, and pulled from the production server.</p>
-<p><img src="https://i.stack.imgur.com/9TtPl.png" height="180px"/></p>
+<p><img src="images/git-servers.png" height="180px"/></p>
 <p>NEVER EVER commit, push or edit anything on the production server.</p>
-<h2>Branches</h2>
+<h3>Branches</h3>
 <p>Branches allow people to work on separate tasks without messing with the master branch code. It is useful to experiment, or add functionalities. Branches can start from the master branch, or from another branch.</p>
-<p><img src="https://backlogtool.com/git-tutorial/en/img/post/stepup/capture_stepup1_5_6.png"
+<p><img src="images/git-branches.png"
      height="250px"></p>
 <p><em>Source : <a href="https://backlogtool.com/git-tutorial/en/stepup/stepup1_5.html">backlogtool.com</a></em></p>
 <p>Check branches within local repository</p>
@@ -176,14 +176,11 @@ git remote -V <span class="c1"># verify the remote</span>
 </pre></div>
 
 
-<h2>Merging and pull requests</h2>
+<h3>Merging and pull requests</h3>
 <p>When we are finished working on our feature-branch, we must check for conflicts before pushing to master. To do so, pull the master branch into your branch, and fix your conflicts locally.</p>
 <p>When all the conflicts are resolved, push again, <em>still on your branch</em>, to the remote repository. Then, make a pull request, that will eventually get merged on the master branch by the repository administrator.</p>
-<p><img src="https://www.tuleap.org/sites/default/files/simplified-pull-request-process.jpeg"
-     height="200px"></p>
-<p><em>Source: <a href="https://www.tuleap.org/tuleap-pull-request-open-source-code-review-tool">tuleap.org</a></em></p>
-<h1>More useful tools</h1>
-<h2>Stash your local changes</h2>
+<h2>More useful tools</h2>
+<h3>Stash your local changes</h3>
 <p>When your <code>git pull</code> fails because you are editing a file that has been changed by someone else, temporarily stash your changes, pull the recent modifications, then apply your changes again.</p>
 <div class="highlight"><pre><span></span>git pull origin awesome-feature <span class="c1"># fails</span>
 
@@ -195,7 +192,7 @@ git push origin awesome-feature <span class="c1"># now the world really is a bet
 </pre></div>
 
 
-<h2>Ignore unnecessary files</h2>
+<h3>Ignore unnecessary files</h3>
 <blockquote>
 <p><em>You can't always git what you want -- The Rolling Stones</em></p>
 </blockquote>
@@ -208,7 +205,7 @@ git push origin awesome-feature <span class="c1"># now the world really is a bet
 
 <p>This tells git to never track <code>.pyc</code> or <code>.csv</code> files, because who needs to ?</p>
 <p>You can also ignore entire directories. You should avoid using <code>git add *</code> if you're not sure you're ignoring unnecessary files.</p>
-<h2>Remove files on the repository</h2>
+<h3>Remove files on the repository</h3>
 <p>What if you no longer want to track something ?</p>
 <div class="highlight"><pre><span></span>git rm go_away.py <span class="c1"># will also delete the file from your disk</span>
 </pre></div>
@@ -218,7 +215,7 @@ git push origin awesome-feature <span class="c1"># now the world really is a bet
 </pre></div>
 
 
-<h2>Versioning configuration files or critical files</h2>
+<h3>Versioning configuration files or critical files</h3>
 <p>Sometimes you want to track files that contain passwords, or configuration
 variables.<br>
 Those files are likely to change independently from the code, so
@@ -236,7 +233,7 @@ DB_PASSWORD=
 
 <p>If you are refering to a conf file named <code>variables.env</code>, name you dist file
 <code>variables.env.dist</code>. Track the <code>.dist</code> file, but ignore <code>variables.env</code>.</p>
-<h2>README.md</h2>
+<h3>README.md</h3>
 <p>Every repository should have a decent README.md file, explaining what it is
 about, and how to configure and install the dependencies to start the
 application.<br>

@@ -585,7 +585,7 @@ COPY ./mywebsite/:/usr/local/apache2/htdocs/
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This post is certainly not exhaustive. It is just a quick introduction to Docker, and I emphasized on commands and practices I am using most of the time. Of course Docker has a very large number of additional functionnalities, and you should explore them while you work with containers. I hope this post was useful to get you started.&lt;/p&gt;</content><category term="docker"></category><category term="code"></category><category term="devops"></category></entry><entry><title>An introduction to Git</title><link href="https://ericdaat.github.io/git-tutorial.html" rel="alternate"></link><published>2017-10-20T10:20:00+02:00</published><updated>2017-10-20T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-20:/git-tutorial.html</id><summary type="html">&lt;p&gt;A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Some History&lt;/h1&gt;
+&lt;p&gt;This post is certainly not exhaustive. It is just a quick introduction to Docker, and I emphasized on commands and practices I am using most of the time. Of course Docker has a very large number of additional functionnalities, and you should explore them while you work with containers. I hope this post was useful to get you started.&lt;/p&gt;</content><category term="docker"></category><category term="code"></category><category term="devops"></category></entry><entry><title>An introduction to Git</title><link href="https://ericdaat.github.io/git-tutorial.html" rel="alternate"></link><published>2017-10-20T10:20:00+02:00</published><updated>2017-10-20T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-20:/git-tutorial.html</id><summary type="html">&lt;p&gt;A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Some History&lt;/h2&gt;
 &lt;p&gt;Git was created by Linus Torvalds in 2005 for development of the Linux kernel,
 with other kernel developers contributing to its initial development.
 Its current maintainer since 2005 is Junio Hamano.&lt;/p&gt;
@@ -595,30 +595,30 @@ Its current maintainer since 2005 is Junio Hamano.&lt;/p&gt;
  3. "global information tracker": you're in a good mood, and it actually works for you. Angels sing, and a light suddenly fills the room.
  4. "g&lt;em&gt;dd&lt;/em&gt;mn idiotic truckload of sh&lt;em&gt;t": when it breaks
 &lt;/em&gt;Source: &lt;a href="https://en.wikipedia.org/wiki/Git"&gt;Wikipedia&lt;/a&gt;*&lt;/p&gt;
-&lt;h1&gt;First Steps&lt;/h1&gt;
-&lt;h2&gt;Install git&lt;/h2&gt;
+&lt;h2&gt;First Steps&lt;/h2&gt;
+&lt;h3&gt;Install git&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install git
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Configure git&lt;/h2&gt;
+&lt;h3&gt;Configure git&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git config --global user.name &lt;span class="s2"&gt;&amp;quot;John Doe&amp;quot;&lt;/span&gt;
 git config --global user.email &lt;span class="s2"&gt;&amp;quot;john@example.com&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Init an empty repository&lt;/h2&gt;
+&lt;h3&gt;Init an empty repository&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir lab-git &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;cd&lt;/span&gt; lab-git
 git init
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;... Or clone an exisiting one&lt;/h2&gt;
+&lt;h3&gt;... Or clone an exisiting one&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone git://github.com/schacon/grit.git
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Create a file&lt;/h2&gt;
+&lt;h3&gt;Create a file&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;touch hi.py
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -630,14 +630,14 @@ git init
  1. Tell git to track the file
  2. Create a remote repository to store our code
  3. Push our code to the remote repository&lt;/p&gt;
-&lt;h2&gt;Tracking a file&lt;/h2&gt;
+&lt;h3&gt;Tracking a file&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git status &lt;span class="c1"&gt;# our file is untracked&lt;/span&gt;
 git add hi.py
 git status &lt;span class="c1"&gt;# our file is tracked!&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Setting a remote repository&lt;/h2&gt;
+&lt;h3&gt;Setting a remote repository&lt;/h3&gt;
 &lt;p&gt;Usually done through websites like &lt;a href="https://github.com"&gt;github&lt;/a&gt;, &lt;a href="https://bitbucket.org/"&gt;bitbucket&lt;/a&gt;, &lt;a href="https://about.gitlab.com/"&gt;gitlab&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Once a remote repository is created, we are provided its url. Then, tell the local repository what its remote url is.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git remote add origin https://github.com/user/repo.git &lt;span class="c1"&gt;# origin is our remote name&lt;/span&gt;
@@ -645,7 +645,7 @@ git remote -V &lt;span class="c1"&gt;# verify the remote&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Commit and push to the remote repository&lt;/h2&gt;
+&lt;h3&gt;Commit and push to the remote repository&lt;/h3&gt;
 &lt;p&gt;Even though we tracked our file, we didn't commit anything. When commiting, we provide a message explaining what we changes within the tracked files.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git commit -m &lt;span class="s2"&gt;&amp;quot;started tracking hi.py&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -661,7 +661,7 @@ git remote -V &lt;span class="c1"&gt;# verify the remote&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Additional useful commands&lt;/h2&gt;
+&lt;h3&gt;Additional useful commands&lt;/h3&gt;
 &lt;p&gt;Display last commits&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git log
 &lt;/pre&gt;&lt;/div&gt;
@@ -677,18 +677,18 @@ git remote -V &lt;span class="c1"&gt;# verify the remote&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;A visual recap&lt;/h2&gt;
-&lt;p&gt;&lt;img alt="git_basic_usage" src="https://marklodato.github.io/visual-git-guide/basic-usage.svg"&gt;&lt;/p&gt;
+&lt;h3&gt;A visual recap&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="git_basic_usage" src="images/git-stages.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Source: &lt;a href="https://marklodato.github.io/visual-git-guide/index-en.html"&gt;marklodato.github.io&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h1&gt;Collaborating with other people&lt;/h1&gt;
-&lt;h2&gt;Common configuration&lt;/h2&gt;
+&lt;h2&gt;Collaborating with other people&lt;/h2&gt;
+&lt;h3&gt;Common configuration&lt;/h3&gt;
 &lt;p&gt;&lt;em&gt;n&lt;/em&gt; co-workers, one repository, one production server.&lt;/p&gt;
 &lt;p&gt;Co-workers work on the same project and can edit the same files simultaneously. Updates are pushed on the distant repository, and pulled from the production server.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://i.stack.imgur.com/9TtPl.png" height="180px"/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="images/git-servers.png" height="180px"/&gt;&lt;/p&gt;
 &lt;p&gt;NEVER EVER commit, push or edit anything on the production server.&lt;/p&gt;
-&lt;h2&gt;Branches&lt;/h2&gt;
+&lt;h3&gt;Branches&lt;/h3&gt;
 &lt;p&gt;Branches allow people to work on separate tasks without messing with the master branch code. It is useful to experiment, or add functionalities. Branches can start from the master branch, or from another branch.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://backlogtool.com/git-tutorial/en/img/post/stepup/capture_stepup1_5_6.png"
+&lt;p&gt;&lt;img src="images/git-branches.png"
      height="250px"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Source : &lt;a href="https://backlogtool.com/git-tutorial/en/stepup/stepup1_5.html"&gt;backlogtool.com&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Check branches within local repository&lt;/p&gt;
@@ -711,14 +711,11 @@ git remote -V &lt;span class="c1"&gt;# verify the remote&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Merging and pull requests&lt;/h2&gt;
+&lt;h3&gt;Merging and pull requests&lt;/h3&gt;
 &lt;p&gt;When we are finished working on our feature-branch, we must check for conflicts before pushing to master. To do so, pull the master branch into your branch, and fix your conflicts locally.&lt;/p&gt;
 &lt;p&gt;When all the conflicts are resolved, push again, &lt;em&gt;still on your branch&lt;/em&gt;, to the remote repository. Then, make a pull request, that will eventually get merged on the master branch by the repository administrator.&lt;/p&gt;
-&lt;p&gt;&lt;img src="https://www.tuleap.org/sites/default/files/simplified-pull-request-process.jpeg"
-     height="200px"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Source: &lt;a href="https://www.tuleap.org/tuleap-pull-request-open-source-code-review-tool"&gt;tuleap.org&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;h1&gt;More useful tools&lt;/h1&gt;
-&lt;h2&gt;Stash your local changes&lt;/h2&gt;
+&lt;h2&gt;More useful tools&lt;/h2&gt;
+&lt;h3&gt;Stash your local changes&lt;/h3&gt;
 &lt;p&gt;When your &lt;code&gt;git pull&lt;/code&gt; fails because you are editing a file that has been changed by someone else, temporarily stash your changes, pull the recent modifications, then apply your changes again.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git pull origin awesome-feature &lt;span class="c1"&gt;# fails&lt;/span&gt;
 
@@ -730,7 +727,7 @@ git push origin awesome-feature &lt;span class="c1"&gt;# now the world really is
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Ignore unnecessary files&lt;/h2&gt;
+&lt;h3&gt;Ignore unnecessary files&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;You can't always git what you want -- The Rolling Stones&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -743,7 +740,7 @@ git push origin awesome-feature &lt;span class="c1"&gt;# now the world really is
 
 &lt;p&gt;This tells git to never track &lt;code&gt;.pyc&lt;/code&gt; or &lt;code&gt;.csv&lt;/code&gt; files, because who needs to ?&lt;/p&gt;
 &lt;p&gt;You can also ignore entire directories. You should avoid using &lt;code&gt;git add *&lt;/code&gt; if you're not sure you're ignoring unnecessary files.&lt;/p&gt;
-&lt;h2&gt;Remove files on the repository&lt;/h2&gt;
+&lt;h3&gt;Remove files on the repository&lt;/h3&gt;
 &lt;p&gt;What if you no longer want to track something ?&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git rm go_away.py &lt;span class="c1"&gt;# will also delete the file from your disk&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -753,7 +750,7 @@ git push origin awesome-feature &lt;span class="c1"&gt;# now the world really is
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h2&gt;Versioning configuration files or critical files&lt;/h2&gt;
+&lt;h3&gt;Versioning configuration files or critical files&lt;/h3&gt;
 &lt;p&gt;Sometimes you want to track files that contain passwords, or configuration
 variables.&lt;br&gt;
 Those files are likely to change independently from the code, so
@@ -771,7 +768,7 @@ DB_PASSWORD=
 
 &lt;p&gt;If you are refering to a conf file named &lt;code&gt;variables.env&lt;/code&gt;, name you dist file
 &lt;code&gt;variables.env.dist&lt;/code&gt;. Track the &lt;code&gt;.dist&lt;/code&gt; file, but ignore &lt;code&gt;variables.env&lt;/code&gt;.&lt;/p&gt;
-&lt;h2&gt;README.md&lt;/h2&gt;
+&lt;h3&gt;README.md&lt;/h3&gt;
 &lt;p&gt;Every repository should have a decent README.md file, explaining what it is
 about, and how to configure and install the dependencies to start the
 application.&lt;br&gt;
