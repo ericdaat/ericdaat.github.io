@@ -9,7 +9,7 @@ Summary: A short introduction and tutorial to Git, the versionning tool created 
 Status: published
 
 
-# Some History
+## Some History
 
 Git was created by Linus Torvalds in 2005 for development of the Linux kernel,
 with other kernel developers contributing to its initial development.
@@ -22,36 +22,36 @@ The name "git" was given by Linus Torvalds when he wrote the very first version.
  4. "g*dd*mn idiotic truckload of sh*t": when it breaks
 *Source: [Wikipedia](https://en.wikipedia.org/wiki/Git)*
 
-# First Steps
-## Install git
+## First Steps
+### Install git
 
-``` sh
+``` shell
 sudo apt-get install git
 ```
 
-## Configure git
+### Configure git
 
-``` sh
+``` shell
 git config --global user.name "John Doe"
 git config --global user.email "john@example.com"
 ```
 
-## Init an empty repository
+### Init an empty repository
 
-``` sh
+``` shell
 mkdir lab-git && cd lab-git
 git init
 ```
 
-## ... Or clone an exisiting one
+### ... Or clone an exisiting one
 
-``` sh
+``` shell
 git clone git://github.com/schacon/grit.git
 ```
 
-## Create a file
+### Create a file
 
-``` sh
+``` shell
 touch hi.py
 ```
 
@@ -64,90 +64,90 @@ What we need to do:
  2. Create a remote repository to store our code
  3. Push our code to the remote repository
 
-## Tracking a file
+### Tracking a file
 
-``` sh
+``` shell
 git status # our file is untracked
 git add hi.py
 git status # our file is tracked!
 ```
 
-## Setting a remote repository
+### Setting a remote repository
 
 Usually done through websites like [github](https://github.com), [bitbucket](https://bitbucket.org/), [gitlab](https://about.gitlab.com/).
 
 Once a remote repository is created, we are provided its url. Then, tell the local repository what its remote url is.
 
-``` sh
+``` shell
 git remote add origin https://github.com/user/repo.git # origin is our remote name
 git remote -V # verify the remote
 ```
 
-## Commit and push to the remote repository
+### Commit and push to the remote repository
 
 Even though we tracked our file, we didn't commit anything. When commiting, we provide a message explaining what we changes within the tracked files.
 
-``` sh
+``` shell
 git commit -m "started tracking hi.py"
 ```
 
 Now, we commited our change. Although, everything is still local, nothing is published on the remote repository yet. To do so, we must `push` our last commit.
 
-``` sh
+``` shell
 git push origin master # push to the branch master on the origin remote repository
 ```
 
 To get the latest changes on remote, use `pull` command.
 
-``` sh
+``` shell
 git pull origin master
 ```
 
-## Additional useful commands
+### Additional useful commands
 
 Display last commits
 
-``` sh
+``` shell
 git log
 ```
 
 Display what has been changed since the last commit
 
-``` sh
+``` shell
 git diff
 ```
 
 Cancels all local changes and rolls back to how the file was at latest commit
 
-``` sh
+``` shell
 git checkout hi.py
 ```
 
-## A visual recap
+### A visual recap
 
-![git_basic_usage](https://marklodato.github.io/visual-git-guide/basic-usage.svg)
+![git_basic_usage](images/git-stages.png)
 
 *Source: [marklodato.github.io](https://marklodato.github.io/visual-git-guide/index-en.html)*
 
 
-# Collaborating with other people
+## Collaborating with other people
 
-## Common configuration
+### Common configuration
 
 *n* co-workers, one repository, one production server.
 
 Co-workers work on the same project and can edit the same files simultaneously. Updates are pushed on the distant repository, and pulled from the production server.
 
-<img src="https://i.stack.imgur.com/9TtPl.png" height="180px"/>
+<img src="images/git-servers.png" height="180px"/>
 
 NEVER EVER commit, push or edit anything on the production server.
 
 
-## Branches
+### Branches
 
 Branches allow people to work on separate tasks without messing with the master branch code. It is useful to experiment, or add functionalities. Branches can start from the master branch, or from another branch.
 
-<img src="https://backlogtool.com/git-tutorial/en/img/post/stepup/capture_stepup1_5_6.png"
+<img src="images/git-branches.png"
      height="250px">
 
 *Source : [backlogtool.com](https://backlogtool.com/git-tutorial/en/stepup/stepup1_5.html)*
@@ -155,47 +155,42 @@ Branches allow people to work on separate tasks without messing with the master 
 
 Check branches within local repository
 
-``` sh
+``` shell
 git branch
 ```
 
 Create a branch named `awesome-feature` from the active branch
 
-``` sh
+``` shell
 git checkout -b awesome-feature
 ```
 
 Edit some code, add and commit files. Then push them to the remote server, but not on master.
 
-``` sh
+``` shell
 git push origin awesome-feature # create branch on the remote repo
 ```
 
 Delete local branch
 
-``` sh
+``` shell
 git branch -d awesome-feature
 ```
 
-## Merging and pull requests
+### Merging and pull requests
 
 When we are finished working on our feature-branch, we must check for conflicts before pushing to master. To do so, pull the master branch into your branch, and fix your conflicts locally.
 
 When all the conflicts are resolved, push again, *still on your branch*, to the remote repository. Then, make a pull request, that will eventually get merged on the master branch by the repository administrator.
 
 
-<img src="https://www.tuleap.org/sites/default/files/simplified-pull-request-process.jpeg"
-     height="200px">
+## More useful tools
 
-*Source: [tuleap.org](https://www.tuleap.org/tuleap-pull-request-open-source-code-review-tool)*
-
-# More useful tools
-
-## Stash your local changes
+### Stash your local changes
 
 When your `git pull` fails because you are editing a file that has been changed by someone else, temporarily stash your changes, pull the recent modifications, then apply your changes again.
 
-``` sh
+``` shell
 git pull origin awesome-feature # fails
 
 git stash conflict-file.py # stash changes
@@ -205,7 +200,7 @@ git commit -m "made the world a better place"
 git push origin awesome-feature # now the world really is a better place
 ```
 
-## Ignore unnecessary files
+### Ignore unnecessary files
 
 > *You can't always git what you want -- The Rolling Stones*
 
@@ -223,19 +218,19 @@ This tells git to never track `.pyc` or `.csv` files, because who needs to ?
 You can also ignore entire directories. You should avoid using `git add *` if you're not sure you're ignoring unnecessary files.
 
 
-## Remove files on the repository
+### Remove files on the repository
 
 What if you no longer want to track something ?
 
-``` sh
+``` shell
 git rm go_away.py # will also delete the file from your disk
 ```
 
-``` sh
+``` shell
 git rm --cached go_away.py # will only delete on the remote repository
 ```
 
-## Versioning configuration files or critical files
+### Versioning configuration files or critical files
 
 Sometimes you want to track files that contain passwords, or configuration
 variables.  
@@ -257,7 +252,7 @@ DB_PASSWORD=
 If you are refering to a conf file named `variables.env`, name you dist file
 `variables.env.dist`. Track the `.dist` file, but ignore `variables.env`.
 
-## README.md
+### README.md
 
 Every repository should have a decent README.md file, explaining what it is
 about, and how to configure and install the dependencies to start the

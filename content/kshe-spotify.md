@@ -117,8 +117,6 @@ This would return a json that looks like the following.
 
 During this part, we are going to use the [Spotify Web API](https://developer.spotify.com/web-api/). I found the API very straightforward and easy to deal with. The documentation is clear and they show a lot of examples that help. You will need to setup a Developer account and register an Application. This will provide you credentials that you will need for the rest of this post.
 
-Note: There exists a Python library called [Spotipy](https://spotipy.readthedocs.io/en/latest/) to deal with the Spotify API. While this library is very complete and super easy to use, I wanted to code my application from scratch and follow the Spotify API documentation. It may take more time, but it's good fun.
-
 
 ## Authorization
 
@@ -129,7 +127,7 @@ I had some trouble figuring this part at first, but it's not that big of a deal 
 
 For our purpose, we will need *Authorization Code Flow* because we want to modify our own playlist. Let's see how we do this. The following picture taken from Spotify documentation explains it well how the authorization code flow works. 
 
-<img src="https://developer.spotify.com/wp-content/uploads/2014/04/Authorization-Code-Flow-Diagram.png" width=600px/>
+<img src="images/spotify-auth.png" width=600px/>
 
 What happens is:
 
