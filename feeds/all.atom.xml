@@ -98,7 +98,7 @@ Batch 429, val score 0.9072
 
 
 &lt;p&gt;I hope this post was useful. Don't hesitate to have a look at scikit-learn documentation on this topic: &lt;a href="http://scikit-learn.org/stable/modules/scaling_strategies.html"&gt;Strategies to scale computationally: bigger data&lt;/a&gt;.&lt;/p&gt;</content><category term="scikit-learn"></category><category term="code"></category><category term="machine-learning"></category><category term="classification"></category></entry><entry><title>Installing Tensorflow with GPU support on Linux (Debian)</title><link href="https://ericdaat.github.io/install-tensorflow-gpu.html" rel="alternate"></link><published>2018-01-16T10:20:00+01:00</published><updated>2018-06-08T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2018-01-16:/install-tensorflow-gpu.html</id><summary type="html">&lt;p&gt;Lately I spent some time using Deep Learning and configuring Linux servers with GPUs so the models train faster. In this short blog post I am going to list all what you have to follow in order to properly install the nvidia drivers, cuda, and other tools you'll need before running Tensorflow (or Keras) with GPU support. Let's get to it !&lt;/p&gt;</summary><content type="html">&lt;p&gt;Lately I spent some time using Deep Learning and configuring Linux servers with GPUs so the models train faster. In this short blog post I am going to list all what you have to follow in order to properly install the nvidia drivers, cuda, and other tools you'll need before running Tensorflow (or Keras) with GPU support. Let's get to it !&lt;/p&gt;
-&lt;h1&gt;Installing Nvidia Graphic Drivers and Cuda&lt;/h1&gt;
+&lt;h2&gt;Installing Nvidia Graphic Drivers and Cuda&lt;/h2&gt;
 &lt;p&gt;For this part, I followed instructions from the &lt;a href="https://wiki.debian.org/NvidiaGraphicsDrivers"&gt;Debian Wiki&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;deb http://httpredir.debian.org/debian/ stretch main contrib non-free&amp;quot;&lt;/span&gt; &amp;gt; /etc/apt/sources.list
 apt update
@@ -111,7 +111,7 @@ apt-get install nvidia-cuda-dev nvidia-cuda-toolkit  nvidia-driver
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h1&gt;Installing Cudnn&lt;/h1&gt;
+&lt;h2&gt;Installing Cudnn&lt;/h2&gt;
 &lt;p&gt;For this part, you're going to need to register as an Nvidia Developer. Then, download cudnn v6 (Tensorflow needs this version, at least it does while I'm writing these lines) from the &lt;a href="https://developer.nvidia.com/rdp/cudnn-download"&gt;Nvidia Developer Website&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /home/user
 tar xvzf cudnn-8.0-linux-x64-v6.0.tgz
@@ -129,7 +129,7 @@ apt-get install libcupti-dev
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h1&gt;Installing python, virtualenv and tensforflow-gpu library&lt;/h1&gt;
+&lt;h2&gt;Installing python, virtualenv and tensforflow-gpu library&lt;/h2&gt;
 &lt;p&gt;This part is the easiest. You can see more details on the &lt;a href="https://www.tensorflow.org/install/install_linux#InstallingVirtualenv"&gt;Tensorflow&lt;/a&gt; page.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get install python python-pip
 virtualenv tensorflow
@@ -146,13 +146,13 @@ pip install tensorflow-gpu&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h1&gt;Docker Image&lt;/h1&gt;
+&lt;h2&gt;Docker Image&lt;/h2&gt;
 &lt;p&gt;If you are familiar with &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt;, I'd recommend you have a look at the &lt;a href="https://hub.docker.com/r/tensorflow/tensorflow/"&gt;Tensorflow Docker Image&lt;/a&gt;. It's already configured with the latest drivers and can run on CPU or GPU.&lt;/p&gt;
 &lt;p&gt;If you're not familiar with Docker, you should definitely learn using it. Here are some links to get you started:
  - &lt;a href="https://ericdaat.github.io/docker-introduction.html"&gt;My introduction to Docker blog post&lt;/a&gt;
  - &lt;a href="https://www.docker.com/"&gt;Docker official website&lt;/a&gt;
  - &lt;a href="https://docs.docker.com/get-started/"&gt;Docker getting started guide&lt;/a&gt;&lt;/p&gt;
-&lt;h1&gt;Install Keras on top of Tensorflow&lt;/h1&gt;
+&lt;h2&gt;Install Keras on top of Tensorflow&lt;/h2&gt;
 &lt;p&gt;This step is not required, and some people probably prefer using Tensorflow directly with no abstraction layer on top of it. I personally started doing Deep Learning with Keras on top of Tensorflow, because it provided a simpler API, and I find it really easy and fast to build models.&lt;br&gt;
 Keras was build by &lt;a href="https://twitter.com/fchollet?lang=en"&gt;François Chollet&lt;/a&gt;, and since he is now working for Google, Keras is very well integrated with Tensorflow.&lt;/p&gt;
 &lt;p&gt;Installing keras is as easy as &lt;code&gt;pip install keras&lt;/code&gt;. It will automatically detect your GPUs if you have &lt;code&gt;tensorflow-gpu&lt;/code&gt; installed, like we did.&lt;/p&gt;
