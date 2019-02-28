@@ -51,7 +51,7 @@ DEFAULT_METADATA = {
 
 # Plugins
 PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['render_math']
+PLUGINS = ['render_math', 'pelican_gist',]
 
 # Themes
 THEME = 'aboutwilson'
