@@ -1,4 +1,4 @@
-# Personnal Tech Blog
+# Personal Tech Blog
 
 This blog is hosted with Github Pages, on [ericdaat.github.io](https://ericdaat.github.io).
 
