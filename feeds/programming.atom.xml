@@ -157,6 +157,8 @@ pip install tensorflow-gpu&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="m
 Keras was build by &lt;a href="https://twitter.com/fchollet?lang=en"&gt;François Chollet&lt;/a&gt;, and since he is now working for Google, Keras is very well integrated with Tensorflow.&lt;/p&gt;
 &lt;p&gt;Installing keras is as easy as &lt;code&gt;pip install keras&lt;/code&gt;. It will automatically detect your GPUs if you have &lt;code&gt;tensorflow-gpu&lt;/code&gt; installed, like we did.&lt;/p&gt;
 &lt;p&gt;To get started, have a look at the official &lt;a href="https://keras.io/"&gt;Keras website&lt;/a&gt; and their &lt;a href="https://keras.io/#getting-started-30-seconds-to-keras"&gt;getting started guide&lt;/a&gt;. I have also wrote a blog post with some &lt;a href="https://ericdaat.github.io/keras-snippets.html"&gt;Keras snippets&lt;/a&gt; that I find useful.&lt;/p&gt;
+&lt;p&gt;The full code is here:
+[gist:id=8623e2e1e0b80f6a94eeedeecd80828d]&lt;/p&gt;
 &lt;p&gt;I hope this post was helpful, and have fun with Deep Learning !&lt;/p&gt;
 &lt;iframe src="https://giphy.com/embed/W9zNtyI9I4lG" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;
 
