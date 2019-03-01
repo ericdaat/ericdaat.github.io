@@ -9,11 +9,11 @@ SITETITLE = 'Eric\'s Blog'
 SITESUBTITLE = 'Data Scientist, Full Stack Developer'
 SITEDESCRIPTION = 'Yet another tech blog where I talk about what I do and like.'
 SITELOGO = '/images/eric.jpg'
-# FAVICON = SITEURL + '/images/favicon.ico'
-GOOGLE_ANALYTICS = 'UA-105599779-1'
+FAVICON = '/images/favicon.ico'
+TIMEZONE = "Europe/Paris"
 
 PATH = 'content'
-STATIC_PATHS = ['images']
+STATIC_PATHS = ['images', 'extra']
 
 TIMEZONE = 'Europe/Paris'
 
@@ -49,6 +49,10 @@ DEFAULT_METADATA = {
     'status': 'draft',
 }
 
+EXTRA_PATH_METADATA = {
+    'extra/favicon.ico': {'path': 'favicon.ico'}
+}
+
 # Plugins
 PLUGIN_PATHS = ['./plugins']
 PLUGINS = ['render_math', 'pelican_gist',]
@@ -62,3 +66,5 @@ THEME = 'aboutwilson'
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
+
+SLUGIFY_SOURCE = 'title'
