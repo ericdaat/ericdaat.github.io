@@ -9,8 +9,8 @@ SITETITLE = 'Eric\'s Blog'
 SITESUBTITLE = 'Data Scientist, Full Stack Developer'
 SITEDESCRIPTION = 'Yet another tech blog where I talk about what I do and like.'
 SITELOGO = '/images/eric.jpg'
-FAVICON = '/extra/favicon.ico'
-TIMEZONE = "Europe/Paris"
+FAVICON = 'favicon.ico'
+TIMEZONE = 'Europe/Paris'
 
 PATH = 'content'
 STATIC_PATHS = ['images', 'extra']
@@ -50,7 +50,7 @@ DEFAULT_METADATA = {
 }
 
 EXTRA_PATH_METADATA = {
-    'extra/favicon.ico': {'path': 'extra/favicon.ico'}
+    'extra/favicon.ico': {'path': 'favicon.ico'}
 }
 
 # Plugins
