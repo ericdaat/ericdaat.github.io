@@ -55,7 +55,7 @@ EXTRA_PATH_METADATA = {
 
 # Plugins
 PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['render_math', 'pelican_gist',]
+PLUGINS = ['render_math',]
 
 # Themes
 THEME = 'aboutwilson'
