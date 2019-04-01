@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/all.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2019-03-01T10:20:00+01:00</updated><entry><title>Out of core text classification with Scikit Learn</title><link href="https://ericdaat.github.io/out-of-core-text-classification-scikit-learn.html" rel="alternate"></link><published>2018-02-02T10:20:00+01:00</published><updated>2018-02-02T10:20:00+01:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2018-02-02:/out-of-core-text-classification-scikit-learn.html</id><summary type="html">&lt;p&gt;In this article, we are going to demonstrate how to build a simple text classifier for larger than RAM datasets. This approach is called Out of Core Learning, and many python Machine Learning librairies make this very easy to implement. For this example I used reviews from the &lt;a href="https://www.yelp.com/dataset/challenge"&gt;Yelp Dataset Challenge&lt;/a&gt; and Python &lt;a href="http://scikit-learn.org/stable/"&gt;scikit-learn&lt;/a&gt; library.&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this article, we are going to demonstrate how to build a simple text classifier for larger than RAM datasets. This approach is called Out of Core Learning, and many python Machine Learning librairies make this very easy to implement. For this example I used reviews from the &lt;a href="https://www.yelp.com/dataset/challenge"&gt;Yelp Dataset Challenge&lt;/a&gt; and Python &lt;a href="http://scikit-learn.org/stable/"&gt;scikit-learn&lt;/a&gt; library.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/all.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2019-03-01T10:20:00+01:00</updated><subtitle>Data Scientist, Full Stack Developer</subtitle><entry><title>Out of core text classification with Scikit Learn</title><link href="https://ericdaat.github.io/out-of-core-text-classification-scikit-learn.html" rel="alternate"></link><published>2018-02-02T10:20:00+01:00</published><updated>2018-02-02T10:20:00+01:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2018-02-02:/out-of-core-text-classification-scikit-learn.html</id><summary type="html">&lt;p&gt;In this article, we are going to demonstrate how to build a simple text classifier for larger than RAM datasets. This approach is called Out of Core Learning, and many python Machine Learning librairies make this very easy to implement. For this example I used reviews from the &lt;a href="https://www.yelp.com/dataset/challenge"&gt;Yelp Dataset Challenge&lt;/a&gt; and Python &lt;a href="http://scikit-learn.org/stable/"&gt;scikit-learn&lt;/a&gt; library.&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this article, we are going to demonstrate how to build a simple text classifier for larger than RAM datasets. This approach is called Out of Core Learning, and many python Machine Learning librairies make this very easy to implement. For this example I used reviews from the &lt;a href="https://www.yelp.com/dataset/challenge"&gt;Yelp Dataset Challenge&lt;/a&gt; and Python &lt;a href="http://scikit-learn.org/stable/"&gt;scikit-learn&lt;/a&gt; library.&lt;/p&gt;
 &lt;h2&gt;The Dataset&lt;/h2&gt;
-&lt;p&gt;First, download the dataset from the &lt;a href="https://www.yelp.com/dataset/challenge"&gt;Yelp website&lt;/a&gt;. Once you're done, we are going to work with the the reviews file. It contains one Json per row, and I like to use the &lt;a href="https://pandas.pydata.org/"&gt;Python Pandas&lt;/a&gt; library to read datasets.&lt;br&gt;
+&lt;p&gt;First, download the dataset from the &lt;a href="https://www.yelp.com/dataset/challenge"&gt;Yelp website&lt;/a&gt;. Once you're done, we are going to work with the the reviews file. It contains one Json per row, and I like to use the &lt;a href="https://pandas.pydata.org/"&gt;Python Pandas&lt;/a&gt; library to read datasets.
 Pandas has a nice function called &lt;code&gt;read_json&lt;/code&gt; that we are going to use for reading the dataset. However we have to be careful of two things:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The dataset is really large, so we don't want to fully load it in RAM&lt;/li&gt;
@@ -36,7 +36,7 @@ Pandas has a nice function called &lt;code&gt;read_json&lt;/code&gt; that we are
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now, we can train a classifier on top of this incoming data. Although, the classifier has to support the &lt;code&gt;partial_fit&lt;/code&gt; method, otherwise the model will be overridden at each epoch. &lt;a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html"&gt;SGDClassifier&lt;/a&gt; is among the classifiers that supports that, and it works pretty well so we will use this one.&lt;br&gt;
+&lt;p&gt;Now, we can train a classifier on top of this incoming data. Although, the classifier has to support the &lt;code&gt;partial_fit&lt;/code&gt; method, otherwise the model will be overridden at each epoch. &lt;a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html"&gt;SGDClassifier&lt;/a&gt; is among the classifiers that supports that, and it works pretty well so we will use this one.
 From there it is very similar to other classifiers, except we use &lt;code&gt;partial_fit&lt;/code&gt; instead of &lt;code&gt;fit&lt;/code&gt;. We will simply loop over the incoming data chunks, transform the raw text into a term-document matrix thanks to the vectorizer, and then train the model, effectively keeping the previously learned weights.&lt;/p&gt;
 &lt;h2&gt;Full Code&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
@@ -119,7 +119,7 @@ is the latest version available while I am writing these words.&lt;/p&gt;
 &lt;li&gt;&lt;a href="https://docs.docker.com/get-started/"&gt;Docker getting started guide&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Install Keras on top of Tensorflow&lt;/h2&gt;
-&lt;p&gt;This step is not required, and some people probably prefer using Tensorflow directly with no abstraction layer on top of it. I personally started doing Deep Learning with Keras on top of Tensorflow, because it provided a simpler API, and I find it really easy and fast to build models.&lt;br&gt;
+&lt;p&gt;This step is not required, and some people probably prefer using Tensorflow directly with no abstraction layer on top of it. I personally started doing Deep Learning with Keras on top of Tensorflow, because it provided a simpler API, and I find it really easy and fast to build models.
 Keras was build by &lt;a href="https://twitter.com/fchollet?lang=en"&gt;François Chollet&lt;/a&gt;, and since he is now working for Google, Keras is very well integrated with Tensorflow.&lt;/p&gt;
 &lt;p&gt;Installing keras is as easy as &lt;code&gt;pip install keras&lt;/code&gt;. It will automatically detect your GPUs if you have &lt;code&gt;tensorflow-gpu&lt;/code&gt; installed, like we did.&lt;/p&gt;
 &lt;p&gt;To get started, have a look at the official &lt;a href="https://keras.io/"&gt;Keras website&lt;/a&gt; and their &lt;a href="https://keras.io/#getting-started-30-seconds-to-keras"&gt;getting started guide&lt;/a&gt;. I have also wrote a blog post with some &lt;a href="https://ericdaat.github.io/keras-snippets.html"&gt;Keras snippets&lt;/a&gt; that I find useful.&lt;/p&gt;
@@ -305,7 +305,7 @@ Keras was build by &lt;a href="https://twitter.com/fchollet?lang=en"&gt;Françoi
 &lt;p&gt;&lt;img alt="embeddings_functional" src="images/keras_nn/multi_embeddings_classifier_functional.png"&gt;&lt;/p&gt;
 &lt;h2&gt;Shared Embeddings&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Model&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.layers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Embedding&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Lambda&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;concatenate&lt;/span&gt; 
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.layers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Dense&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Embedding&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Lambda&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Input&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;concatenate&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;plot_model&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.utils.vis_utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;model_to_dot&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.backend&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;mean&lt;/span&gt;
@@ -340,7 +340,7 @@ Keras was build by &lt;a href="https://twitter.com/fchollet?lang=en"&gt;Françoi
 
 &lt;p&gt;&lt;img alt="shared_embeddings" src="images/keras_nn/shared_embeddings.png"&gt;&lt;/p&gt;
 &lt;h1&gt;Callbacks&lt;/h1&gt;
-&lt;p&gt;Keras has many awesome callbacks that can be used during training. You can find them in the docs and I won't cover them all here. The one I recently discovered and particularly liked is Tensorboard. I am not very familiar with Tensorflow yet, but I love the fact that Tensorboard works with Keras. You can visualize how your model trains, your embeddings, and much more. &lt;/p&gt;
+&lt;p&gt;Keras has many awesome callbacks that can be used during training. You can find them in the docs and I won't cover them all here. The one I recently discovered and particularly liked is Tensorboard. I am not very familiar with Tensorflow yet, but I love the fact that Tensorboard works with Keras. You can visualize how your model trains, your embeddings, and much more.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Sequential&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.layers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Dense&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;keras.utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;plot_model&lt;/span&gt;
@@ -374,7 +374,7 @@ Keras was build by &lt;a href="https://twitter.com/fchollet?lang=en"&gt;Françoi
 &lt;p&gt;“Docker containers wrap a piece of software in a complete filesystem that
 contains everything needed to run: code, runtime, system tools, system libraries
 – anything that can be installed on a server. This guarantees that the software
-will always run the same, regardless of its environment.”&lt;br&gt;
+will always run the same, regardless of its environment.”
 &lt;em&gt;Source: &lt;a href="https://www.docker.com/what-docker"&gt;Docker Website&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;Advantages&lt;/h2&gt;
@@ -521,32 +521,32 @@ COPY ./mywebsite/:/usr/local/apache2/htdocs/
 &lt;p&gt;Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on &lt;em&gt;localhost&lt;/em&gt; is exactly what we have under the local &lt;em&gt;./mywebsite&lt;/em&gt; directory.&lt;/p&gt;
 &lt;h2&gt;Docker Compose&lt;/h2&gt;
 &lt;p&gt;Often, you will need to build and run many different containers, and using the previously seen commands for each container can become very dull. In this section we will introduce Docker Compose, which is a very handy tool for defining and running multiple containers from a YAML configuration file. Here is how this file might look like for the apache webserver we had before.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;version&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
-&lt;span class="l l-Scalar l-Scalar-Plain"&gt;services&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
-  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;website&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
-   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;httpd:latest&lt;/span&gt;
-   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;ports&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
+&lt;span class="nt"&gt;services&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;website&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+   &lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;httpd:latest&lt;/span&gt;
+   &lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;80:80&lt;/span&gt;
-   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;volumes&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+   &lt;span class="nt"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;./mywebsite/:/usr/local/apache2/htdocs/&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;Linking containers&lt;/h2&gt;
 &lt;p&gt;Now imagine you are running a web application in a container, and you need access to various services such as a relational database and a cache server. These three services can be run in different containers talking to each others via links. You might notice the &lt;em&gt;expose&lt;/em&gt; keyword. Containers by default have all their ports closed. We previously seen that we could map a container's port to the host by using &lt;em&gt;ports&lt;/em&gt;. Thanks to &lt;em&gt;expose&lt;/em&gt;, we tell a container to open its port to other containers. Exposing a container's port does not make it accessible from the host.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;version&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
-&lt;span class="l l-Scalar l-Scalar-Plain"&gt;services&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
-  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;website&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
-   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;httpd:latest&lt;/span&gt;
-   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;ports&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;3&amp;#39;&lt;/span&gt;
+&lt;span class="nt"&gt;services&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;website&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+   &lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;httpd:latest&lt;/span&gt;
+   &lt;span class="nt"&gt;ports&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;80:80&lt;/span&gt;
-   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;volumes&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+   &lt;span class="nt"&gt;volumes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;./mywebsite/:/usr/local/apache2/htdocs/&lt;/span&gt;
-   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;links&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+   &lt;span class="nt"&gt;links&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;redis&lt;/span&gt;
-  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;cache&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
-   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;image&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;redis:latest&lt;/span&gt;
-   &lt;span class="l l-Scalar l-Scalar-Plain"&gt;expose&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="nt"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+   &lt;span class="nt"&gt;image&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;redis:latest&lt;/span&gt;
+   &lt;span class="nt"&gt;expose&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="p p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;6379&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -1053,7 +1053,7 @@ die-on-term = true
 application with the configuration you just wrote. You can then write a startup
 script with &lt;em&gt;upstart&lt;/em&gt; or &lt;em&gt;systemd&lt;/em&gt; to make your application run in the
 background and easily start/stop it.&lt;/p&gt;
-&lt;p&gt;In another post, I'll cover how to run all this with &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt;, as it is what I tend to use now to deploy apps in production. &lt;/p&gt;</content><category term="python"></category><category term="code"></category></entry><entry><title>Python Tips and Tools</title><link href="https://ericdaat.github.io/python-tips-and-tools.html" rel="alternate"></link><published>2017-05-28T10:20:00+02:00</published><updated>2017-07-29T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-05-28:/python-tips-and-tools.html</id><summary type="html">&lt;p&gt;There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !&lt;/p&gt;
+&lt;p&gt;In another post, I'll cover how to run all this with &lt;a href="https://www.docker.com/"&gt;Docker&lt;/a&gt;, as it is what I tend to use now to deploy apps in production.&lt;/p&gt;</content><category term="python"></category><category term="code"></category></entry><entry><title>Python Tips and Tools</title><link href="https://ericdaat.github.io/python-tips-and-tools.html" rel="alternate"></link><published>2017-05-28T10:20:00+02:00</published><updated>2017-07-29T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-05-28:/python-tips-and-tools.html</id><summary type="html">&lt;p&gt;There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;em&gt;Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;-- Guido Van Rossum, 1996&lt;/p&gt;

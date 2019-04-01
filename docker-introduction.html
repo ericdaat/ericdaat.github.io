@@ -35,7 +35,7 @@
 	<div>
 		Category:
 		<span itemprop="articleSection">
-			<a href="https://ericdaat.github.io/category/programming.html" rel="category">Programming</a>
+			<a href="https://ericdaat.github.io/category/devops.html" rel="category">DevOps</a>
 		</span>
 	</div>
 	<div>
@@ -57,7 +57,7 @@
 <p>“Docker containers wrap a piece of software in a complete filesystem that
 contains everything needed to run: code, runtime, system tools, system libraries
 – anything that can be installed on a server. This guarantees that the software
-will always run the same, regardless of its environment.”<br>
+will always run the same, regardless of its environment.”
 <em>Source: <a href="https://www.docker.com/what-docker">Docker Website</a></em></p>
 </blockquote>
 <h2>Advantages</h2>
@@ -204,32 +204,32 @@ COPY ./mywebsite/:/usr/local/apache2/htdocs/
 <p>Voila! Your container should now be running an apache web server in detached mode. And since we mapped the volume containing our awesome website, what you see on <em>localhost</em> is exactly what we have under the local <em>./mywebsite</em> directory.</p>
 <h2>Docker Compose</h2>
 <p>Often, you will need to build and run many different containers, and using the previously seen commands for each container can become very dull. In this section we will introduce Docker Compose, which is a very handy tool for defining and running multiple containers from a YAML configuration file. Here is how this file might look like for the apache webserver we had before.</p>
-<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&#39;3&#39;</span>
-<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">website</span><span class="p p-Indicator">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">httpd:latest</span>
-   <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+<div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3&#39;</span>
+<span class="nt">services</span><span class="p">:</span>
+  <span class="nt">website</span><span class="p">:</span>
+   <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">httpd:latest</span>
+   <span class="nt">ports</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">80:80</span>
-   <span class="l l-Scalar l-Scalar-Plain">volumes</span><span class="p p-Indicator">:</span>
+   <span class="nt">volumes</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./mywebsite/:/usr/local/apache2/htdocs/</span>
 </pre></div>
 
 
 <h2>Linking containers</h2>
 <p>Now imagine you are running a web application in a container, and you need access to various services such as a relational database and a cache server. These three services can be run in different containers talking to each others via links. You might notice the <em>expose</em> keyword. Containers by default have all their ports closed. We previously seen that we could map a container's port to the host by using <em>ports</em>. Thanks to <em>expose</em>, we tell a container to open its port to other containers. Exposing a container's port does not make it accessible from the host.</p>
-<div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&#39;3&#39;</span>
-<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">website</span><span class="p p-Indicator">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">httpd:latest</span>
-   <span class="l l-Scalar l-Scalar-Plain">ports</span><span class="p p-Indicator">:</span>
+<div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3&#39;</span>
+<span class="nt">services</span><span class="p">:</span>
+  <span class="nt">website</span><span class="p">:</span>
+   <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">httpd:latest</span>
+   <span class="nt">ports</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">80:80</span>
-   <span class="l l-Scalar l-Scalar-Plain">volumes</span><span class="p p-Indicator">:</span>
+   <span class="nt">volumes</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">./mywebsite/:/usr/local/apache2/htdocs/</span>
-   <span class="l l-Scalar l-Scalar-Plain">links</span><span class="p p-Indicator">:</span>
+   <span class="nt">links</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">redis</span>
-  <span class="l l-Scalar l-Scalar-Plain">cache</span><span class="p p-Indicator">:</span>
-   <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">redis:latest</span>
-   <span class="l l-Scalar l-Scalar-Plain">expose</span><span class="p p-Indicator">:</span>
+  <span class="nt">cache</span><span class="p">:</span>
+   <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">redis:latest</span>
+   <span class="nt">expose</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">6379</span>
 </pre></div>
 
@@ -269,7 +269,9 @@ COPY ./mywebsite/:/usr/local/apache2/htdocs/
 					<div class="col-md-3">
 						<h4>Categories</h4>
 						<ul class="list-unstyled my-list-style">
-							<li><a href="https://ericdaat.github.io/category/programming.html">Programming (8)</a></li>
+							<li><a href="https://ericdaat.github.io/category/devops.html">DevOps (2)</a></li>
+							<li><a href="https://ericdaat.github.io/category/machine-learning.html">Machine Learning (3)</a></li>
+							<li><a href="https://ericdaat.github.io/category/programming.html">Programming (3)</a></li>
 						</ul>
 					</div>
 				</div>
@@ -280,7 +282,7 @@ COPY ./mywebsite/:/usr/local/apache2/htdocs/
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center center-block aw-bottom">
-			<p>&copy; Eric Daoud 2016</p>
+			<p>&copy; Eric Daoud 2019</p>
 			<p>Powered by Pelican</p>
 		</div>
 	</div>
