@@ -1,7 +1,7 @@
 Title: Single Layer Neural Network from scratch in Python
 Date: 2010-12-03 10:20
 Modified: 2010-12-03 10:20
-Category: Data Science
+Category: Machine Learning
 Tags: python, machine-learning, neural-networks, code
 Slug: single-layer-neural-network-from-scratch
 Authors: Eric Daoud

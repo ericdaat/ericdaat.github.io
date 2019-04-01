@@ -1,7 +1,7 @@
 Title: Deploying a Python Flask application to production
 Date: 2017-05-28 10:20
 Modified: 2017-05-28 10:20
-Category: Programming
+Category: DevOps
 Tags: python, code
 Slug: deploy-python-flask-api
 Authors: Eric Daoud
@@ -96,4 +96,4 @@ application with the configuration you just wrote. You can then write a startup
 script with *upstart* or *systemd* to make your application run in the
 background and easily start/stop it.
 
-In another post, I'll cover how to run all this with [Docker](https://www.docker.com/), as it is what I tend to use now to deploy apps in production. 
+In another post, I'll cover how to run all this with [Docker](https://www.docker.com/), as it is what I tend to use now to deploy apps in production.

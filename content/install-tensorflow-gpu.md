@@ -1,7 +1,7 @@
 Title: Installing Tensorflow with GPU support on Linux
 Date: 2018-01-16 10:20
 Modified: 2019-03-01 10:20
-Category: Programming
+Category: Machine Learning
 Tags: tensorflow, keras, code, config, server, deep-learning
 Slug: install-tensorflow-gpu
 Authors: Eric Daoud
@@ -37,7 +37,7 @@ If you're not familiar with Docker, you should definitely learn using it. Here a
 
 ## Install Keras on top of Tensorflow
 
-This step is not required, and some people probably prefer using Tensorflow directly with no abstraction layer on top of it. I personally started doing Deep Learning with Keras on top of Tensorflow, because it provided a simpler API, and I find it really easy and fast to build models.  
+This step is not required, and some people probably prefer using Tensorflow directly with no abstraction layer on top of it. I personally started doing Deep Learning with Keras on top of Tensorflow, because it provided a simpler API, and I find it really easy and fast to build models.
 Keras was build by [François Chollet](https://twitter.com/fchollet?lang=en), and since he is now working for Google, Keras is very well integrated with Tensorflow.
 
 Installing keras is as easy as `pip install keras`. It will automatically detect your GPUs if you have `tensorflow-gpu` installed, like we did.

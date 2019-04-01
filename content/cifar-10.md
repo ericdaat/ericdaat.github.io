@@ -1,7 +1,7 @@
 Title: Playing with ConvNets on CIFAR-10 dataset
 Date: 2018-01-24 10:20
 Modified: 2018-01-24 10:20
-Category: Programming
+Category: Machine Learning
 Tags: keras, code, deep-learning
 Slug: deep-learning-convnets-cifar
 Authors: Eric Daoud

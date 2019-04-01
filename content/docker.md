@@ -1,7 +1,7 @@
 Title: An introduction to Docker
 Date: 2017-10-25 10:20
 Modified: 2017-10-25 10:20
-Category: Programming
+Category: DevOps
 Tags: docker, code, devops
 Authors: Eric Daoud
 Slug: docker-introduction
@@ -15,7 +15,7 @@ This post is a short tutorial to Docker. We will first talk about what Docker is
 > “Docker containers wrap a piece of software in a complete filesystem that
 contains everything needed to run: code, runtime, system tools, system libraries
 – anything that can be installed on a server. This guarantees that the software
-will always run the same, regardless of its environment.”  
+will always run the same, regardless of its environment.”
 *Source: [Docker Website](https://www.docker.com/what-docker )*
 
 ## Advantages

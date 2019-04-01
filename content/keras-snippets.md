@@ -1,7 +1,7 @@
 Title: Some Keras snippets
 Date: 2017-12-16 10:20
 Modified: 2017-12-16 10:20
-Category: Programming
+Category: Machine Learning
 Tags: python, keras, code, deep-learning
 Slug: keras-snippets
 Authors: Eric Daoud
@@ -213,7 +213,7 @@ model.predict([np.random.rand(1, 10),
 
 ``` python
 from keras.models import Model
-from keras.layers import Dense, Embedding, Lambda, Input, concatenate 
+from keras.layers import Dense, Embedding, Lambda, Input, concatenate
 from keras.utils import plot_model
 from keras.utils.vis_utils import model_to_dot
 from keras.backend import mean
@@ -250,7 +250,7 @@ plot_model(model, to_file='shared_embeddings_averaged_dot.png', show_shapes=True
 
 # Callbacks
 
-Keras has many awesome callbacks that can be used during training. You can find them in the docs and I won't cover them all here. The one I recently discovered and particularly liked is Tensorboard. I am not very familiar with Tensorflow yet, but I love the fact that Tensorboard works with Keras. You can visualize how your model trains, your embeddings, and much more. 
+Keras has many awesome callbacks that can be used during training. You can find them in the docs and I won't cover them all here. The one I recently discovered and particularly liked is Tensorboard. I am not very familiar with Tensorflow yet, but I love the fact that Tensorboard works with Keras. You can visualize how your model trains, your embeddings, and much more.
 
 ``` python
 from keras.models import Sequential

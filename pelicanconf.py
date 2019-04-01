@@ -58,7 +58,7 @@ PLUGIN_PATHS = ['./plugins']
 PLUGINS = ['render_math',]
 
 # Themes
-THEME = 'aboutwilson'
+THEME = 'themes/aboutwilson'
 
 # code blocks with line numbers
 # PYGMENTS_MD_OPTIONS = {'linenos': 'table'}

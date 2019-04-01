@@ -1,7 +1,7 @@
 Title: Out of core text classification with Scikit Learn
 Date: 2018-02-02 10:20
 Modified: 2018-02-02 10:20
-Category: Programming
+Category: Machine Learning
 Tags: scikit-learn, code, machine-learning, classification
 Slug: out-of-core-text-classification-scikit-learn
 Authors: Eric Daoud
@@ -12,7 +12,7 @@ In this article, we are going to demonstrate how to build a simple text classifi
 
 ## The Dataset
 
-First, download the dataset from the [Yelp website](https://www.yelp.com/dataset/challenge). Once you're done, we are going to work with the the reviews file. It contains one Json per row, and I like to use the [Python Pandas](https://pandas.pydata.org/) library to read datasets.  
+First, download the dataset from the [Yelp website](https://www.yelp.com/dataset/challenge). Once you're done, we are going to work with the the reviews file. It contains one Json per row, and I like to use the [Python Pandas](https://pandas.pydata.org/) library to read datasets.
 Pandas has a nice function called `read_json` that we are going to use for reading the dataset. However we have to be careful of two things:
 
  - The dataset is really large, so we don't want to fully load it in RAM
@@ -55,7 +55,7 @@ v.transform(['some text']) # a 1*N matrix where every
                            # number is 0 except for two
 ```
 
-Now, we can train a classifier on top of this incoming data. Although, the classifier has to support the `partial_fit` method, otherwise the model will be overridden at each epoch. [SGDClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html) is among the classifiers that supports that, and it works pretty well so we will use this one.  
+Now, we can train a classifier on top of this incoming data. Although, the classifier has to support the `partial_fit` method, otherwise the model will be overridden at each epoch. [SGDClassifier](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html) is among the classifiers that supports that, and it works pretty well so we will use this one.
 From there it is very similar to other classifiers, except we use `partial_fit` instead of `fit`. We will simply loop over the incoming data chunks, transform the raw text into a term-document matrix thanks to the vectorizer, and then train the model, effectively keeping the previously learned weights.
 
 ## Full Code
