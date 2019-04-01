@@ -16,11 +16,10 @@ source venv/bin/activate
 pip install -r requirements
 ```
 
-Clone [pelican-themes](https://github.com/getpelican/pelican-themes) and
-install the theme you want:
+Install the theme:
 
 ``` text
-pelican-themes --install ../pelican-themes/aboutwilson --verbose
+pelican-themes --install themes/aboutwilson
 ```
 
 ## Commands

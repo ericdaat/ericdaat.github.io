@@ -68,3 +68,6 @@ THEME = 'aboutwilson'
 RELATIVE_URLS = True
 
 SLUGIFY_SOURCE = 'title'
+
+from datetime import date
+CURRENTYEAR = date.today().year
