@@ -43,10 +43,10 @@ SOCIAL = (('Github', 'https://github.com/ericdaat'),
 
 DEFAULT_PAGINATION = 10
 
-MARKUP = ('md', 'ipynb')
+MARKUP = ('md')
 
 DEFAULT_METADATA = {
-    'status': 'draft',
+    'status': 'published',
 }
 
 EXTRA_PATH_METADATA = {
