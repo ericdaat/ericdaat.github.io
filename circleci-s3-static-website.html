@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Auto deploy a static website on AWS S3 using CircleCI — Eric's Blog</title>
+	<meta name="description" content="Title: Auto deploy a static website on AWS S3 using CircleCI; Date: 2019-04-12; Author: Eric Daoud">
+	<meta name="author" content="Eric Daoud">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="https://ericdaat.github.io/theme/html5.js"></script>
+		<![endif]-->
+	<link href="https://ericdaat.github.io/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="https://ericdaat.github.io/theme/css/local.css" rel="stylesheet">
+	<link href="https://ericdaat.github.io/theme/css/pygments.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="https://ericdaat.github.io/">Eric's Blog</a>
+			<br><small>Data Scientist, Full Stack Developer</small></h1>	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Auto deploy a static website on AWS S3 using CircleCI</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">Eric Daoud</h4>
+		</span>
+		<time datetime="2019-04-12T10:20:00+02:00" itemprop="datePublished">Fri 12 April 2019</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="https://ericdaat.github.io/category/devops.html" rel="category">DevOps</a>
+		</span>
+	</div>
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="https://ericdaat.github.io/tag/s3.html" rel="tag">S3</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="https://ericdaat.github.io/tag/aws.html" rel="tag">aws</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="https://ericdaat.github.io/tag/code.html" rel="tag">code</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="https://ericdaat.github.io/tag/devops.html" rel="tag">devops</a>
+		</span>
+		<span itemprop="keywords">
+			<a href="https://ericdaat.github.io/tag/circleci.html" rel="tag">circleci</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p>In this post we are going to look at how to use CircleCI to automatically deploy a static website hosted on AWS S3. AWS S3 is an easy and cheap way to host a static website, and combined with Cloudfront and Route 53 we can have a highly reliable and secure website. CircleCI is a continuous integration tool, which we will use with Github to push the code to AWS S3 at every commit.</p>
+<p>Before getting started, I encourage you to get familiar (if you're not already) with the different tools we are going to use, namely:</p>
+<ul>
+<li><a href="https://aws.amazon.com/">Amazon Web Services</a> (AWS): A major Cloud Computing vendor</li>
+<li><a href="https://aws.amazon.com/s3/">AWS S3</a>: Object storage service from AWS. It can be configured to host static websites.</li>
+<li><a href="https://aws.amazon.com/cloudfront">AWS Cloudfront</a>: AWS Content Delivery Network (CDN). We will use this to add SSL to our website. </li>
+<li><a href="https://aws.amazon.com/certificate-manager/">AWS Certificate Manager</a>: AWS service for getting SSL certificates.</li>
+<li><a href="https://aws.amazon.com/route53">AWS Route 53</a>: Domain Name System (DNS) web service. It is not mandatory to use this, but it makes things easier.</li>
+<li><a href="https://gitub.com">Github</a>: The most popular hosting service for version control using Git.</li>
+<li><a href="https://circleci.com/">CircleCI</a>: Continuous Integration (CI) and delivery platform.</li>
+</ul>
+<h2>Hosting the website on S3</h2>
+<p>Note: There are many great tutorials on how to host a static website on AWS S3, so I won't enter into too much details as the main goal of this post is to show how to use CircleCI to synchronize Github and S3.</p>
+<p>We assume you already have a static website ready. If not, it can be as simple as <code>echo "&lt;p&gt;Hello World&lt;/p&gt;" &gt; index.html</code>. You will also need to host your code in Github.</p>
+<p>To learn how to host a static website on S3, please follow Step 2 from this page: <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html">Setting up a Static Website Using a Custom Domain</a>.</p>
+<h2>Create a Cloudfront distribution</h2>
+<p>Once your bucket is ready and has your website in it, you should use a Cloudfront distribution and a SSL certificate to enable HTTPS. You can discover how to do so here: <a href="https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/">How do I use CloudFront to serve a static website hosted on Amazon S3?</a>.</p>
+<h2>Using a custom domain name</h2>
+<p>This step assumes you have bought a domain name (not necessarily from AWS, I bought mine from <a href="https://www.namecheap.com/">Namecheap</a>). </p>
+<p>I prefer using AWS Route 53 for DNS management as it makes things simpler. If you bought your domain name on AWS you don't need any additional configuration. Otherwise, you will need to tell your domain name provider to use AWS name servers.</p>
+<p>Let's say you bought <code>example.com</code> on Namcheap. You will first need to create a hosted zone on AWS Route 53 named <code>example.com</code>. After that, you'll see <code>NS</code> records corresponding to the AWS Name Servers, they might look like this:</p>
+<div class="highlight"><pre><span></span>ns-995.awsdns-60.net.
+ns-1903.awsdns-45.co.uk.
+ns-155.awsdns-19.com.
+ns-1306.awsdns-35.org.
+</pre></div>
+
+
+<p>You'll want to add these to Namecheap, as explained here: <a href="https://www.namecheap.com/support/knowledgebase/article.aspx/767/10/how-to-change-dns-for-a-domain">How to Change DNS For a Domain</a>.</p>
+<p>Now Namecheap will redirect to Route53, but you'll need to tell Route53 what to redirect the trafic to. Create record sets like <code>www.example.com</code> and <code>example.com</code> and make them point to your Cloudfront distribution. </p>
+<p>We are done for the first part, your website hosted in S3 should show at <code>example.com</code>. Again, we skipped some details for this part as it is not the main goal of this post. Some tutorials explain this part much better than I did. I recommend these ones:</p>
+<ul>
+<li><a href="https://medium.freecodecamp.org/how-to-host-a-website-on-s3-without-getting-lost-in-the-sea-e2b82aa6cd38">How to Host a Website on S3 Without Getting Lost in the Sea</a></li>
+<li><a href="https://medium.com/devopslinks/how-to-host-your-static-website-with-s3-cloudfront-and-set-up-an-ssl-certificate-9ee48cd701f9">How to host your static website with S3 &amp; CloudFront and set-up an SSL certificate?</a></li>
+</ul>
+<h2>Setting up CircleCI and Github</h2>
+<p>Here's the exciting part: whenever you push changes to Github, CircleCI will sync the code files with the AWS S3 bucket you created.</p>
+<p>We assume you alrady have your static website hosted on Github. If you haven't already, sign up to CircleCI (it's free), and add your Github repo to a CircleCI project. </p>
+<p>CircleCI uses <code>awscli</code> to sync files with S3, so it requires credentials to login to your AWS account. Go to AWS IAM, and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_cliwpsapi">create a <code>circleci</code> user</a>, with restricted permissions on your S3 bucket.</p>
+<p>When you finish creating the user, you will be given credentials (an ID key and a secret key) that you should store somewhere safe. You will also need to store these as environment variables in CircleCI. Go to your project settings, and under environment variables, add these variables, corresponding to the ones you just downloaded:</p>
+<ul>
+<li>AWS_ACCESS_KEY</li>
+<li>AWS_SECRET_ACCESS_KEY</li>
+<li>AWS_REGION</li>
+</ul>
+<p>Now CircleCI will login to you AWS account with the user you created, and it will have the right permissions to push files to your S3 bucket.</p>
+<p>Finally, you'll need to add this configuration file to your Github repository, under <code>.circleci/config.yml</code>:</p>
+<script src="https://gist.github.com/ericdaat/2a91569f770a479ee1f02596ef94be56.js"></script>
+
+<p>Adapt this configuration file to your needs, by changing the S3 bucket url, and modify the files to exclude by the sync command.</p>
+<p>When that's done, push to Github, and see that the pipeline runs correctly on CircleCI. When it succeeds, you should see your files updated on AWS S3.</p>
+<p>Have a look at my <a href="https://github.com/ericdaat/edaoud.com">personnal website repository</a> for more details. </p>
+<p>I hope this post was helpful, let me know if you need any help, or if something does not seem right.</p></div>
+	<hr>
+    <!-- <h2>Comments</h2> -->
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="https://ericdaat.github.io">Eric's Blog</a></li>
+							<li><a href="https://ericdaat.github.io//archives.html"><i class="fa fa-Archives "></i> Archives</a></li>
+							<li><a href="https://ericdaat.github.io//categories.html"><i class="fa fa-Categories "></i> Categories</a></li>
+							<li><a href="https://ericdaat.github.io/pages/about-me.html"><i class="fa fa-About me "></i> About me</a></li>
+							<li><a href="https://ericdaat.github.io/feeds/all.atom.xml" type="application/atom+xml"><i class="fa fa-rss "></i> atom</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="https://github.com/ericdaat">Github</a></li>
+							<li><a href="https://twitter.com/ericdaoud">Twitter</a></li>
+							<li><a href="https://www.youtube.com/user/ericmusic13">Youtube</a></li>
+							<li><a href="https://www.linkedin.com/in/ericdaoud/">Linkedin</a></li>
+							<li><a href="https://500px.com/ericda">500px</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="https://ericdaat.github.io/category/devops.html">DevOps (3)</a></li>
+							<li><a href="https://ericdaat.github.io/category/machine-learning.html">Machine Learning (3)</a></li>
+							<li><a href="https://ericdaat.github.io/category/programming.html">Programming (3)</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; Eric Daoud 2019</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105599779-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - DevOps</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/devops.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2017-10-25T10:20:00+02:00</updated><subtitle>Data Scientist, Full Stack Developer</subtitle><entry><title>An introduction to Docker</title><link href="https://ericdaat.github.io/docker-introduction.html" rel="alternate"></link><published>2017-10-25T10:20:00+02:00</published><updated>2017-10-25T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-25:/docker-introduction.html</id><summary type="html">&lt;p&gt;A tutorial on how to get started with Docker.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post is a short tutorial to Docker. We will first talk about what Docker is and how it differs from virtual machines. Then, we will learn how to get started and run your first container.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Eric's Blog - DevOps</title><link href="https://ericdaat.github.io/" rel="alternate"></link><link href="https://ericdaat.github.io/feeds/devops.atom.xml" rel="self"></link><id>https://ericdaat.github.io/</id><updated>2019-04-12T10:20:00+02:00</updated><subtitle>Data Scientist, Full Stack Developer</subtitle><entry><title>Auto deploy a static website on AWS S3 using CircleCI</title><link href="https://ericdaat.github.io/circleci-s3-static-website.html" rel="alternate"></link><published>2019-04-12T10:20:00+02:00</published><updated>2019-04-12T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2019-04-12:/circleci-s3-static-website.html</id><summary type="html">&lt;p&gt;In this post we are going to look at how to use CircleCI to automatically deploy a static website hosted on AWS S3. AWS S3 is an easy and cheap way to host a static website, and combined with Cloudfront and Route 53 we can have a highly reliable and secure website. CircleCI is a continuous integration tool, which we will use with Github to push the code to AWS S3 at every commit.&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this post we are going to look at how to use CircleCI to automatically deploy a static website hosted on AWS S3. AWS S3 is an easy and cheap way to host a static website, and combined with Cloudfront and Route 53 we can have a highly reliable and secure website. CircleCI is a continuous integration tool, which we will use with Github to push the code to AWS S3 at every commit.&lt;/p&gt;
+&lt;p&gt;Before getting started, I encourage you to get familiar (if you're not already) with the different tools we are going to use, namely:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://aws.amazon.com/"&gt;Amazon Web Services&lt;/a&gt; (AWS): A major Cloud Computing vendor&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aws.amazon.com/s3/"&gt;AWS S3&lt;/a&gt;: Object storage service from AWS. It can be configured to host static websites.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aws.amazon.com/cloudfront"&gt;AWS Cloudfront&lt;/a&gt;: AWS Content Delivery Network (CDN). We will use this to add SSL to our website. &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aws.amazon.com/certificate-manager/"&gt;AWS Certificate Manager&lt;/a&gt;: AWS service for getting SSL certificates.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aws.amazon.com/route53"&gt;AWS Route 53&lt;/a&gt;: Domain Name System (DNS) web service. It is not mandatory to use this, but it makes things easier.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gitub.com"&gt;Github&lt;/a&gt;: The most popular hosting service for version control using Git.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://circleci.com/"&gt;CircleCI&lt;/a&gt;: Continuous Integration (CI) and delivery platform.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Hosting the website on S3&lt;/h2&gt;
+&lt;p&gt;Note: There are many great tutorials on how to host a static website on AWS S3, so I won't enter into too much details as the main goal of this post is to show how to use CircleCI to synchronize Github and S3.&lt;/p&gt;
+&lt;p&gt;We assume you already have a static website ready. If not, it can be as simple as &lt;code&gt;echo "&amp;lt;p&amp;gt;Hello World&amp;lt;/p&amp;gt;" &amp;gt; index.html&lt;/code&gt;. You will also need to host your code in Github.&lt;/p&gt;
+&lt;p&gt;To learn how to host a static website on S3, please follow Step 2 from this page: &lt;a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html"&gt;Setting up a Static Website Using a Custom Domain&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Create a Cloudfront distribution&lt;/h2&gt;
+&lt;p&gt;Once your bucket is ready and has your website in it, you should use a Cloudfront distribution and a SSL certificate to enable HTTPS. You can discover how to do so here: &lt;a href="https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/"&gt;How do I use CloudFront to serve a static website hosted on Amazon S3?&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Using a custom domain name&lt;/h2&gt;
+&lt;p&gt;This step assumes you have bought a domain name (not necessarily from AWS, I bought mine from &lt;a href="https://www.namecheap.com/"&gt;Namecheap&lt;/a&gt;). &lt;/p&gt;
+&lt;p&gt;I prefer using AWS Route 53 for DNS management as it makes things simpler. If you bought your domain name on AWS you don't need any additional configuration. Otherwise, you will need to tell your domain name provider to use AWS name servers.&lt;/p&gt;
+&lt;p&gt;Let's say you bought &lt;code&gt;example.com&lt;/code&gt; on Namcheap. You will first need to create a hosted zone on AWS Route 53 named &lt;code&gt;example.com&lt;/code&gt;. After that, you'll see &lt;code&gt;NS&lt;/code&gt; records corresponding to the AWS Name Servers, they might look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ns-995.awsdns-60.net.
+ns-1903.awsdns-45.co.uk.
+ns-155.awsdns-19.com.
+ns-1306.awsdns-35.org.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You'll want to add these to Namecheap, as explained here: &lt;a href="https://www.namecheap.com/support/knowledgebase/article.aspx/767/10/how-to-change-dns-for-a-domain"&gt;How to Change DNS For a Domain&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now Namecheap will redirect to Route53, but you'll need to tell Route53 what to redirect the trafic to. Create record sets like &lt;code&gt;www.example.com&lt;/code&gt; and &lt;code&gt;example.com&lt;/code&gt; and make them point to your Cloudfront distribution. &lt;/p&gt;
+&lt;p&gt;We are done for the first part, your website hosted in S3 should show at &lt;code&gt;example.com&lt;/code&gt;. Again, we skipped some details for this part as it is not the main goal of this post. Some tutorials explain this part much better than I did. I recommend these ones:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://medium.freecodecamp.org/how-to-host-a-website-on-s3-without-getting-lost-in-the-sea-e2b82aa6cd38"&gt;How to Host a Website on S3 Without Getting Lost in the Sea&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://medium.com/devopslinks/how-to-host-your-static-website-with-s3-cloudfront-and-set-up-an-ssl-certificate-9ee48cd701f9"&gt;How to host your static website with S3 &amp;amp; CloudFront and set-up an SSL certificate?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Setting up CircleCI and Github&lt;/h2&gt;
+&lt;p&gt;Here's the exciting part: whenever you push changes to Github, CircleCI will sync the code files with the AWS S3 bucket you created.&lt;/p&gt;
+&lt;p&gt;We assume you alrady have your static website hosted on Github. If you haven't already, sign up to CircleCI (it's free), and add your Github repo to a CircleCI project. &lt;/p&gt;
+&lt;p&gt;CircleCI uses &lt;code&gt;awscli&lt;/code&gt; to sync files with S3, so it requires credentials to login to your AWS account. Go to AWS IAM, and &lt;a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_cliwpsapi"&gt;create a &lt;code&gt;circleci&lt;/code&gt; user&lt;/a&gt;, with restricted permissions on your S3 bucket.&lt;/p&gt;
+&lt;p&gt;When you finish creating the user, you will be given credentials (an ID key and a secret key) that you should store somewhere safe. You will also need to store these as environment variables in CircleCI. Go to your project settings, and under environment variables, add these variables, corresponding to the ones you just downloaded:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AWS_ACCESS_KEY&lt;/li&gt;
+&lt;li&gt;AWS_SECRET_ACCESS_KEY&lt;/li&gt;
+&lt;li&gt;AWS_REGION&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now CircleCI will login to you AWS account with the user you created, and it will have the right permissions to push files to your S3 bucket.&lt;/p&gt;
+&lt;p&gt;Finally, you'll need to add this configuration file to your Github repository, under &lt;code&gt;.circleci/config.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;script src="https://gist.github.com/ericdaat/2a91569f770a479ee1f02596ef94be56.js"&gt;&lt;/script&gt;
+
+&lt;p&gt;Adapt this configuration file to your needs, by changing the S3 bucket url, and modify the files to exclude by the sync command.&lt;/p&gt;
+&lt;p&gt;When that's done, push to Github, and see that the pipeline runs correctly on CircleCI. When it succeeds, you should see your files updated on AWS S3.&lt;/p&gt;
+&lt;p&gt;Have a look at my &lt;a href="https://github.com/ericdaat/edaoud.com"&gt;personnal website repository&lt;/a&gt; for more details. &lt;/p&gt;
+&lt;p&gt;I hope this post was helpful, let me know if you need any help, or if something does not seem right.&lt;/p&gt;</content><category term="S3"></category><category term="aws"></category><category term="code"></category><category term="devops"></category><category term="circleci"></category></entry><entry><title>An introduction to Docker</title><link href="https://ericdaat.github.io/docker-introduction.html" rel="alternate"></link><published>2017-10-25T10:20:00+02:00</published><updated>2017-10-25T10:20:00+02:00</updated><author><name>Eric Daoud</name></author><id>tag:ericdaat.github.io,2017-10-25:/docker-introduction.html</id><summary type="html">&lt;p&gt;A tutorial on how to get started with Docker.&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post is a short tutorial to Docker. We will first talk about what Docker is and how it differs from virtual machines. Then, we will learn how to get started and run your first container.&lt;/p&gt;
 &lt;h1&gt;Introduction&lt;/h1&gt;
 &lt;h2&gt;What is Docker ?&lt;/h2&gt;
 &lt;blockquote&gt;
