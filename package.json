@@ -1,0 +1,29 @@
+{
+  "name": "vuepress-blog",
+  "version": "1.0.0",
+  "description": "--- home: true heroImage: /eric.png heroText: Eric Daoud Attoyan tagline: Data Scientist, Full Stack Developer features: - title: Data Scientist   details: 3 years of experience in Data Science, working for fast growing startups. I worked on Recommender Systems and Natural Language Processing. - title: Full Stack Developer   details: I have experience in backend and front-end developement. I can build a website from scratch using Python and Django.  - title: Art Enthusiast   details: Besides work, I love arts, especially Music and Photography. I have been playing the guitar since I am 13, and I have been keep on photography since I am 18. footer: Copyright © 2019 Eric Daoud Attoyan ---",
+  "main": "index.js",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/vue-fontawesome": "^0.1.6",
+    "@vuepress/plugin-google-analytics": "^1.0.2",
+    "vuepress": "^1.0.0-rc.1",
+    "vuepress-plugin-mathjax": "^1.2.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vuepress build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericdaat/vuepress-blog.git"
+  },
+  "author": "Eric Daoud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericdaat/vuepress-blog/issues"
+  },
+  "homepage": "https://github.com/ericdaat/vuepress-blog#readme"
+}

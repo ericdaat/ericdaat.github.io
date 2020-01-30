@@ -1,6 +1,4 @@
-_site
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
-vendor
+.vuepress/dist
 .DS_Store
+node_modules
+
