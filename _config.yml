@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Eric Daoud - PhD Student, Data Scientist and Full Stack Developer
+title: Eric Daoud - Data Scientist and Full Stack Developer
 author: Eric Daoud
 email: ericda [at] outlook.com
 description: Data Scientist and Full Stack Developer.
@@ -48,6 +48,10 @@ social:
     - https://www.linkedin.com/in/ericdaoud
     - https://github.com/ericdaat
 
+# blog
+paginate: 5
+blog_url: /blog
+paginate_path: "/blog/page:num/"
 permalink: /blog/:year/:month/:day/:title/
 
 # Build settings
@@ -56,6 +60,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-paginate
 
 # Exclude from processing.
 # The following items will not be processed, by default.

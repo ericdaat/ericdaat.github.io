@@ -33,3 +33,6 @@ gem 'jekyll-sitemap'
 
 # SEO
 gem 'jekyll-seo-tag'
+
+# paginate
+gem 'jekyll-paginate'
