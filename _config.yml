@@ -18,10 +18,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Eric Daoud
+title: Eric Daoud - PhD Student, Data Scientist and Full Stack Developer
 author: Eric Daoud
 email: ericda [at] outlook.com
-description: Data Scientist and Full Stack Developer
+description: Data Scientist and Full Stack Developer.
+  Currently a PhD Student in Machine Learning applied to cancer research.
+  This website hosts my personal tech blog, my music and my photography gallery.
 show_excerpts: True
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://edaoud.com" # the base hostname & protocol for your site, e.g. http://example.com
