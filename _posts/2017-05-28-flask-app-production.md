@@ -7,8 +7,6 @@ excerpt:
 cover: gears.jpg
 ---
 
-In this post we are going to see how we can efficiently deploy a web application powered by Flask (a Python framework) to production. We won't code a complex application, actually we will just stick to the Flask Hello World example.
-
 ## Basic Flask application
 
 If you've never heard of Flask before, I recommend you to visit its [website](http://flask.pocoo.org/) and read about it.

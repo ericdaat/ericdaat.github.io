@@ -7,8 +7,6 @@ excerpt:
 cover: network.jpg
 ---
 
-I started to use Keras for Deep Learning months ago, and as I was using it, I thought I should make a memo of all the cool features and network architectures I was using. This post aims at sharing some snippets I have found useful, so I can reuse them later. Maybe it will be useful to you as well !
-
 ## Networks example
 
 Let's start with some networks example. Those are really similar to the examples you'd find in the [Keras Docs](https://keras.io/getting-started/sequential-model-guide/), but I added a few things here and there to better understand what they do.
