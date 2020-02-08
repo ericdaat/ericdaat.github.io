@@ -21,10 +21,11 @@
 title: Eric Daoud - Data Scientist & Full Stack Developer
 author: Eric Daoud
 email: ericda [at] outlook.com
+tagline: A website dedicated to Data Science, Software Engineering,
+  Photography and Music.
 description: Data Scientist and Full Stack Developer from France with
     experience in NLP and Recommender Systems. Currently a PhD Student in
     Machine Learning applied to cancer research.
-show_excerpts: True
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://edaoud.com" # the base hostname & protocol for your site, e.g. http://example.com
 logo: /assets/img/eric.jpg
@@ -59,6 +60,7 @@ paginate: 5
 blog_url: /blog
 paginate_path: "/blog/page:num/"
 permalink: /blog/:year/:month/:day/:title/
+show_excerpts: True
 
 disqus:
   shortname: edaoud

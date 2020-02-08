@@ -12,14 +12,6 @@
   {%- seo -%}
   {%- feed_meta -%}
 
-  <title>
-    {%if page.title %}
-        {{ page.title }}
-    {% else %}
-        {{ site.title }}
-    {% endif %}
-  </title>
-
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
 
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
