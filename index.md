@@ -3,7 +3,7 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-title: Welcome
+title:
 ---
 
 Hi, I'm Eric, a Data Scientist and Full Stack Developer with additional

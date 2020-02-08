@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Eric Daoud - Data Scientist and Full Stack Developer
+title: Eric Daoud - Data Scientist & Full Stack Developer
 author: Eric Daoud
 email: ericda [at] outlook.com
 description: Data Scientist and Full Stack Developer from France with
