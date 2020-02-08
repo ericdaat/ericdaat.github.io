@@ -21,19 +21,19 @@
 title: Eric Daoud - Data Scientist and Full Stack Developer
 author: Eric Daoud
 email: ericda [at] outlook.com
-description: Data Scientist and Full Stack Developer from France.
-    I have experience in Recommender Systems and Natural Language Processing.
-    I am currently a PhD Student in Machine Learning applied to cancer research
-    at Institut Curie in Paris, France.
+description: Data Scientist and Full Stack Developer from France with
+    experience in NLP and Recommender Systems. Currently a PhD Student in
+    Machine Learning applied to cancer research.
 show_excerpts: True
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://edaoud.com" # the base hostname & protocol for your site, e.g. http://example.com
+logo: /assets/img/eric.jpg
 
 defaults:
   - scope:
-      path: "assets/img"
+      path: ""
     values:
-      image: eric.jpg
+      image: /assets/img/eric.jpg
 
 twitter_username: ericdaoud
 github_username:  ericdaat
