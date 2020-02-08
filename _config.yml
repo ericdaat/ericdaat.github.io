@@ -35,6 +35,11 @@ defaults:
     values:
       image: /assets/img/eric.jpg
 
+image:
+  path: /assets/img/eric.jpg
+  height: 100
+  width: 100
+
 twitter_username: ericdaoud
 github_username:  ericdaat
 linkedin_username: ericdaoud
