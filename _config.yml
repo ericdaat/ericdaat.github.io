@@ -54,6 +54,9 @@ blog_url: /blog
 paginate_path: "/blog/page:num/"
 permalink: /blog/:year/:month/:day/:title/
 
+disqus:
+  shortname: edaoud
+
 # Build settings
 theme: minima
 plugins:
