@@ -21,18 +21,31 @@
 title: Eric Daoud - Data Scientist and Full Stack Developer
 author: Eric Daoud
 email: ericda [at] outlook.com
-description: Data Scientist and Full Stack Developer.
-  Currently a PhD Student in Machine Learning applied to cancer research.
+description: Data Scientist and Full Stack Developer from France.
+  I have experience in Recommender Systems and Natural Language Processing.
+  I love working on Data Products, from learning about State of the Art
+  algorithms, to implementing them and deploying them in production.
+  I am currently a PhD Student in Machine Learning applied to cancer research
+  at Institut Curie in Paris, France.
+  Prior to this, I was working as a Data Scientist for ManoMano, a fast growing
+  french e-commerce startup.
   This website hosts my personal tech blog, my music and my photography gallery.
 show_excerpts: True
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://edaoud.com" # the base hostname & protocol for your site, e.g. http://example.com
 
+footer:
+  text: Data Scientist and Full Stack Developer from France.
+    I have experience in Recommender Systems and Natural Language Processing.
+    I am currently a PhD Student in Machine Learning applied to cancer research
+    at Institut Curie in Paris, France.
+    This website hosts my personal tech blog, my music and my photography gallery.
+
 defaults:
   - scope:
       path: "assets/img"
     values:
-      image: true
+      image: eric.jpg
 
 twitter_username: ericdaoud
 github_username:  ericdaat
