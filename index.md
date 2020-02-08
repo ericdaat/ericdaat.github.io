@@ -22,4 +22,4 @@ check it out! I also added two sections not related to code:
 
 This static website was created with [Jekyll](https://jekyllrb.com/),
 using the minima theme that I tweaked a bit. The code is open source
-and available on this [github repository](https://github.com/ericdaat/jekyll-blog).
+and available on this [github repository](https://github.com/ericdaat/ericdaat.github.io).
