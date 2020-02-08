@@ -6,8 +6,6 @@ cover: desk.jpg
 in_navbar: True
 ---
 
-Hi there! I am Eric, a Data Scientist and Full Stack Developer from France.
-
 My background is computer science. I hold a MSc in General
 Engineering from ECAM Lyon, and a master's degree in Software Engineering
 from CentraleSupélec. I graduated in 2016.

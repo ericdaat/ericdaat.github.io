@@ -3,13 +3,13 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-title: Eric Daoud
+title: Welcome
 ---
 
-# Welcome
+Hi, I'm Eric, a Data Scientist and Full Stack Developer with additional
+Data Engineering and DevOps skills.
 
-Data Scientist and Full Stack Developer with additional Data Engineering
-and DevOps skills. I am currently pursuing a PhD in Machine Learning
+I am currently pursuing a PhD in Machine Learning
 applied to cancerology at the Curie Institute of Research in Paris, France.
 Besides work, I am really keen on music, photography, karate and golf.
 
