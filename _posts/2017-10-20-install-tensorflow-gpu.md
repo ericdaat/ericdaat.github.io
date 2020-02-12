@@ -20,68 +20,7 @@ Tensorflow GPU needs the following softwares:
 
 Here is a complete shell script showing the different steps to install `tensorflow-gpu`:
 
-``` bash
-# Guide for installing Tensorflow on Ubuntu 16.04
-
-# Requirements
-# From Tensorflow GPU docs (https://www.tensorflow.org/install/gpu):
-# The following NVIDIA® software must be installed on your system:
-
-# NVIDIA® GPU drivers —CUDA 9.0 requires 384.x or higher.
-# CUDA® Toolkit —TensorFlow supports CUDA 9.0.
-# CUPTI ships with the CUDA Toolkit.
-# cuDNN SDK (>= 7.2)
-# (Optional) NCCL 2.2 for multiple GPU support.
-# (Optional) TensorRT 4.0 to improve latency and throughput for inference on some models.
-
-
-# Check your device has GPUs
-lspci | grep -i nvidia;
-
-# Login as root (so you don't have to write sudo all the time)
-su;
-
-# install GCC
-apt-get install gcc;
-apt-get install build-essential;
-gcc --version; # check that it has been installed correctly
-apt-get install linux-headers-$(uname -r);
-
-# Nvidia drivers, v384
-wget http://us.download.nvidia.com/tesla/384.183/NVIDIA-Linux-x86_64-384.183.run;
-chmod +x NVIDIA-Linux-x86_64-384.183.run;
-./NVIDIA-Linux-x86_64-384.183.run;
-
-# CUDA v9.0
-wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run;
-chmod +x cuda_9.0.176_384.81_linux-run;
-./cuda_9.0.176_384.81_linux-run; # also install the cuda toolkit
-
-# CUDNN 7.5
-# Get the .tgz file from here: https://developer.nvidia.com/rdp/cudnn-download
-scp cudnn-9.0-linux-x64-v7.5.0.56.tgz USER@IP:/path/to/your/dir;
-tar -xzvf cudnn-9.0-linux-x64-v7.5.0.56.tgz;
-cp -P cuda/include/cudnn.h /usr/local/cuda/include;
-cp -P cuda/lib64/libcudnn* /usr/local/cuda/lib64;
-chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda-9.0/lib64/libcudnn*;
-
-# Append these two lines to your .bashrc
-export PATH=/usr/local/cuda/bin:$PATH
-export CUDA_HOME=/usr/local/cuda;
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
-source .bashrc;
-
-# Actual Tensorflow install
-apt-get update;
-apt-get install python3-dev python3-pip;
-pip3 install -U virtualenv;  # system-wide install
-virtualenv --system-site-packages -p python3 ./venv;
-source ./venv/bin/activate  # sh, bash, ksh, or zsh;
-pip install tensorflow-gpu;
-
-# Verify the install
-python -c "import tensorflow as tf; tf.enable_eager_execution(); print(tf.reduce_sum(tf.random_normal([1000, 1000])))"
-```
+{% gist 8623e2e1e0b80f6a94eeedeecd80828d %}
 
 ## Docker Image
 

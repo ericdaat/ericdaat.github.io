@@ -36,3 +36,6 @@ gem 'jekyll-seo-tag'
 
 # paginate
 gem 'jekyll-paginate'
+
+# github gist
+gem 'jekyll-gist'
