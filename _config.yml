@@ -27,7 +27,7 @@ description: Data Scientist and Full Stack Developer from France with
     experience in NLP and Recommender Systems. Currently a PhD Student in
     Machine Learning applied to cancer research.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://edaoud.com" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://edaoud.com" # the base hostname & protocol for your site, e.g. http://example.com
 logo: /assets/img/eric.jpg
 
 defaults:
