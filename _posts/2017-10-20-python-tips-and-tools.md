@@ -5,6 +5,7 @@ date: 2017-05-28
 excerpt:
     There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.
 cover: code.jpg
+categories: ["Software Engineering"]
 ---
 
 I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !

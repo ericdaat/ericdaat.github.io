@@ -5,6 +5,7 @@ date: 2019-04-12
 excerpt:
     In this post we are going to look at how to use CircleCI to automatically deploy a static website hosted on AWS S3. AWS S3 is an easy and cheap way to host a static website, and combined with Cloudfront and Route 53 we can have a highly reliable and secure website. CircleCI is a continuous integration tool, which we will use with Github to push the code to AWS S3 at every commit.
 cover: writer.jpg
+categories: ["Software Engineering"]
 ---
 
 Before getting started, I encourage you to get familiar (if you're not already) with the different tools we are going to use, namely:

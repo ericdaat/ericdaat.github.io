@@ -5,6 +5,7 @@ date: 2017-10-20
 excerpt:
     A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.
 cover: tree.jpg
+categories: ["Software Engineering"]
 ---
 
 ## Some History

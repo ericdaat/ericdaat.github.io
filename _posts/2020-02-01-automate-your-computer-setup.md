@@ -8,6 +8,7 @@ excerpt:
     useful when you have a new computer, or when it gets stolen (unfortunaltey
     it happened to me recently).
 cover: terminal.png
+categories: ["Computer Setup"]
 ---
 
 ## Motivation

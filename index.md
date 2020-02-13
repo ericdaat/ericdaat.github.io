@@ -20,6 +20,6 @@ to write short tech related articles on my [blog page](blog), feel free to
 check it out! I also added two sections not related to code:
 [photography](photography) and [music](music).
 
-This static website was created with [Jekyll](https://jekyllrb.com/),
+*Note: This static website was created with [Jekyll](https://jekyllrb.com/),
 using the minima theme that I tweaked a bit. The code is open source
-and available on this [github repository](https://github.com/ericdaat/ericdaat.github.io).
+and available on this [github repository](https://github.com/ericdaat/ericdaat.github.io).*
