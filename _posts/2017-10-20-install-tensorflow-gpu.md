@@ -29,7 +29,7 @@ If you are familiar with [Docker](https://www.docker.com/), I'd recommend you ha
 
 If you're not familiar with Docker, you should definitely learn using it. Here are some links to get you started:
 
-- [My introduction to Docker blog post](https://ericdaat.github.io/docker-introduction.html)
+- [My introduction to Docker blog post](/blog/2017/10/25/docker/)
 - [Docker official website](https://www.docker.com/)
 - [Docker getting started guide](https://docs.docker.com/get-started/)
 
@@ -40,7 +40,9 @@ Keras was build by [François Chollet](https://twitter.com/fchollet?lang=en), an
 
 Installing keras is as easy as `pip install keras`. It will automatically detect your GPUs if you have `tensorflow-gpu` installed, like we did.
 
-To get started, have a look at the official [Keras website](https://keras.io/) and their [getting started guide](https://keras.io/#getting-started-30-seconds-to-keras). I have also wrote a blog post with some [Keras snippets](https://ericdaat.github.io/keras-snippets.html) that I find useful.
+To get started, have a look at the official [Keras website](https://keras.io/) and their [getting started guide](https://keras.io/#getting-started-30-seconds-to-keras). I have also wrote a blog post with some
+[Keras snippets](/blog/2017/12/16/keras-snippets/)
+that I find useful.
 
 I hope this post was helpful, and have fun with Deep Learning !
 
