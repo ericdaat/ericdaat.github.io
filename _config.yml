@@ -57,11 +57,16 @@ social:
     - https://github.com/ericdaat
 
 # blog
-paginate: 5
 blog_url: /blog
-paginate_path: "/blog/page:num/"
 permalink: /blog/:year/:month/:day/:title/
 show_excerpts: True
+paginate: 5
+paginate_path: blog/page/:num
+defaults:
+  - scope:
+      path: "blog/page"
+    values:
+      sitemap: false
 
 disqus:
   shortname: edaoud
