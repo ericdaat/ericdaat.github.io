@@ -1,36 +1,52 @@
-<footer class="site-footer h-card">
-  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+<!-- Footer -->
+<footer class="page-footer font-small pt-4">
 
-  <div class="wrapper">
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
 
-    <h2 class="footer-heading">{{ site.title | escape }}</h2>
+    <!-- Grid row -->
+    <div class="row">
 
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">
-            {%- if site.author -%}
-              {{ site.author | escape }}
-            {%- else -%}
-              {{ site.title | escape }}
-            {%- endif -%}
-            </li>
-            {%- if site.email -%}
-            <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-            {%- endif -%}
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase">{{ site.title | escape }}</h5>
+        <p>{{ site.description }}</p>
+
+        {%- if site.email -%}
+          <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+        {%- endif -%}
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Links</h5>
+
+        <ul class="list-unstyled">
+          {%- include social.html -%}
         </ul>
+
       </div>
 
-      <div class="footer-col footer-col-2">
-        {%- include social.html -%}
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>About</p>
-        <p>{{- site.description | escape -}}</p>
-      </div>
     </div>
 
   </div>
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Eric Daoud</div>
 
 </footer>

@@ -2,14 +2,14 @@
 layout: default
 ---
 
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+<article itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
+  <header>
 
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+    <h1 itemprop="name headline">{{ page.title | escape }}</h1>
 
-    <p class="post-meta">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+    <p>
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         Written on {{ page.date | date: date_format }}
       </time>
@@ -20,13 +20,14 @@ layout: default
 
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <p class="post-excerpt">
+  <div itemprop="articleBody">
+    <p>
       {{ page.excerpt }}
     </p>
     {{ content }}
   </div>
 
+  <h2>Comments</h2>
   {%- if site.disqus.shortname -%}
     {%- include disqus_comments.html -%}
   {%- endif -%}

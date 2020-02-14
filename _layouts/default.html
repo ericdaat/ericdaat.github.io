@@ -4,21 +4,17 @@
   {%- include head.html -%}
 
   <body>
+      {%- include header.html -%}
 
-    {%- include header.html -%}
+      {%- if page.cover -%}
+        <img class="img-fluid" src="/assets/img/covers/{{ page.cover }}">
+      {%- endif -%}
 
-    {%- if page.cover -%}
-      <img class="cover" src="/assets/img/covers/{{ page.cover }}">
-    {%- endif -%}
-
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
+      <div class="container-fluid" style="max-width: 800px;">
         {{ content }}
       </div>
-    </main>
 
-    {%- include footer.html -%}
-
+      {%- include footer.html -%}
   </body>
 
 </html>

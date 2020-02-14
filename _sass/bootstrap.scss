@@ -3,9 +3,17 @@
 
 // https://experimentingwithcode.com/creating-a-jekyll-blog-with-bootstrap-4-and-sass-part-1/
 
-$primary: #8d021f; // burgundy
-
 @import
+  "fontawesome/fontawesome",
   "bootstrap/bootstrap",
   "pygments/github"
 ;
+
+article img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  max-width: 100%;
+}

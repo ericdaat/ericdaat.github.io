@@ -38,7 +38,6 @@ model.predict(np.random.rand(1, 10))
 
 ![regression](/assets/img/articles/keras_nn/regression.png)
 
-
 ### Binary Classification
 
 ``` python
