@@ -1,7 +1,10 @@
 
 @charset "utf-8";
 
-// https://experimentingwithcode.com/creating-a-jekyll-blog-with-bootstrap-4-and-sass-part-1/
+$font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:       $font-family-serif !default;
 
 @import
   "fontawesome/fontawesome",
@@ -16,4 +19,10 @@ article img {
   margin-top: 50px;
   margin-bottom: 50px;
   max-width: 100%;
+}
+
+.img-cover {
+  max-height: 350px;
+  width: 100%;
+  object-fit: cover;
 }
