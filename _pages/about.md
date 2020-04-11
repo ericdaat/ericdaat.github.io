@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-permalink: /about/
+permalink: /about
 cover: desk.jpg
 in_navbar: True
 ---

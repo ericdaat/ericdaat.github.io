@@ -4,6 +4,7 @@
 
 layout: home
 title: Home
+permalink: "/"
 ---
 
 Hi, I'm Eric, a Data Scientist and Full Stack Developer with additional

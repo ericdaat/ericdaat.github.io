@@ -31,6 +31,9 @@ url: "http://edaoud.com" # the base hostname & protocol for your site, e.g. http
 logo: /assets/img/eric.jpg
 type: website
 
+include:
+  - _pages
+
 defaults:
   - scope:
       path: ""
@@ -72,7 +75,6 @@ disqus:
   shortname: edaoud
 
 # Build settings
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap
