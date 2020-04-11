@@ -20,7 +20,3 @@ are listed on the [open source](open-source) page. When I find the time, I like
 to write short tech related articles on my [blog page](blog), feel free to
 check it out! I also added two sections not related to code:
 [photography](photography) and [music](music).
-
-*Note: This static website was created with [Jekyll](https://jekyllrb.com/),
-using the minima theme that I tweaked a bit. The code is open source
-and available on this [github repository](https://github.com/ericdaat/ericdaat.github.io).*
