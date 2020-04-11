@@ -1,0 +1,52 @@
+<!-- Footer -->
+<footer class="page-footer font-small pt-4 bg-white mt-5">
+
+  <!-- Footer Links -->
+  <div class="text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5>{{ site.title | escape }}</h5>
+        <p>{{ site.description }}</p>
+
+        {%- if site.email -%}
+          <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+        {%- endif -%}
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        <h5 class="text-uppercase">Links</h5>
+
+        <ul class="list-unstyled">
+          {%- include components/social.html -%}
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Eric Daoud</div>
+
+</footer>

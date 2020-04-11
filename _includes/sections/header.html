@@ -1,0 +1,40 @@
+<header class="site-header" role="banner">
+
+  {%- assign default_paths = site.pages | map: "path" -%}
+  {%- assign page_paths = site.header_pages | default: default_paths -%}
+
+  <nav class="navbar navbar-expand-sm navbar-light px-0">
+
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="/">{{ site.author }}</a>
+
+    <!-- Navbar toggler button -->
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarToggler"
+            aria-controls="navbarToggler"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarToggler">
+      <ul class="navbar-nav mr-auto">
+        {%- for path in page_paths -%}
+          {%- assign my_page = site.pages | where: "path", path | first -%}
+          {%- if my_page.in_navbar -%}
+            {% unless my_page.url contains 'page' %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+            </li>
+            {% endunless %}
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+
+  </nav>
+
+</header>
