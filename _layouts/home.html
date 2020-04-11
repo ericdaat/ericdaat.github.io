@@ -4,16 +4,13 @@ layout: default
 
 <div class="home">
   <p>
-    <img class="avatar" src="/assets/img/eric.jpg" alt="avatar">
+    <img class="rounded-circle mx-auto d-block mt-4" style="width: 20%;" src="/assets/img/eric.jpg" alt="avatar">
   </p>
 
-  <header class="post-header">
-    <h1 class="post-title">{{ site.title }}</h1>
+  <header>
+    <h1 class="text-center mb-5">{{ site.title }}</h1>
   </header>
 
   {{ content }}
-
-  <h2>Blog posts by category</h2>
-  {% include blog_categories.html %}
 
 </div>

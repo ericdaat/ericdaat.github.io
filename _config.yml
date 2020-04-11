@@ -20,7 +20,7 @@
 
 title: Eric Daoud - Data Scientist & Full Stack Developer
 author: Eric Daoud
-email: ericda [at] outlook.com
+email:
 tagline: A website dedicated to Data Science, Software Engineering,
   Photography and Music.
 description: Data Scientist and Full Stack Developer with
@@ -30,6 +30,16 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://edaoud.com" # the base hostname & protocol for your site, e.g. http://example.com
 logo: /assets/img/eric.jpg
 type: website
+
+include:
+  - _pages
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM #Github Flavored Markdown
+  hard_wrap: false
+  syntax_highlighter: rouge
 
 defaults:
   - scope:
@@ -46,6 +56,8 @@ twitter_username: ericdaoud
 github_username:  ericdaat
 linkedin_username: ericdaoud
 youtube_username: ericmusic13
+instagram_username: ericda
+500px_username: ericda
 
 google_analytics: UA-105599779-4
 
@@ -72,7 +84,6 @@ disqus:
   shortname: edaoud
 
 # Build settings
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-sitemap

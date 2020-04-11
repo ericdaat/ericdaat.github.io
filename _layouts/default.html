@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-  {%- include head.html -%}
+  {%- include sections/head.html -%}
 
   <body>
+      <div class="container-fluid" style="max-width: 900px;">
+        {%- include sections/header.html -%}
 
-    {%- include header.html -%}
+        {%- if page.cover -%}
+          <img class="img-cover"
+               src="/assets/img/covers/{{ page.cover }}">
+        {%- endif -%}
 
-    {%- if page.cover -%}
-      <img class="cover" src="/assets/img/covers/{{ page.cover }}">
-    {%- endif -%}
-
-    <main class="page-content" aria-label="Content">
-      <div class="wrapper">
         {{ content }}
+
+        {%- include sections/footer.html -%}
       </div>
-    </main>
-
-    {%- include footer.html -%}
-
   </body>
 
 </html>

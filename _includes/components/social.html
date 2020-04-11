@@ -1,0 +1,48 @@
+{%- if site.github_username -%}
+    <li>
+        <i class="fab fa-github"></i>
+        <a href="https://github.com/{{ site.github_username| cgi_escape | escape }}">Github</a>
+    </li>
+{%- endif -%}
+
+{%- if site.instagram_username -%}
+    <li>
+        <i class="fab fa-instagram"></i>
+        <a href="https://instagram.com/{{ site.instagram_username| cgi_escape | escape }}">Instagram</a>
+    </li>
+{%- endif -%}
+
+{%- if site.linkedin_username -%}
+    <li>
+        <i class="fab fa-linkedin"></i>
+        <a href="https://www.linkedin.com/in/{{ site.linkedin_username| cgi_escape | escape }}">Linkedin</a>
+    </li>
+{%- endif -%}
+
+{%- if site.pinterest_username -%}
+    <li>
+        <i class="fab fa-pinterest"></i>
+        <a href="https://www.pinterest.com/{{ site.pinterest_username| cgi_escape | escape }}">Pinterest</a>
+    </li>
+{%- endif -%}
+
+{%- if site.twitter_username -%}
+    <li>
+        <i class="fab fa-twitter"></i>
+        <a href="https://www.twitter.com/{{ site.twitter_username| cgi_escape | escape }}">Twitter</a>
+    </li>
+{%- endif -%}
+
+{%- if site.youtube_username -%}
+    <li>
+        <i class="fab fa-youtube"></i>
+        <a href="https://youtube.com/{{ site.youtube_username| cgi_escape | escape }}">YouTube</a>
+    </li>
+{%- endif -%}
+
+{%- if site.500px_username -%}
+    <li>
+        <i class="fab fa-500px"></i>
+        <a href="https://500px.com/{{ site.500px_username| cgi_escape | escape }}">500px</a>
+    </li>
+{%- endif -%}
