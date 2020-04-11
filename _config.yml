@@ -34,6 +34,8 @@ type: website
 include:
   - _pages
 
+sass_dir: ./_sass
+
 markdown: kramdown
 highlighter: rouge
 kramdown:
