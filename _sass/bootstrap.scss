@@ -4,7 +4,10 @@
 $font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
 $font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
-$font-family-base:       $font-family-serif !default;
+$font-family-base:       $font-family-sans-serif !default;
+$font-size-base: 16;
+$theme-colors: ();
+
 
 @import
   "fontawesome/fontawesome",
@@ -22,7 +25,11 @@ article img {
 }
 
 .img-cover {
-  max-height: 350px;
+  max-height: 250px;
   width: 100%;
   object-fit: cover;
+}
+
+body{
+  text-align: justify;
 }

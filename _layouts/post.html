@@ -8,7 +8,7 @@ layout: default
 
     <h1 itemprop="name headline">{{ page.title | escape }}</h1>
 
-    <p>
+    <p class="font-italic">
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         Written on {{ page.date | date: date_format }}
@@ -21,7 +21,7 @@ layout: default
   </header>
 
   <div itemprop="articleBody">
-    <p>
+    <p class="font-italic">
       {{ page.excerpt }}
     </p>
     {{ content }}
@@ -29,7 +29,7 @@ layout: default
 
   <h2>Comments</h2>
   {%- if site.disqus.shortname -%}
-    {%- include disqus_comments.html -%}
+    {%- include components/disqus_comments.html -%}
   {%- endif -%}
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>

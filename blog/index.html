@@ -9,49 +9,8 @@ in_navbar: True
 
 <ul class="list-unstyled">
   {%- for post in paginator.posts -%}
-    <h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-    <p>{{ post.date }}</p>
-    <div>
-      {{ post.excerpt }}
-    </div>
+    {%- include components/post_preview.html -%}
   {%- endfor -%}
 </ul>
 
-<!-- Pagination links -->
-{% if paginator.total_pages > 1 %}
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    {% if paginator.previous_page %}
-      <li class="page-item">
-        <a class="page-link" href="{{ paginator.previous_page_path | replace: '//', '/' }}">Previous</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">Previous</a>
-      </li>
-    {% endif %}
-
-    {% for page in (1..paginator.total_pages) %}
-      {% if page == paginator.page %}
-        <li class="page-item active" aria-current="page">
-          <a class="page-link" href="#">{{ page }} <span class="sr-only">(current)</span></a>
-        </li>
-      {% elsif page == 1 %}
-        <li class="page-item"><a class="page-link" href="{{ site.blog_url }}">{{ page }}</a></li>
-      {% else %}
-        <li class="page-item"><a class="page-link" href="{{ site.paginate_path | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a></li>
-      {% endif %}
-    {% endfor %}
-
-    {% if paginator.next_page %}
-      <li class="page-item">
-        <a class="page-link" href="{{ paginator.next_page_path | replace: '//', '/' }}">Next</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    {% endif %}
-  </ul>
-</nav>
-{% endif %}
+{%- include components/pagination.html -%}
