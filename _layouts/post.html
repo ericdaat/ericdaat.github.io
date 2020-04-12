@@ -14,7 +14,9 @@ layout: default
         Written on {{ page.date | date: date_format }}
       </time>
       {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
+        </span>
       {%- endif -%}
     </p>
 
@@ -26,6 +28,8 @@ layout: default
     </p>
     {{ content }}
   </div>
+
+  {%- include components/more_posts.html -%}
 
   {%- if site.disqus.shortname and page.comments != false -%}
     {%- include components/disqus_comments.html -%}

@@ -1,0 +1,19 @@
+<h2>More posts</h2>
+
+<div class="card-deck mt-4">
+    {%- assign posts = site.posts | where_exp: "post", "post.title != page.title" -%}
+    {% for post in posts limit:3 %}
+        <div class="card">
+            <a href="{{ post.url }}" class="text-decoration-none text-dark">
+            <!-- <img src="/assets/img/covers/{{post.cover}}" class="card-img-top" alt="..."> -->
+            <!-- <div class="card-img-overlay" ></div> -->
+
+            <div class="card-body">
+                <h5 class="card-title" style="min-height: 90px;">{{ post.title }}</h5>
+                <p class="card-text text-left" style="min-height: 180px;">{{ post.excerpt | truncate: 180 }}</p>
+                <p class="card-text"><small class="text-muted">{{ post.date | date: "%b %-d, %Y"}}</small></p>
+            </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>

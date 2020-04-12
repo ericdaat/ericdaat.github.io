@@ -20,7 +20,6 @@
 
 title: Eric Daoud - Data Scientist & Full Stack Developer
 author: Eric Daoud
-email:
 tagline: A website dedicated to Data Science, Software Engineering,
   Photography and Music.
 description: Data Scientist and Full Stack Developer with
@@ -69,6 +68,9 @@ social:
     - https://twitter.com/ericdaoud
     - https://www.linkedin.com/in/ericdaoud
     - https://github.com/ericdaat
+    - https://instagram.com/ericda
+    - https://youtube.com/c/EricDaoud
+    - https://500px.com/ericda
 
 # blog
 blog_url: /blog
