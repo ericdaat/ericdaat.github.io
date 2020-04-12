@@ -4,23 +4,21 @@ layout: default
 
 <article itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="mt-4">
-
+  <div class="mt-4">
     <h1 itemprop="name headline">{{ page.title | escape }}</h1>
 
     <p class="font-italic">
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        Written on {{ page.date | date: date_format }}
+        Written on {{ page.date | date: "%b %-d, %Y"}}
       </time>
+
       {%- if page.author -%}
         <span itemprop="author" itemscope itemtype="http://schema.org/Person">
           <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
         </span>
       {%- endif -%}
     </p>
-
-  </header>
+  </div>
 
   <div itemprop="articleBody">
     <p class="font-italic">
@@ -29,11 +27,16 @@ layout: default
     {{ content }}
   </div>
 
-  {%- include components/more_posts.html -%}
+  <div class="mt-5">
+    {%- include components/more_posts.html -%}
+  </div>
 
-  {%- if site.disqus.shortname and page.comments != false -%}
-    {%- include components/disqus_comments.html -%}
-  {%- endif -%}
+  <div class="mt-5">
+    {%- if site.disqus.shortname and page.comments != false -%}
+      {%- include components/disqus_comments.html -%}
+    {%- endif -%}
+  </div>
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+
 </article>
