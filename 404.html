@@ -1,12 +1,25 @@
 ---
 permalink: /404.html
 layout: default
+cover: dead-end.jpg
 ---
 
-<div class="container-fluid mt-4 mb-4 text-center"
-     style="min-height: 60vh;">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
+<div class="row text-center mt-5 mb-5">
+  <div class="col">
+    <h1>404</h1>
+    <p class="text-center">Page not found :(</p>
+    <p class="text-center">Unfortunately the requested page could not be found.</p>
+  </div>
 </div>
+
+
+<div class="row mt-5 mb-5">
+  <div class="col">
+    <h2>Last blog posts</h2>
+
+    {%- for post in site.posts limit:5 -%}
+      {%- include components/post_preview.html -%}
+    {%- endfor -%}
+  </div>
+</div>
+
