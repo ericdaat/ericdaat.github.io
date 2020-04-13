@@ -11,9 +11,11 @@
 <div class="row">
 
 <div class="col-sm-auto">
-    <ul class="list-unstyled">
+    <ul class="list-inline">
     {% for category in post.categories %}
-    <li><span class="badge badge-secondary">{{category}}</span></li>
+    <li class="list-inline-item">
+        <span class="badge badge-secondary">{{category}}</span>
+    </li>
     {% endfor %}
     </ul>
 </div>
