@@ -25,9 +25,10 @@ tagline: A website dedicated to Data Science, Software Engineering,
 description: Data Scientist and Full Stack Developer with
     experience in NLP and Recommender Systems. PhD Student in
     Machine Learning applied to cancer research.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: ""
 url: "http://edaoud.com" # the base hostname & protocol for your site, e.g. http://example.com
 logo: /assets/img/eric.jpg
+image: /assets/img/eric.jpg
 type: website
 
 include:
@@ -50,8 +51,8 @@ defaults:
 
 image:
   path: /assets/img/eric.jpg
-  height: 100
-  width: 100
+  height: 200
+  width: 200
 
 twitter_username: ericdaoud
 github_username:  ericdaat

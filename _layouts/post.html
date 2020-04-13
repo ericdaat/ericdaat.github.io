@@ -21,10 +21,13 @@ layout: default
   </div>
 
   <div itemprop="articleBody">
-    <p class="font-italic">
-      {{ page.excerpt }}
-    </p>
-    {{ content }}
+    <div class="mt-3 mb-5" itemprop="abstract">
+      <p class="font-italic">{{ page.excerpt }}</p>
+    </div>
+
+    <div>
+      {{ content }}
+    </div>
   </div>
 
   <div class="mt-5">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 
   {%- include sections/head.html -%}
 
@@ -8,12 +8,14 @@
         {%- include sections/header.html -%}
 
         {%- if page.cover -%}
-          <img class="img-cover" src="/assets/img/covers/{{ page.cover }}">
+          <img class="img-cover mt-4 mb-2" src="/assets/img/covers/{{ page.cover }}">
         {%- endif -%}
 
         {{ content }}
 
-        {%- include sections/footer.html -%}
+        <div class="mt-5">
+          {%- include sections/footer.html -%}
+        </div>
       </div>
   </body>
 
