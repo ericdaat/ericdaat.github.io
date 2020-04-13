@@ -2,22 +2,14 @@
 layout: default
 ---
 
+{% assign post=page %}
+
 <article itemscope itemtype="http://schema.org/BlogPosting">
 
   <div class="mt-4">
     <h1 itemprop="name headline">{{ page.title | escape }}</h1>
 
-    <p class="font-italic">
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        Written on {{ page.date | date: "%b %-d, %Y"}}
-      </time>
-
-      {%- if page.author -%}
-        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <span class="p-author h-card" itemprop="name">{{ page.author }}</span>
-        </span>
-      {%- endif -%}
-    </p>
+    {%- include components/post_metadata.html -%}
   </div>
 
   <div itemprop="articleBody">

@@ -1,0 +1,21 @@
+<div class="row">
+
+<div class="col-sm-auto font-italic">
+    <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+    Written on {{ post.date | date: "%b %-d, %Y" }}
+    </time>
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-sm-auto">
+    <ul class="list-unstyled">
+    {% for category in post.categories %}
+    <li><span class="badge badge-secondary">{{category}}</span></li>
+    {% endfor %}
+    </ul>
+</div>
+
+</div>

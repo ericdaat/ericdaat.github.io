@@ -14,17 +14,21 @@ layout: default
   {{ content }}
 
    <div class="row mt-5">
+
     <div class="col-sm-8">
-      <h2 class="mb-4"><i class="fas fa-pen-nib"></i> Last Posts</h2>
+      <h2 class="mb-4"><i class="fas fa-pen-nib"></i> Latest posts</h2>
 
       {%- for post in site.posts limit:5 -%}
         {%- include components/post_preview.html -%}
       {%- endfor -%}
+
+      <a href="/blog/"><p>See all posts <i class="fas fa-arrow-right"></i></p></a>
     </div>
 
     <div class="col-sm-4">
       {%- include components/tweets.html -%}
     </div>
+
   </div>
 
 </div>

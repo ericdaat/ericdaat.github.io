@@ -1,14 +1,9 @@
-<div>
+<div class="mb-5">
   <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
 
-  <p class="font-italic">
-    <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
-      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-      Written on {{ post.date | date: date_format }}
-    </time>
-  </p>
+  {%- include components/post_metadata.html -%}
 
-  <div>
-    <p>{{ post.excerpt }}</p>
+  <div class="mt-2">
+    <p itemprop="abstract">{{ post.excerpt }}</p>
   </div>
 </div>
