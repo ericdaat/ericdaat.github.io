@@ -75,7 +75,7 @@ social:
 
 # blog
 blog_url: /blog
-permalink: /blog/:year/:month/:day/:title
+permalink: pretty
 show_excerpts: True
 paginate: 5
 paginate_path: blog/page/:num
