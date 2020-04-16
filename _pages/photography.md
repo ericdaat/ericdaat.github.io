@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Photography
-permalink: /photography
+permalink: /photography/
 cover: camera.jpg
 in_navbar: True
 ---

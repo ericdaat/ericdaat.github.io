@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Music
-permalink: /music
+permalink: /music/
 cover: music.jpg
 in_navbar: True
 ---

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Research
-permalink: /research
+permalink: /research/
 cover: research.jpg
 in_navbar: False
 ---
