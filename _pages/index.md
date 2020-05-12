@@ -5,6 +5,7 @@
 layout: home
 title: Home
 permalink: "/"
+last_modified_at: 2020-05-12
 ---
 
 Hi, I'm Eric, a Data Scientist and Full Stack Developer with additional

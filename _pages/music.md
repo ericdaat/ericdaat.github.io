@@ -4,6 +4,7 @@ title: Music
 permalink: /music/
 cover: music.jpg
 in_navbar: True
+last_modified_at: 2020-05-12
 ---
 
 I started playing the guitar in 2004. I started by playing Blues, Classic Rock

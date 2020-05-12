@@ -4,6 +4,7 @@ title: About
 permalink: /about/
 cover: desk.jpg
 in_navbar: True
+last_modified_at: 2020-05-12
 ---
 
 My background is computer science. I hold a MSc in General
