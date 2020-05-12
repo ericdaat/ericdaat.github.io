@@ -10,7 +10,9 @@ categories: ["Machine Learning"]
 
 ## Networks example
 
-Let's start with some networks example. Those are really similar to the examples you'd find in the [Keras Docs](https://keras.io/getting-started/sequential-model-guide/), but I added a few things here and there to better understand what they do.
+Let's start with some networks example. Those are really similar to the examples
+you'd find in the [Keras Docs](https://keras.io/getting-started/sequential-model-guide/),
+but I added a few things here and there to better understand what they do.
 
 ### Regression
 

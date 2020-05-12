@@ -8,7 +8,14 @@ cover: radio.jpg
 categories: ["Software Engineering"]
 ---
 
-As a big fan of Classic Rock living in France, I am very frustrated by the lack of good classic rock radio we have. I spent four months in St Louis, MO, and I had the chance to listen to [KSHE 95](http://www.kshe95.com/) every day, playing some of my favorite classic rock tunes. Unfortunately, I can't listen to this radio in France as they block it. Fortunately, their website shows the [songs that have been playing earlier](http://player.listenlive.co/20101/en/songhistory). I decided to scrap this page, make myself an empty [Spotify playlist](https://open.spotify.com/user/ericda/playlist/3BCcE8T945z1MnfPWkFsfX), and automatically add in the KSHE tracks.
+As a big fan of Classic Rock living in France, I am very frustrated by the
+lack of good classic rock radio we have. I spent four months in St Louis, MO,
+and I had the chance to listen to [KSHE 95](http://www.kshe95.com/) every day,
+playing some of my favorite classic rock tunes. Unfortunately,
+I can't listen to this radio in France as they block it. Fortunately,
+their website shows the [songs that have been playing earlier](http://player.listenlive.co/20101/en/songhistory).
+I decided to scrap this page, make myself an empty [Spotify playlist](https://open.spotify.com/user/ericda/playlist/3BCcE8T945z1MnfPWkFsfX),
+and automatically add in the KSHE tracks.
 
 So far, I am able to:
 

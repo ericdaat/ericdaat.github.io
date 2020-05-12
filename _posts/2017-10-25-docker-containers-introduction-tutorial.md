@@ -8,7 +8,8 @@ cover: containers.jpg
 categories: ["Software Engineering"]
 ---
 
-This post is a short tutorial to Docker. We will first talk about what Docker is and how it differs fromw to get started and run your first container.
+This post is a short tutorial to Docker. We will first talk about what Docker
+is and how it differs fromw to get started and run your first container.
 
 ## Introduction
 

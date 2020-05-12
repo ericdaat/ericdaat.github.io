@@ -14,7 +14,8 @@ Git was created by Linus Torvalds in 2005 for development of the Linux kernel,
 with other kernel developers contributing to its initial development.
 Its current maintainer since 2005 is Junio Hamano.
 
-The name "git" was given by Linus Torvalds when he wrote the very first version. He described the tool as "the stupid content tracker" and the name as (depending on your way):
+The name "git" was given by Linus Torvalds when he wrote the very first version.
+He described the tool as "the stupid content tracker" and the name as (depending on your way):
 
  1. random three-letter combination that is pronounceable, and not actually used by any common UNIX command. The fact that it is a mispronunciation of "get" may or may not be relevant.
  2. stupid. contemptible and despicable. simple. Take your pick from the dictionary of slang.

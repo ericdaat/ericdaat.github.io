@@ -13,7 +13,7 @@ categories: ["Computer Setup"]
 
 ## Motivation
 
-Often, when changing laptop or after formating it, I had to
+Often, when changing laptop or after formatting it, I had to
 go through the tedious operation of reinstalling every software I had as well
 as all the configuration files. This is when I ask myself "how did I manage
 to configure this?", or "what was this amazing extension that worked

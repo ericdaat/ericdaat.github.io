@@ -8,7 +8,9 @@ cover: code.jpg
 categories: ["Software Engineering"]
 ---
 
-I love Python programming language, and I have been using it for several years now. It is a very simple yet powerful language that is used for so many purposes. It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !
+I love Python programming language, and I have been using it for several years now.
+It is a very simple yet powerful language that is used for so many purposes.
+It is quite an old language created by Guido Van Rossum in 1989 ... when he was bored !
 
 >*Over six years ago, in December 1989, I was looking for a "hobby" programming project that would keep me occupied during the week around Christmas. My office ... would be closed, but I had a home computer, and not much else on my hands. I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus).
 > -- Guido Van Rossum, 1996*

@@ -8,7 +8,8 @@ cover: server.jpg
 categories: ["Machine Learning"]
 ---
 
-Note that this tutorial can work either on Ubuntu or Debian. This tutorial will install `tensorflow-gpu 1.12` which
+Note that this tutorial can work either on Ubuntu or Debian.
+This tutorial will install `tensorflow-gpu 1.12` which
 is the latest version available while I am writing these words.
 
 Tensorflow GPU needs the following softwares:
@@ -25,7 +26,7 @@ Here is a complete shell script showing the different steps to install `tensorfl
 
 ## Docker Image
 
-If you are familiar with [Docker](https://www.docker.com/), I'd recommend you have a look at the [Tensorflow Docker Image](https://hub.docker.com/r/tensorflow/tensorflow/). It's already configured with the latest drivers and can run on CPU or GPU.
+If you are familiar with [Docker](https://www.docker.com/), I recommend you have a look at the [Tensorflow Docker Image](https://hub.docker.com/r/tensorflow/tensorflow/). It's already configured with the latest drivers and can run on CPU or GPU.
 
 If you're not familiar with Docker, you should definitely learn using it. Here are some links to get you started:
 

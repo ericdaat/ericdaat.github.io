@@ -37,6 +37,7 @@ if __name__ == '__main__':
 Now run ```python main.py``` and your app should be visible in your browser at ```localhost:5000```.
 
 ## WSGI server
+
 So far we have a working application, but it won't be enough to serve a production environment. Python applications can't be directly deployed in a webserver, because python is not a web compatible language like Javascript or PHP for instance. Hence, we need an additional layer: a WSGI server.
 
 There are various WSGI servers on the market, [Gunicorn](http://gunicorn.org/) is a popular choice but my favorite is [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/).
@@ -93,4 +94,5 @@ application with the configuration you just wrote. You can then write a startup
 script with *upstart* or *systemd* to make your application run in the
 background and easily start/stop it.
 
-In another post, I'll cover how to run all this with [Docker](https://www.docker.com/), as it is what I tend to use now to deploy apps in production.
+In another post, I'll cover how to run all this with
+[Docker](https://www.docker.com/), as it is what I tend to use now to deploy apps in production.

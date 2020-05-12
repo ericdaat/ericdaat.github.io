@@ -10,8 +10,11 @@ categories: ["Machine Learning"]
 
 ## The Dataset
 
-First, download the dataset from the [Yelp website](https://www.yelp.com/dataset/challenge). Once you're done, we are going to work with the the reviews file. It contains one Json per row, and I like to use the [Python Pandas](https://pandas.pydata.org/) library to read datasets.
-Pandas has a nice function called `read_json` that we are going to use for reading the dataset. However we have to be careful of two things:
+First, download the dataset from the [Yelp website](https://www.yelp.com/dataset/challenge).
+Once you're done, we are going to work with the the reviews file. It contains one Json per row, and I like to use the [Python Pandas](https://pandas.pydata.org/) library to read datasets.
+Pandas has a nice function called `read_json` that we are going to use for reading the dataset.
+
+However we have to be careful of two things:
 
 * The dataset is really large, so we don't want to fully load it in RAM
 * It's not really a Json file, it has one Json per line
