@@ -2,6 +2,7 @@
 layout: post
 title: Python Tips and Tools
 date: 2017-05-28
+last_modified_at: 2020-05-12
 excerpt:
     There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.
 cover: code.jpg

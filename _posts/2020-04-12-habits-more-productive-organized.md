@@ -2,6 +2,7 @@
 layout: post
 title: Habits to be more productive and organized
 date: 2020-04-12
+last_modified_at: 2020-05-12
 excerpt:
     I recently read a book about productivity and organization at work.
     More precisely about how to achieve the same amount of work

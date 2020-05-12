@@ -2,6 +2,7 @@
 layout: post
 title: Deploying a Python Flask application to production
 date: 2017-05-28
+last_modified_at: 2020-05-12
 excerpt:
     In this post we are going to see how we can efficiently deploy a web application powered by Flask (a Python framework) to production. We won't code a complex application, actually we will just stick to the Flask Hello World example.
 cover: gears.jpg

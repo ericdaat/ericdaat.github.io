@@ -2,6 +2,7 @@
 layout: post
 title: An introduction to Git
 date: 2017-10-20
+last_modified_at: 2020-05-12
 excerpt:
     A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.
 cover: tree.jpg

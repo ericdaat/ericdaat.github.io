@@ -2,6 +2,7 @@
 layout: post
 title: Some Keras snippets
 date: 2017-12-16
+last_modified_at: 2020-05-12
 excerpt:
     I started to use Keras for Deep Learning months ago, and as I was using it, I thought I should make a memo of all the cool features and network architectures I was using. This post aims at sharing some snippets I have found useful, so I can reuse them later. Maybe it will be useful to you as well !
 cover: network.jpg

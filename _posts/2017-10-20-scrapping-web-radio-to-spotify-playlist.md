@@ -2,6 +2,7 @@
 layout: post
 title: From a web radio website to a Spotify Playlist
 date: 2017-08-16
+last_modified_at: 2020-05-12
 excerpt:
     This post shows how to scrap a list of songs from the KSHE 95 radio website and upload them to a Spotify playlist using the Spotify Web API. I used Python programming language along with Beautiful Soup for scraping and Flask for deploying the app.
 cover: radio.jpg

@@ -2,6 +2,7 @@
 layout: post
 title: Automate your computer setup with dotfiles
 date: 2020-02-01
+last_modified_at: 2020-05-12
 excerpt:
     In this post we are going to look at how to automatically setup your
     computer with your favorite software and configurations. This can be very
