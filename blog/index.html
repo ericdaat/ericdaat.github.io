@@ -5,7 +5,9 @@ cover: pen.jpg
 in_navbar: True
 ---
 
-<ul class="list-unstyled">
+<p>Browse posts by category <a href="/blog/categories">here</a>.</p>
+
+<ul class="list-unstyled mt-5">
   {%- for post in paginator.posts -%}
     {%- include components/post_preview.html -%}
   {%- endfor -%}
