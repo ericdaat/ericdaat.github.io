@@ -9,6 +9,7 @@ cover: radio.jpg
 categories: ["Software Engineering"]
 redirect_from:
   - /software%20engineering/2017/08/16/kshe-spotify/
+  - /blog/2017/08/16/kshe-spotify/
 ---
 
 As a big fan of Classic Rock living in France, I am very frustrated by the

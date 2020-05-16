@@ -9,6 +9,7 @@ cover: server.jpg
 categories: ["Machine Learning"]
 redirect_from:
     - /machine%20learning/2017/12/16/keras-snippets/
+    - /blog/2018/01/16/install-tensorflow-gpu/
 ---
 
 Note that this tutorial can work either on Ubuntu or Debian.

@@ -9,6 +9,7 @@ cover: network.jpg
 categories: ["Machine Learning"]
 redirect_from:
     - /machine%20learning/2017/12/16/keras-snippets/
+    - /blog/2017/12/16/keras-snippets/
 ---
 
 ## Networks example

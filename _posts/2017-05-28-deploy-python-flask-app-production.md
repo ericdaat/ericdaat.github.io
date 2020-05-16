@@ -8,6 +8,8 @@ excerpt:
 cover: gears.jpg
 categories: ["Software Engineering"]
 tags: ["Python"]
+redirect_from:
+    - /blog/2017/05/28/flask-app-production/
 ---
 
 ## Basic Flask application
