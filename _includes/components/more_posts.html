@@ -10,8 +10,15 @@
 
             <div class="card-body">
                 <h5 class="card-title" style="min-height: 90px;">{{ post.title }}</h5>
+                <p class="card-text"><small class="text-muted">Written on {{ post.date | date: "%b %-d, %Y"}}</small></p>
                 <p class="card-text text-left" style="min-height: 180px;">{{ post.excerpt | truncate: 180 }}</p>
-                <p class="card-text"><small class="text-muted">{{ post.date | date: "%b %-d, %Y"}}</small></p>
+                <ul class="list-inline">
+                {% for category in post.categories %}
+                <li class="list-inline-item">
+                    <span class="badge badge-secondary">{{category}}</span>
+                </li>
+                {% endfor %}
+                </ul>
             </div>
             </a>
         </div>
