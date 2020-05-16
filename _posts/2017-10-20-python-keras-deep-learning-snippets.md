@@ -7,6 +7,8 @@ excerpt:
     I started to use Keras for Deep Learning months ago, and as I was using it, I thought I should make a memo of all the cool features and network architectures I was using. This post aims at sharing some snippets I have found useful, so I can reuse them later. Maybe it will be useful to you as well !
 cover: network.jpg
 categories: ["Machine Learning"]
+redirect_from:
+    - /machine%20learning/2017/12/16/keras-snippets/
 ---
 
 ## Networks example

@@ -95,6 +95,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-gist
+  - jekyll-redirect-from
 
 # Exclude from processing.
 # The following items will not be processed, by default.

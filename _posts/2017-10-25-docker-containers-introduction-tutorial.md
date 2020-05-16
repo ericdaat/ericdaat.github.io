@@ -7,6 +7,9 @@ excerpt:
     A tutorial on how to get started with Docker.
 cover: containers.jpg
 categories: ["Software Engineering"]
+redirect_from:
+  - /blog/2017/10/25/docker/
+  - /software%20engineering/2017/10/25/docker/
 ---
 
 This post is a short tutorial to Docker. We will first talk about what Docker

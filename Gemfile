@@ -43,3 +43,6 @@ gem 'jekyll-gist'
 # highlighting
 gem 'rouge'
 gem 'kramdown'
+
+# redirect
+gem 'jekyll-redirect-from'

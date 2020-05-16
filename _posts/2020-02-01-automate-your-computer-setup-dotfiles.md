@@ -10,6 +10,8 @@ excerpt:
     it happened to me recently).
 cover: terminal.png
 categories: ["Computer Setup"]
+redirect_from:
+  - /blog/2020/02/01/automate-your-computer-setup/
 ---
 
 ## Motivation

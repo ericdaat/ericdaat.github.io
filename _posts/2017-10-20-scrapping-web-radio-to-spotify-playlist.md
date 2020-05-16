@@ -7,6 +7,8 @@ excerpt:
     This post shows how to scrap a list of songs from the KSHE 95 radio website and upload them to a Spotify playlist using the Spotify Web API. I used Python programming language along with Beautiful Soup for scraping and Flask for deploying the app.
 cover: radio.jpg
 categories: ["Software Engineering"]
+redirect_from:
+  - /software%20engineering/2017/08/16/kshe-spotify/
 ---
 
 As a big fan of Classic Rock living in France, I am very frustrated by the

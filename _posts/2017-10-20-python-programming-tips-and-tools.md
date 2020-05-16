@@ -7,6 +7,9 @@ excerpt:
     There are a few Python things I learnt over the years, and I decided to share them in this post. I'll cover the basis of Object Oriented Programming; then some useful functions or tools that I like about the language; finally, I'll speak about how to organise a project and install libraries with virtual environments.
 cover: code.jpg
 categories: ["Software Engineering"]
+redirect_from:
+    - /blog/2017/05/28/python-tips-and-tools/
+    - /software%20engineering/2017/05/28/python-tips-and-tools/
 ---
 
 I love Python programming language, and I have been using it for several years now.
