@@ -7,6 +7,7 @@ excerpt:
     A short introduction and tutorial to Git, the versionning tool created by Linus Torvalds.
 cover: tree.jpg
 categories: ["Software Engineering"]
+image: /assets/img/eric.jpg
 redirect_from:
     - /blog/2017/10/20/git-tutorial/
     - /software%20engineering/2017/10/20/git-tutorial/

@@ -8,6 +8,7 @@ excerpt:
 cover: gears.jpg
 categories: ["Software Engineering"]
 tags: ["Python"]
+image: /assets/img/eric.jpg
 redirect_from:
     - /blog/2017/05/28/flask-app-production/
 ---

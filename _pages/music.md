@@ -5,6 +5,7 @@ permalink: /music/
 cover: music.jpg
 in_navbar: True
 last_modified_at: 2020-05-12
+image: /assets/img/eric.jpg
 ---
 
 I started playing the guitar in 2004. I started by playing Blues, Classic Rock

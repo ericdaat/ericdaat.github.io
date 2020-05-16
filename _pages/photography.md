@@ -5,6 +5,7 @@ permalink: /photography/
 cover: camera.jpg
 in_navbar: True
 last_modified_at: 2020-05-12
+image: /assets/img/eric.jpg
 ---
 
 I have been keen on photography since 2010. Here are some of my favorite shots.

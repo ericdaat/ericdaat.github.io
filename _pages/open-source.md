@@ -5,6 +5,7 @@ permalink: /open-source/
 cover: open.jpg
 in_navbar: True
 last_modified_at: 2020-05-12
+image: /assets/img/eric.jpg
 ---
 
 ## Projects

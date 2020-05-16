@@ -11,6 +11,7 @@ excerpt:
     change my habits. I'll sum up the book advices here, and show you what
     works for me.
 cover: clock.jpg
+image: /assets/img/eric.jpg
 categories: ["Lifestyle"]
 ---
 

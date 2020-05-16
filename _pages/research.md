@@ -5,6 +5,7 @@ permalink: /research/
 cover: research.jpg
 in_navbar: False
 last_modified_at: 2020-05-12
+image: /assets/img/eric.jpg
 ---
 
 Late 2019, I started a PhD in Machine Learning applied to cancerology at the

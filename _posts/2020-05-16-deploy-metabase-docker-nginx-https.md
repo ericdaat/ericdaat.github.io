@@ -9,6 +9,7 @@ excerpt:
     Metabase over HTTPS by using Docker, Nginx and
     Let's Encrypt.
 cover: metabase.png
+image: /assets/img/eric.jpg
 categories: ["Software Engineering"]
 ---
 
