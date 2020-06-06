@@ -1,0 +1,61 @@
+experience:
+    - company: Institut Curie
+      position: PhD Student, Machine Learning & Oncology
+      logo: curie.png
+      date: October 2019 - Today
+      description: PhD Student within the Residual tumor and response to
+        treatment team, supervised by Prof. Fabien Reyal. Working on oncology
+        care pathways, using the social security (SNDS) database.
+
+    - company: OpenClassrooms
+      position: Mentor Data Scientist
+      logo: openclassrooms.png
+      date: November 2019 - Today
+      description: OpenClassrooms is the leading online education platform in
+        Europe. As a mentor Data Scientist, I help students during their online
+        classes and assignments through weekly video sessions.
+
+    - company: Doctrine
+      position: Senior Data Scientist
+      logo: doctrine.png
+      date: July 2018 - January 2019
+      description: Fastest growing Legal Tech in Europe, building a Search
+        Engine to help lawyers find the legal documents they need. Worked on a
+        Named Entity Recognition algorithm using BiLSTM and CRF for anonymising
+        legal decisions. Deployed a Python Flask web application to collect errors
+        made by our Machine Learning algorithms and re-train them. Participated
+        in cleaning the code base and setting development best practices.
+
+    - company: ManoMano
+      position: Data Scientist
+      logo: manomano.jpg
+      date: April 2016 - May 2018
+      description: ManoMano is a fast growing marketplace startup, selling
+        DIY and gardening materials. Pioneered website personalization by
+        creating an item recommendation system API from scratch. The system
+        is now serving more than 7 million unique users monthly and increased
+        average basket price by 15%. Deployed a Lambda Architecture to collect
+        user data. Built state of the art Machine Learning and Deep Learning
+        models on top of this data. Deployed algorithms to production using
+        an in-house AB Testing module. Classified 1.5 million DIY/gardening
+        products into 3,000 categories by creating an automatic text classifier.
+
+education:
+  - university: Université Paris-Sud (Paris-Saclay)
+    degree: Doctor of Philosophy
+    logo: paris-sud.jpg
+    date: 2019 - 2022 (expected)
+    description: PhD Student at Institut Curie, operated by Université Paris-Sud.
+      Machine Learning applied oncology.
+
+  - university: Ecole CentraleSupélec
+    degree: Master's Degree
+    logo: centrale-supelec.png
+    date: 2015-2016
+    description: Big Data and Cloud Computing
+
+  - university: ECAM Lyon
+    degree: Master of Science
+    logo: ecam.png
+    date: 2010 - 2015
+    description: Software Engineering and Electrical Engineering

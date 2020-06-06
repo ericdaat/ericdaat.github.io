@@ -2,14 +2,11 @@
 layout: default
 ---
 
-<article class="post">
+<header class="mt-4">
+  <h1>{{ page.title | escape }}</h1>
+</header>
 
-  <header class="post-header mt-4">
-    <h1 class="post-title">{{ page.title | escape }}</h1>
-  </header>
+<div class="mt-4">
+  {{ content }}
+</div>
 
-  <div class="post-content mt-4">
-    {{ content }}
-  </div>
-
-</article>
