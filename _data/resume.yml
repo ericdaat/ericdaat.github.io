@@ -1,5 +1,5 @@
 experience:
-    - company: Institut Curie
+    - company: Institut Curie - Paris (France)
       position: PhD Student, Machine Learning & Oncology
       logo: curie.png
       date: October 2019 - Today
@@ -7,7 +7,7 @@ experience:
         treatment team, supervised by Prof. Fabien Reyal. Working on oncology
         care pathways, using the social security (SNDS) database.
 
-    - company: OpenClassrooms
+    - company: OpenClassrooms - Paris (France)
       position: Mentor Data Scientist
       logo: openclassrooms.png
       date: November 2019 - Today
@@ -15,7 +15,7 @@ experience:
         Europe. As a mentor Data Scientist, I help students during their online
         classes and assignments through weekly video sessions.
 
-    - company: Doctrine
+    - company: Doctrine - Paris (France)
       position: Senior Data Scientist
       logo: doctrine.png
       date: July 2018 - January 2019
@@ -26,7 +26,7 @@ experience:
         made by our Machine Learning algorithms and re-train them. Participated
         in cleaning the code base and setting development best practices.
 
-    - company: ManoMano
+    - company: ManoMano - Paris (France)
       position: Data Scientist
       logo: manomano.jpg
       date: April 2016 - May 2018
@@ -40,22 +40,43 @@ experience:
         an in-house AB Testing module. Classified 1.5 million DIY/gardening
         products into 3,000 categories by creating an automatic text classifier.
 
-education:
-  - university: Université Paris-Sud (Paris-Saclay)
-    degree: Doctor of Philosophy
-    logo: paris-sud.jpg
-    date: 2019 - 2022 (expected)
-    description: PhD Student at Institut Curie, operated by Université Paris-Sud.
-      Machine Learning applied oncology.
+    - company: UC Davis HRVIP Lab - Davis, CA (USA)
+      position: Visiting Research Scholar
+      logo: ucdavis.png
+      date: August 2014 - January 2015
+      description: Worked within the Mechanical and Aerospace Department, under
+        supervision of Prof. Stephen Robinson, former Nasa Astronaut. Prototyped
+        software and hardware tools to approximate the drag of an object in a wind
+        tunnel. Programmed an Arduino Micro Controller used with differential
+        pressure and distance sensors. Developed a live plotting software in
+        Python, with GUI and post processing functions.
 
-  - university: Ecole CentraleSupélec
-    degree: Master's Degree
+    - company: Hunter Engineering - St Louis, MO (USA)
+      position: Test Engineer
+      logo: hunter.png
+      date: June 2013 - September 2013
+      description: Worked on "Quick Tread" prototype allowing to automatically
+        measure wear on cars tires by using lasers and cameras. Tested accuracy
+        and repeatability of results by comparing results obtained
+        manually with the machine output. Improved and accelerated data analysis
+        by automating and enhancing Excel workbooks with Visual Basic. Co-wrote
+        a technical paper published on SAE website.
+
+education:
+  - university: Paris-Saclay University - Paris (France)
+    degree: Ph.D. - Machine Learning & Oncology
+    logo: paris-saclay.jpg
+    date: 2019 - 2022 (expected)
+    description:
+
+  - university: CentraleSupélec - Paris (France)
+    degree: M.S. - Software Engineering & Data Science
     logo: centrale-supelec.png
     date: 2015-2016
-    description: Big Data and Cloud Computing
+    description:
 
-  - university: ECAM Lyon
-    degree: Master of Science
+  - university: ECAM Lyon - Lyon (France)
+    degree: M.S. - Electrical & Software Engineering
     logo: ecam.png
     date: 2010 - 2015
-    description: Software Engineering and Electrical Engineering
+    description:
