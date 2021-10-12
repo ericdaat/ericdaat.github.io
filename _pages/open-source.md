@@ -4,6 +4,7 @@ title: Open Source
 permalink: /open-source/
 cover: open.jpg
 in_navbar: True
+order: 2
 last_modified_at: 2020-05-12
 image: /assets/img/eric.jpg
 ---

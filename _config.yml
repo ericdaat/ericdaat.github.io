@@ -4,7 +4,7 @@ tagline: A website dedicated to Data Science, Software Engineering,
   Photography and Music.
 description: Data Scientist and Full Stack Developer with
     experience in NLP and Recommender Systems. PhD Student in
-    Machine Learning applied to cancer research.
+    Machine Learning applied to oncology.
 baseurl: ""
 url: "http://edaoud.com"
 type: website
@@ -33,6 +33,7 @@ linkedin_username: ericdaoud
 youtube_username: EricDaoud
 instagram_username: ericda
 500px_username: ericda
+scholar_id: 6MyQM4wAAAAJ
 
 social:
   name: Eric Daoud

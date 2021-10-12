@@ -4,6 +4,7 @@ title: Photography
 permalink: /photography/
 cover: camera.jpg
 in_navbar: True
+order: 1
 last_modified_at: 2020-05-12
 image: /assets/img/eric.jpg
 ---

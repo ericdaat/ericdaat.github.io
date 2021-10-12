@@ -1,22 +1,22 @@
 
 @charset "utf-8";
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto:wght@300&display=swap');
 
-$font-family-sans-serif: Raleway, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-sans-serif: "Roboto", Raleway, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
 $font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base:       $font-family-sans-serif !default;
 $font-size-base: 17;
 $theme-colors: (  // https://coolors.co/app/247ba0-70c1b3-b2dbbf-f3ffbd-ff1654
-  "primary": #2EC4B6,
-  "danger": #FF1654,
+  "primary": #457b9d,
+  "danger": #e63946,
 );
 $code-color: #247BA0;
 
 @import
   "bootstrap/bootstrap",
-  "pygments/syntax-highlighting"
+  "pygments/monokai"
 ;
 
 article img {
@@ -33,6 +33,14 @@ article img {
   width: 100%;
   object-fit: cover;
   border-radius: 8px;
+}
+
+h2 {
+  margin-top: 80px;
+}
+
+h3 {
+  margin-top: 50px;
 }
 
 p{

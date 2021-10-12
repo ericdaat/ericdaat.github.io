@@ -19,7 +19,7 @@ If you've never heard of Flask before, I recommend you to visit its [website](ht
 
 To create a Hello World application in Flask, just write the following code in a file called ```application.py```.
 
-``` python
+{% highlight python linenos %}
 from flask import Flask
 
 app = Flask(__name__)
@@ -27,7 +27,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 	return "Hello, World!"
-```
+{% endhighlight %}
 
 And then run the application with this code in a ```main.py``` file.
 

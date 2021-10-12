@@ -4,11 +4,11 @@ layout: default
 
 <div class="home">
   <p>
-    <img class="rounded-circle mx-auto d-block mt-5" style="width: 20%;" src="/assets/img/eric.jpg" alt="avatar">
+    <img class="rounded-circle mx-auto d-block mt-5" style="width: 150px;" src="/assets/img/eric.jpg" alt="avatar">
   </p>
 
   <header>
-    <h1 class="text-center mb-5">{{ site.title }}</h1>
+    <h2 class="text-center mt-0 mb-5">{{ site.title }}</h2>
   </header>
 
   {{ content }}
@@ -16,7 +16,7 @@ layout: default
    <div class="row mt-5">
 
     <div class="col-sm-8">
-      <h2 class="mb-4"><i class="fas fa-pen-nib"></i> Latest posts</h2>
+      <h2 class="mb-4 mt-0"><i class="fas fa-pen-nib"></i> Latest blog posts</h2>
 
       {%- for post in site.posts limit:5 -%}
         {%- include components/post_preview.html -%}

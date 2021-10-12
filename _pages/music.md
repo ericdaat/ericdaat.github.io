@@ -4,6 +4,7 @@ title: Music
 permalink: /music/
 cover: music.jpg
 in_navbar: True
+order: 3
 last_modified_at: 2020-05-12
 image: /assets/img/eric.jpg
 ---
