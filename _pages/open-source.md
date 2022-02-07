@@ -40,6 +40,12 @@ like Metabase, Airflow, a Python package with Sphinx docs, pytest, etc.
 Template for a Python Flask web application along with sqlalchemy,
 docker, circle-ci and sphinx.
 
+##### [Python Flask with Bootstrap](https://github.com/ericdaat/flask-assets-bootstrap)
+
+This repository is a starting point for everyone who wants to build a web application
+using Python Flask along with Bootstrap. Instead of importing Bootstrap from
+the CDN, I am installing it with npm and use Sass to customize it.
+
 ##### [Python project](https://github.com/ericdaat/template-python)
 
 A template repository for a python package. Pre configured sphinx and pytest.
