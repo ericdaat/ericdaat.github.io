@@ -1,7 +1,13 @@
-<div class="mb-5">
+<div class="my-5">
   <h5><a href="{{ post.url }}">{{ post.title }}</a></h5>
 
-  {%- include components/post_metadata.html -%}
+  <ul class="list-inline">
+      {% for category in post.categories %}
+          <li class="list-inline-item">
+              <span class="badge badge-secondary">{{category}}</span>
+          </li>
+      {% endfor %}
+  </ul>
 
   <div class="mt-2">
     <p itemprop="abstract">{{ post.excerpt }}</p>

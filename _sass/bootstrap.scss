@@ -1,5 +1,8 @@
-
 @charset "utf-8";
+
+// ###############
+// # Font family #
+// ###############
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto:wght@300&display=swap');
 
@@ -7,50 +10,31 @@ $font-family-sans-serif: "Roboto", Raleway, -apple-system, system-ui, BlinkMacSy
 $font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
 $font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 $font-family-base:       $font-family-sans-serif !default;
-$font-size-base: 17;
-$theme-colors: (  // https://coolors.co/app/247ba0-70c1b3-b2dbbf-f3ffbd-ff1654
-  "primary": #457b9d,
-  "danger": #e63946,
+
+// #############
+// # Font size #
+// #############
+
+$font-size-base: 18;
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
 );
-$code-color: #247BA0;
 
-@import
-  "bootstrap/bootstrap",
-  "pygments/monokai"
-;
+// ###############
+// # Font colors #
+// ###############
 
-article img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  max-width: 100%;
-}
+$theme-colors: (  // https://coolors.co/palette/227c9d-17c3b2-ffcb77-fef9ef-fe6d73
+  "primary": #227C9D,
+  "danger": #fe6d73,
+);
+$code-color: #17C3B2;
 
-.img-cover {
-  max-height: 250px;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-h2 {
-  margin-top: 80px;
-}
-
-h3 {
-  margin-top: 50px;
-}
-
-p{
-  text-align: justify;
-}
-
-.navbar {
-  border-bottom: 2px solid $light;
-}
-
-.page-footer {
-  border-top: 2px solid $light;
-}
+@import "bootstrap/bootstrap";

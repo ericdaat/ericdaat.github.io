@@ -10,9 +10,7 @@ image: /assets/img/eric.jpg
 ---
 
 Hi, I'm Eric, a Data Scientist and Full Stack Developer with additional
-Data Engineering and DevOps skills.
-
-I am currently pursuing a PhD in Machine Learning
+Data Engineering and DevOps skills. I am currently pursuing a PhD in Machine Learning
 applied to oncology at Institut Curie and INRIA in Paris, France.
 Besides work, I am really keen on music, photography, karate and golf.
 

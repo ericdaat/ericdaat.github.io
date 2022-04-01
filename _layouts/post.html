@@ -4,12 +4,26 @@ layout: default
 
 {% assign post=page %}
 
+{%- if page.cover -%}
+  <img class="img-cover mt-4 mb-2" src="/assets/img/covers/{{ page.cover }}">
+{%- endif -%}
+
 <article itemscope itemtype="http://schema.org/BlogPosting">
 
   <div class="mt-4">
     <h1 itemprop="name headline">{{ page.title | escape }}</h1>
 
-    {%- include components/post_metadata.html -%}
+    <ul class="list-inline">
+        {% for category in post.categories %}
+            <li class="list-inline-item">
+                <span class="badge badge-secondary">{{category}}</span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <time class="font-italic" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+      {{ post.date | date: "%b %-d, %Y" }}
+    </time>
   </div>
 
   <div itemprop="articleBody">

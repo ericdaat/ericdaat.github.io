@@ -3,8 +3,6 @@ layout: page
 title: About
 permalink: /about/
 cover: paris.jpg
-in_navbar: True
-order: 4
 last_modified_at: 2020-05-12
 image: /assets/img/eric.jpg
 ---
@@ -53,31 +51,3 @@ image: /assets/img/eric.jpg
     projects, like a movie recommender system and writing tech articles
     on my personal blog.
 </p>
-
-<h3 class="mt-4">Work Experience</h3>
-
-{%- for item in site.data.resume.experience -%}
-    <div class="media mt-4">
-        <img class="mr-5" src="/assets/img/logos/{{item.logo}}" style="width: 64px;" alt="{{item.logo}}">
-
-        <div class="media-body">
-            <h5 class="mt-0">{{item.position}}, {{item.company}}</h5>
-            <h6>{{item.date}}</h6>
-            <p>{{item.description}}</p>
-        </div>
-    </div>
-{%- endfor -%}
-
-<h3 class="mt-4">Education</h3>
-
-{%- for item in site.data.resume.education -%}
-    <div class="media mt-4">
-        <img class="mr-5" src="/assets/img/logos/{{item.logo}}" style="width: 64px;" alt="{{item.logo}}">
-
-        <div class="media-body">
-            <h5 class="mt-0">{{item.degree}}, {{item.university}}</h5>
-            <h6>{{item.date}}</h6>
-            <p>{{item.description}}</p>
-        </div>
-    </div>
-{%- endfor -%}

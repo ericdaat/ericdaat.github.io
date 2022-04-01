@@ -1,5 +1,33 @@
----
----
+@import
+    "bootstrap",
+    "fontawesome",
+    "pygments/monokai"
+;
 
-@import "bootstrap";
-@import "fontawesome";
+article img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 100%;
+}
+
+.img-cover {
+    max-height: 250px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+p {
+    text-align: justify;
+}
+
+.navbar {
+    border-bottom: 2px solid $light;
+}
+
+.page-footer {
+    border-top: 2px solid $light;
+}

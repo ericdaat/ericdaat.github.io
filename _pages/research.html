@@ -3,27 +3,52 @@ layout: page
 title: Research
 permalink: /research/
 cover: research.jpg
-in_navbar: True
-order: 10
 last_modified_at: 2020-05-12
 image: /assets/img/eric.jpg
 ---
 
 <p>
     I am currently a PhD Student in Machine Learning applied to oncology,
-    at Institut Curie and INRIA, in Paris. I am supervised by
-    Professor <a href="https://scholar.google.fr/citations?user=VRZhLFsAAAAJ&hl=fr">Fabien Reyal</a> (Institut Curie)
+    at <a href="https://institut-curie.org/">Institut Curie</a>
+    and <a href="https://www.inria.fr/">INRIA</a>,
+    in Paris. I am supervised by Professor
+    <a href="https://scholar.google.fr/citations?user=VRZhLFsAAAAJ&hl=fr">Fabien Reyal</a> (Institut Curie)
     and <a href="https://scholar.google.com/citations?user=cLGOIdMAAAAJ&hl=en">Marc Lelarge</a> (INRIA).
+    Here is a brief description of my PhD subject.
 </p>
 
-<h2>Publications</h2>
+<p class="text-center font-weight-bold">Geographic and socio-demographic disparities in oncology care pathways.</p>
 
-<ul class="list-unstyled">
-    <li>
-        Eric Daoud, Anne-Sophie Hamy-Petit, Elise Dumas, Lidia Delrieu, Beatriz Grandal Rejo, Christine Le Bihan-Benjamin,
-        Sophie Houzard, Philippe-Jean Bousquet, Judicaël Hotton, Aude-Marie Savoye,
-        Christelle Jouannaud, Chloé-Agathe Azencott, Marc Lelarge, and Fabien Reyal (2021).
-        <strong>Disparities in accessibility to oncology care centers in France.</strong>
-        [<a href="https://www.medrxiv.org/content/10.1101/2021.09.29.21264296" target="_blank">medrxiv</a>]
+<p>
+    In France, during year 2018, there was 382,000 new cancer cases and 157,400 deaths. The 2014-2019 Cancer Plan sets
+    new objectives for cancer care in France. In particular, objectives 2 and 7 emphasize the quality of the care
+    pathways: they aim respectively to guarantee the quality and safety of care and ensure comprehensive and
+    personalized care. In order to standardize the care pathways while personalizing care, care trajectories have been
+    introduced. The definition of these optimal care trajectories is based on national and international good practice
+    recommendations. We propose to study in detail the geographical and socio-demographic disparities in the care
+    pathways of cancer patients in France. First, we will try to characterize the health care institutions in France
+    based on their oncology activity. Then, we will study the distribution of these centers on the territory, in order
+    to highlight possible disparities in access to them. Finally, we will try to propose a care center recommendation
+    algorithm, using the French social security database (SNDS). This algorithm will aim at guiding patients towards the
+    optimal center, in order to maximize the quality of the care pathways.
+</p>
+
+<h4 class="mt-5">Publications</h4>
+
+<ul class="list-group">
+    {%- for publication in site.data.publications -%}
+    <li class="list-group-item border-0 mx-0 px-0">
+        {{ publication.authors }} ({{ publication.year }}).
+        <strong>{{ publication.title }}</strong>
+        [<a href="{{ publication.url }}" target="_blank">url</a>]
+        {%- if publication.code -%}
+        [<a href="{{ publication.code }}" target="_blank">code</a>]
+        {%- endif -%}
     </li>
+    {%- endfor -%}
 </ul>
+
+<p class="mt-4">
+    The full list of my publications is available on my
+    <a href="https://scholar.google.com/citations?user=6MyQM4wAAAAJ&hl=en">Google Scholar profile</a>.
+</p>
