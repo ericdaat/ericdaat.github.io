@@ -1,11 +1,31 @@
 ---
 ---
+@charset "utf-8";
+
+// ########
+// # Font #
+// ########
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto:wght@300&display=swap');
+
+$font-family-sans-serif: "Roboto", Raleway, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:       $font-family-sans-serif !default;
+
+// ##########
+// # Import #
+// ##########
 
 @import
     "bootstrap",
     "fontawesome",
     "pygments/monokai"
 ;
+
+// ###############
+// # Font family #
+// ###############
 
 article img {
     display: block;
