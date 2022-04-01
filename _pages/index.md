@@ -14,8 +14,8 @@ Data Engineering and DevOps skills. I am currently pursuing a PhD in Machine Lea
 applied to oncology at Institut Curie and INRIA in Paris, France.
 Besides work, I am really keen on music, photography, karate and golf.
 
-In this website, you will find some more details about [who I am](./about.html) and what I am
-[working on as PhD Student](./research.html). I also work on various open source projects that
+In this website, you will find some more details about [who I am](about) and what I am
+[working on as PhD Student](research). I also work on various open source projects that
 are listed on the [open source](open-source) page. When I find the time, I like
 to write short tech related articles on my [blog page](blog), feel free to
 check it out! I also added two sections not related to code:
