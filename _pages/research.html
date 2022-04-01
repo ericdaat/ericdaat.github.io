@@ -40,9 +40,12 @@ image: /assets/img/eric.jpg
     <li class="list-group-item border-0 mx-0 px-0">
         {{ publication.authors }} ({{ publication.year }}).
         <strong>{{ publication.title }}</strong>
-        [<a href="{{ publication.url }}" target="_blank">url</a>]
+        [<a href="{{ publication.url }}" target="_blank">publication</a>]
         {%- if publication.code -%}
         [<a href="{{ publication.code }}" target="_blank">code</a>]
+        {%- endif -%}
+        {%- if publication.url -%}
+        [<a href="{{ publication.url }}" target="_blank">website</a>]
         {%- endif -%}
     </li>
     {%- endfor -%}
