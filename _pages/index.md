@@ -9,10 +9,10 @@ last_modified_at: 2020-05-12
 image: /assets/img/eric.jpg
 ---
 
-Hi, I'm Eric, a Data Scientist and Full Stack Developer with additional
-Data Engineering and DevOps skills. I am currently pursuing a PhD in Machine Learning
-applied to oncology at Institut Curie and INRIA in Paris, France.
-Besides work, I am really keen on music, photography, karate and golf.
+Data Scientist and Full Stack Developer. Currently founder in residence at Entrepreneur First, 
+I'm looking at ways to build a SaaS company with a positive impact on the environment. 
+Prior to this, I was a PhD Student at Institut Curie and INRIA, working on Machine Learning 
+techniques to reduce geographic disparities in oncology care pathways.
 
 In this website, you will find some more details about [who I am](about) and what I am
 [working on as PhD Student](research). I also work on various open source projects that
