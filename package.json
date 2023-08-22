@@ -1,0 +1,34 @@
+{
+  "private": true,
+  "name": "jodie",
+  "description": "Image-heavy photography portfolio with colorful accents & customizable pages. Includes adaptive image grids powered by CSS grid and automatic image integration into projects.",
+  "version": "0.1.8",
+  "author": "LekoArts",
+  "license": "0BSD",
+  "starter-name": "gatsby-starter-portfolio-jodie",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "develop:cypress": "cross-env CYPRESS_SUPPORT=y yarn develop",
+    "build:cypress": "cross-env CYPRESS_SUPPORT=y yarn build",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@lekoarts/gatsby-theme-jodie": "^5.0.4",
+    "gatsby": "^5.10.0",
+    "gatsby-plugin-manifest": "^5.10.0",
+    "gatsby-plugin-sitemap": "^6.10.0",
+    "gatsby-plugin-webpack-statoscope": "^1.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.16",
+    "@types/react": "^18.2.9",
+    "@types/react-dom": "^18.2.4",
+    "cross-env": "^7.0.3",
+    "typescript": "^4.9.5"
+  }
+}
