@@ -2,6 +2,7 @@ import type { GatsbyConfig, PluginRef } from "gatsby"
 import "dotenv/config"
 
 const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
+const path = require(`path`)
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -25,7 +26,8 @@ const config: GatsbyConfig = {
       options: {
         navigation: [
           { name: `Projects`, slug: `/projects` },
-          { name: `Art`, slug: `/art` },
+          { name: `Photography`, slug: `/photography` },
+          { name: `Music`, slug: `/music` },
           { name: `About`, slug: `/about` },
         ],
       },
@@ -62,6 +64,15 @@ const config: GatsbyConfig = {
         ],
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: path.join(__dirname, `static`, `images`),
+      },
+    },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     // You can remove this plugin if you don't need it
     shouldAnalyseBundle && {
       resolve: `gatsby-plugin-webpack-statoscope`,
