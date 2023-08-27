@@ -11,9 +11,9 @@ const config: GatsbyConfig = {
     // See all options: https://github.com/LekoArts/gatsby-themes/blob/main/themes/gatsby-theme-jodie/gatsby-config.mjs
     siteTitle: `Eric Daoud Attoyan`,
     siteTitleAlt: `Eric Daoud Attoyan`,
-    siteHeadline: `Eric Daoud Attoyan`,
+    siteHeadline: `Eric Daoud Attoyan -- Co-Founder and CTO, Accelerating fleet electrification at Guided Energy`,
     siteUrl: `https://edaoud.com`,
-    siteDescription: `Image-heavy photography portfolio with colorful accents & customizable pages. Includes adaptive image grids powered by CSS grid and automatic image integration into projects.`,
+    siteDescription: `Eric Daoud Attoyan -- Co-Founder and CTO, Accelerating fleet electrification at Guided Energy.`,
     siteImage: `/banner.jpg`,
     siteLanguage: `en`,
     author: `@ericdaoud`,
