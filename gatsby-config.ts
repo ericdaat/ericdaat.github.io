@@ -25,11 +25,14 @@ const config: GatsbyConfig = {
       // See the theme's README for all available options
       options: {
         navigation: [
-          { name: `Projects`, slug: `/projects` },
+          // { name: `Blog`, slug: `/blog` },
           { name: `Photography`, slug: `/photography` },
           { name: `Music`, slug: `/music` },
           { name: `About`, slug: `/about` },
         ],
+        projectsPrefix: `/blog/`,
+        projectsUrl: `/blog/`,
+        projectsPath: `content/blog`,
       },
     },
     {
