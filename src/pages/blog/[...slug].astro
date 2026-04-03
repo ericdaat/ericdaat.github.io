@@ -1,0 +1,135 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title}>
+  <article>
+    <header>
+      <h1>{post.data.title}</h1>
+      <time datetime={post.data.date.toISOString().slice(0, 10)}>
+        {post.data.date.toISOString().slice(0, 10)}
+      </time>
+      {post.data.tags.length > 0 && (
+        <div class="tags">
+          {post.data.tags.map(tag => (
+            <a href={`/blog/tags/${tag}/`}>{tag}</a>
+          ))}
+        </div>
+      )}
+    </header>
+    <div class="content">
+      <Content />
+    </div>
+    <a href="/blog/" class="back">&larr; back to blog</a>
+  </article>
+</Base>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  header {
+    margin-bottom: 2rem;
+  }
+
+  time {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .tags a {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    text-decoration: none;
+    border: 1px solid var(--color-border);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+  }
+
+  .tags a:hover {
+    color: var(--color-text);
+    border-color: var(--color-muted);
+  }
+
+  .content {
+    font-size: 0.95rem;
+  }
+
+  .content :global(img) {
+    max-width: 100%;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 5rem auto 1rem;
+  }
+
+  .content :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .content :global(h2) {
+    font-size: 1.3rem;
+    margin: 2rem 0 0.75rem;
+  }
+
+  .content :global(h3) {
+    font-size: 1.1rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  .content :global(pre) {
+    background: var(--color-border);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .content :global(code) {
+    font-family: inherit;
+    font-size: 0.9em;
+  }
+
+  .content :global(ul), .content :global(ol) {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .content :global(blockquote) {
+    border-left: 2px solid var(--color-border);
+    padding-left: 1rem;
+    color: var(--color-muted);
+    margin-bottom: 1rem;
+  }
+
+  .back {
+    display: inline-block;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+</style>
