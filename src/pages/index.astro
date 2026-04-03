@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Home">
+  <section>
+    <h1>Eric Daoud Attoyan</h1>
+    <p class="tagline">Software Engineer & CTO</p>
+    <div class="bio">
+      <p>
+        I build software, play guitar, and take photos.
+      </p>
+      <p>
+        I co-founded <a href="https://guided.energy/">Guided Energy</a>, where
+        we build AI agents for the logistics and transportation industry.
+        Before that, I did a PhD in ML at Inria and Institut Curie in Paris, spent years working in tech startups,
+        notably at ManoMano, and graduated in Software Engineering and Data Science.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  section {
+    margin-top: 0;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .tagline {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  .bio {
+    font-size: 0.95rem;
+  }
+
+  .bio p {
+    margin-bottom: 1rem;
+  }
+</style>

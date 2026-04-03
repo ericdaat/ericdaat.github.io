@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+
+const photos = [
+  {
+    src: '/photos/fleet-week.jpg',
+    alt: 'Man looking at plane during Fleet Week',
+    caption: 'San Francisco, during Fleet Week.',
+  },
+  {
+    src: '/photos/camargue.jpg',
+    alt: 'Carousel in Camargue',
+    caption: 'Camargue, France.',
+  },
+  {
+    src: '/photos/lisbon.jpg',
+    alt: 'People in Belem, Lisbon',
+    caption: 'Lisbon, Portugal. The person waving while standing still makes this my favorite picture.',
+  },
+  {
+    src: '/photos/skate.jpg',
+    alt: 'Skateboard in LA',
+    caption: 'Skateboard in LA.',
+  },
+  {
+    src: '/photos/sevilla.jpg',
+    alt: 'Sevilla, Spain',
+    caption: 'Sevilla, Spain.',
+  },
+  {
+    src: '/photos/sunset.jpg',
+    alt: 'Sunset in South of France',
+    caption: 'South of France, playing with my ND filter at sunset.',
+  },
+  {
+    src: '/photos/montmartre.jpg',
+    alt: 'Sacre Coeur in Montmartre',
+    caption: 'Montmartre, Paris during blue hour.',
+  },
+];
+---
+
+<Base title="Photography">
+  <section>
+    <h1>Photography</h1>
+    <p>
+      I've been into photography since 2010, mostly landscapes and street photography. Here are some of my favorite shots — you can find more on my <a href="https://500px.com/p/ericda?view=photos">500px gallery</a>.
+    </p>
+
+    <div class="gallery">
+      {photos.map((photo) => (
+        <figure>
+          <img src={photo.src} alt={photo.alt} loading="lazy" />
+          <figcaption>{photo.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+</Base>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .gallery img {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+  }
+</style>
