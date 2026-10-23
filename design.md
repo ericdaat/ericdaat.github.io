@@ -67,6 +67,7 @@ Avoid gradients, colored accents, shadows, decorative cards, and unnecessary bor
 
 - Follow the system color preference until the user chooses a theme.
 - Store the explicit choice in `localStorage` under `theme`; apply it using `data-theme` on the document root.
+- Restore a valid saved choice synchronously with an inline script in the document head, before the body renders, to avoid a flash of the system theme. If storage is unavailable, retain the system fallback and keep the toggle usable.
 - The toggle icon represents the destination: **sun in dark mode, moon in light mode**.
 - Footer left: GitHub and LinkedIn icons only, with a `1rem` gap. Do not restore visible platform labels.
 - Footer right: theme toggle.

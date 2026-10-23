@@ -14,6 +14,17 @@ const currentPath = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Apply the saved theme before the body renders to avoid a theme flash.
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch {
+        // Storage may be unavailable; CSS falls back to the system preference.
+      }
+    </script>
     <title>{title} — Eric Daoud Attoyan</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
@@ -53,15 +64,16 @@ const currentPath = Astro.url.pathname;
       const toggle = document.getElementById('theme-toggle');
       const root = document.documentElement;
 
-      const saved = localStorage.getItem('theme');
-      if (saved) root.setAttribute('data-theme', saved);
-
       toggle?.addEventListener('click', () => {
         const isDark = root.getAttribute('data-theme') === 'dark' ||
           (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
         const next = isDark ? 'light' : 'dark';
         root.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
+        try {
+          localStorage.setItem('theme', next);
+        } catch {
+          // Keep the toggle working even if the preference cannot be saved.
+        }
       });
     </script>
   </body>
