@@ -18,16 +18,18 @@ const { Content } = await render(post);
   <article>
     <header>
       <h1>{post.data.title}</h1>
-      <time datetime={post.data.date.toISOString().slice(0, 10)}>
-        {post.data.date.toISOString().slice(0, 10)}
-      </time>
-      {post.data.tags.length > 0 && (
-        <div class="tags">
-          {post.data.tags.map(tag => (
-            <a href={`/blog/tags/${tag}/`}>{tag}</a>
-          ))}
-        </div>
-      )}
+      <div class="metadata">
+        <time datetime={post.data.date.toISOString().slice(0, 10)}>
+          {post.data.date.toISOString().slice(0, 10)}
+        </time>
+        {post.data.tags.length > 0 && (
+          <div class="tags">
+            {post.data.tags.map(tag => (
+              <a href={`/blog/tags/${tag}/`}>{tag}</a>
+            ))}
+          </div>
+        )}
+      </div>
     </header>
     <div class="content">
       <Content />
@@ -38,8 +40,6 @@ const { Content } = await render(post);
 
 <style>
   h1 {
-    font-size: 2rem;
-    font-weight: 600;
     margin-bottom: 0.25rem;
   }
 
@@ -47,20 +47,26 @@ const { Content } = await render(post);
     margin-bottom: 2rem;
   }
 
+  .metadata {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+  }
+
   time {
     color: var(--color-muted);
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
   }
 
   .tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: 0.5rem;
   }
 
   .tags a {
-    font-size: 0.8rem;
+    font-size: var(--font-size-tag);
     color: var(--color-muted);
     text-decoration: none;
     border: 1px solid var(--color-border);
@@ -74,7 +80,7 @@ const { Content } = await render(post);
   }
 
   .content {
-    font-size: 0.95rem;
+    font-size: var(--font-size-body);
   }
 
   .content :global(img) {
@@ -91,12 +97,12 @@ const { Content } = await render(post);
   }
 
   .content :global(h2) {
-    font-size: 1.3rem;
+    font-size: var(--font-size-heading-2);
     margin: 2rem 0 0.75rem;
   }
 
   .content :global(h3) {
-    font-size: 1.1rem;
+    font-size: var(--font-size-heading-3);
     margin: 1.5rem 0 0.5rem;
   }
 
@@ -106,12 +112,12 @@ const { Content } = await render(post);
     border-radius: 4px;
     overflow-x: auto;
     margin-bottom: 1rem;
-    font-size: 0.85rem;
+    font-size: var(--font-size-caption);
   }
 
   .content :global(code) {
     font-family: inherit;
-    font-size: 0.9em;
+    font-size: var(--font-size-inline-code);
   }
 
   .content :global(ul), .content :global(ol) {
@@ -129,7 +135,7 @@ const { Content } = await render(post);
   .back {
     display: inline-block;
     margin-top: 2rem;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
     color: var(--color-muted);
   }
 </style>

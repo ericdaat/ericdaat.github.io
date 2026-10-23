@@ -40,8 +40,6 @@ const { tag, posts } = Astro.props;
 
 <style>
   h1 {
-    font-size: 2rem;
-    font-weight: 600;
     margin-bottom: 2rem;
   }
 
@@ -66,14 +64,14 @@ const { tag, posts } = Astro.props;
 
   time {
     color: var(--color-muted);
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
     flex-shrink: 0;
   }
 
   .back {
     display: inline-block;
     margin-top: 2rem;
-    font-size: 0.9rem;
+    font-size: var(--font-size-small);
     color: var(--color-muted);
   }
 </style>

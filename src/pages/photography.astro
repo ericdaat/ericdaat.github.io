@@ -42,7 +42,6 @@ const photos = [
 
 <Base title="Photography">
   <section>
-    <h1>Photography</h1>
     <p>
       I've been into photography since 2010, mostly landscapes and street photography. Here are some of my favorite shots — you can find more on my <a href="https://500px.com/p/ericda?view=photos">500px gallery</a>.
     </p>
@@ -59,14 +58,8 @@ const photos = [
 </Base>
 
 <style>
-  h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-  }
-
   p {
-    font-size: 0.95rem;
+    font-size: var(--font-size-body);
     margin-bottom: 1rem;
   }
 
@@ -88,7 +81,7 @@ const photos = [
 
   figcaption {
     margin-top: 0.75rem;
-    font-size: 0.85rem;
+    font-size: var(--font-size-caption);
     color: var(--color-muted);
   }
 </style>

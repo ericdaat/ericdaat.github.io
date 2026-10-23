@@ -4,8 +4,6 @@ import Base from '../layouts/Base.astro';
 
 <Base title="Home">
   <section>
-    <h1>Eric Daoud Attoyan</h1>
-    <p class="tagline">Software Engineer & CTO</p>
     <div class="bio">
       <p>
         I build software, play guitar, and take photos.
@@ -25,20 +23,8 @@ import Base from '../layouts/Base.astro';
     margin-top: 0;
   }
 
-  h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-
-  .tagline {
-    color: var(--color-muted);
-    font-size: 0.95rem;
-    margin-bottom: 2rem;
-  }
-
   .bio {
-    font-size: 0.95rem;
+    font-size: var(--font-size-body);
   }
 
   .bio p {

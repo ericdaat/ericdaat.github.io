@@ -5,82 +5,80 @@ import Base from '../../layouts/Base.astro';
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
+const years = [...new Set(posts.map(post => post.data.date.getUTCFullYear()))];
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
 ---
 
 <Base title="Blog">
-  <section>
-    <h1>Blog</h1>
-    <nav class="tags">
-      {allTags.map(tag => (
-        <a href={`/blog/tags/${tag}/`}>{tag}</a>
-      ))}
-    </nav>
-    <ul>
-      {posts.map(post => (
-        <li>
-          <a href={`/blog/${post.id}/`}>
-            <time datetime={post.data.date.toISOString().slice(0, 10)}>
-              {post.data.date.toISOString().slice(0, 10)}
-            </time>
-            <span>{post.data.title}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
+  <div class="archive">
+    {years.map(year => (
+      <section class="year-group" aria-labelledby={`year-${year}`}>
+        <h2 id={`year-${year}`}>{year}</h2>
+        <ul>
+          {posts.filter(post => post.data.date.getUTCFullYear() === year).map(post => (
+            <li>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              <time datetime={post.data.date.toISOString().slice(0, 10)}>
+                {dateFormat.format(post.data.date)}
+              </time>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
 </Base>
 
 <style>
-  h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
+  .archive {
+    display: grid;
+    gap: 3rem;
   }
 
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+  .year-group {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 2rem;
+    align-items: baseline;
   }
 
-  .tags a {
-    font-size: 0.85rem;
+  h2 {
     color: var(--color-muted);
-    text-decoration: none;
-    border: 1px solid var(--color-border);
-    padding: 0.15rem 0.5rem;
-    border-radius: 3px;
-  }
-
-  .tags a:hover {
-    color: var(--color-text);
-    border-color: var(--color-muted);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-normal);
   }
 
   ul {
     list-style: none;
-  }
-
-  li {
-    margin-bottom: 0.75rem;
+    display: grid;
+    gap: 1.75rem;
   }
 
   li a {
-    display: flex;
-    gap: 1rem;
+    font-size: var(--font-size-archive-title);
     text-decoration: none;
   }
 
-  li a:hover span {
+  li a:hover {
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 
   time {
+    display: block;
+    margin-top: 0.25rem;
     color: var(--color-muted);
-    font-size: 0.9rem;
-    flex-shrink: 0;
+    font-size: var(--font-size-small);
+  }
+
+  @media (max-width: 500px) {
+    .year-group {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
   }
 </style>
