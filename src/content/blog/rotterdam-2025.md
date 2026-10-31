@@ -1,5 +1,5 @@
 ---
-title: "Street Photography in Rotterdam"
+title: "Street Photography in Rotterdam, Netherlands"
 date: 2025-10-11
 description: "Street photography, deep shadows, and the Cube Houses in Rotterdam."
 tags: ["photography"]

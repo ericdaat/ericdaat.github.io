@@ -1,5 +1,5 @@
 ---
-title: "Helsinki"
+title: "Helsinki, Finland"
 date: 2023-02-05
 description: "Architecture, shadows, and quiet moments in Helsinki."
 tags: ["photography"]

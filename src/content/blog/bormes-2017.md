@@ -1,5 +1,5 @@
 ---
-title: "Bormes"
+title: "Bormes les Mimosas, France"
 date: 2017-05-23
 description: "Rocky shores, long exposures, and a Ferris wheel in Bormes."
 tags: ["photography"]

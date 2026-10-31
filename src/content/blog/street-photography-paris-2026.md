@@ -1,5 +1,5 @@
 ---
-title: "Street Photography in Paris"
+title: "Street Photography in Paris, France"
 date: 2026-01-03
 description: "Reflections, passersby, and afternoon shadows in Paris."
 tags: ["photography"]

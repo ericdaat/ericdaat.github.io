@@ -1,5 +1,5 @@
 ---
-title: "Street Photography in Brussels"
+title: "Street Photography in Brussels, Belgium"
 date: 2025-04-04
 description: "Street photography from a trip to Brussels."
 tags: ["photography"]

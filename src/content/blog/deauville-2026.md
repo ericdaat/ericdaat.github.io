@@ -1,5 +1,5 @@
 ---
-title: "Street Photography in Deauville"
+title: "Street Photography in Deauville, France"
 date: 2026-10-31
 description: "Beach cabins, long shadows, and street photography in Deauville."
 tags: ["photography"]

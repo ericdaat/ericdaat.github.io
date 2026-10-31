@@ -1,5 +1,5 @@
 ---
-title: "Marseille"
+title: "Marseille, France"
 date: 2022-10-19
 description: "Street scenes, Mediterranean light, and sunsets in Marseille."
 tags: ["photography"]

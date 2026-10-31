@@ -1,5 +1,5 @@
 ---
-title: "Côte d'Opale"
+title: "Côte d'Opale, France"
 date: 2021-03-15
 description: "Beaches, kitesurfers, and countryside along the Côte d'Opale."
 tags: ["photography"]
