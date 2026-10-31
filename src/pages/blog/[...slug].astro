@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { Calendar, Hash } from '@lucide/astro';
 import Base from '../../layouts/Base.astro';
+import PhotoLightbox from '../../components/PhotoLightbox.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -40,6 +41,7 @@ const { Content } = await render(post);
       <Content />
     </div>
     <a href="/blog/" class="back">&larr; back to blog</a>
+    {post.data.tags.includes('photography') && <PhotoLightbox />}
   </article>
 </Base>
 

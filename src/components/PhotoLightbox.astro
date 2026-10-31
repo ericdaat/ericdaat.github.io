@@ -1,0 +1,140 @@
+---
+import { X } from '@lucide/astro';
+---
+
+<photo-lightbox>
+  <dialog aria-label="Enlarged photograph">
+    <button type="button" class="close" aria-label="Close enlarged photograph" autofocus>
+      <X size={24} aria-hidden="true" />
+    </button>
+    <img class="enlarged" alt="" />
+  </dialog>
+</photo-lightbox>
+
+<script>
+  class PhotoLightbox extends HTMLElement {
+    connectedCallback() {
+      const dialog = this.querySelector('dialog')!;
+      const enlarged = this.querySelector<HTMLImageElement>('.enlarged')!;
+      const closeButton = this.querySelector<HTMLButtonElement>('.close')!;
+      const photos = this.closest('article')!.querySelectorAll<HTMLImageElement>('.content img');
+      let trigger: HTMLImageElement | null = null;
+      let previousOverflow = '';
+      let openedWithKeyboard = false;
+
+      const open = (photo: HTMLImageElement, keyboard = false) => {
+        if (dialog.open) return;
+        trigger = photo;
+        openedWithKeyboard = keyboard;
+        enlarged.src = photo.currentSrc || photo.src;
+        enlarged.alt = photo.alt;
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        dialog.showModal();
+      };
+
+      photos.forEach(photo => {
+        photo.tabIndex = 0;
+        photo.setAttribute('role', 'button');
+        photo.setAttribute('aria-haspopup', 'dialog');
+        photo.setAttribute('aria-label', `Enlarge photograph${photo.alt ? `: ${photo.alt}` : ''}`);
+        photo.classList.add('lightbox-trigger');
+        photo.addEventListener('click', () => open(photo));
+        photo.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            open(photo, true);
+          }
+        });
+      });
+
+      const close = () => {
+        dialog.close();
+        document.body.style.overflow = previousOverflow;
+        if (openedWithKeyboard) {
+          trigger?.focus({ preventScroll: true });
+        } else {
+          trigger?.blur();
+        }
+        enlarged.removeAttribute('src');
+      };
+
+      closeButton.addEventListener('click', close);
+      dialog.addEventListener('click', event => {
+        if (event.target === dialog) close();
+      });
+      dialog.addEventListener('cancel', event => {
+        event.preventDefault();
+        close();
+      });
+    }
+  }
+
+  if (!customElements.get('photo-lightbox')) {
+    customElements.define('photo-lightbox', PhotoLightbox);
+  }
+</script>
+
+<style>
+  dialog {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 3.5rem 1rem 1rem;
+    border: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  dialog[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  dialog::backdrop {
+    background: rgb(0 0 0 / 90%);
+  }
+
+  .enlarged {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+  }
+
+  .close:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
+  :global(.content img.lightbox-trigger) {
+    cursor: zoom-in;
+  }
+
+  :global(.content img.lightbox-trigger:focus-visible) {
+    outline: 2px solid var(--color-text);
+    outline-offset: 4px;
+  }
+</style>
