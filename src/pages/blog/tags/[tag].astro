@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
+import BlogArchive from '../../../components/BlogArchive.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -22,18 +23,7 @@ const { tag, posts } = Astro.props;
 <Base title={`#${tag}`}>
   <section>
     <h1>#{tag}</h1>
-    <ul>
-      {posts.map(post => (
-        <li>
-          <a href={`/blog/${post.id}/`}>
-            <time datetime={post.data.date.toISOString().slice(0, 10)}>
-              {post.data.date.toISOString().slice(0, 10)}
-            </time>
-            <span>{post.data.title}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <BlogArchive posts={posts} />
     <a href="/blog/" class="back">&larr; all posts</a>
   </section>
 </Base>
@@ -41,31 +31,6 @@ const { tag, posts } = Astro.props;
 <style>
   h1 {
     margin-bottom: 2rem;
-  }
-
-  ul {
-    list-style: none;
-  }
-
-  li {
-    margin-bottom: 0.75rem;
-  }
-
-  li a {
-    display: flex;
-    gap: 1rem;
-    text-decoration: none;
-  }
-
-  li a:hover span {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  time {
-    color: var(--color-muted);
-    font-size: var(--font-size-small);
-    flex-shrink: 0;
   }
 
   .back {

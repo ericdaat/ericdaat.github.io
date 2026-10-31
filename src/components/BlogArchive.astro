@@ -1,0 +1,127 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Calendar, Hash } from '@lucide/astro';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+const years = [...new Set(posts.map(post => post.data.date.getUTCFullYear()))];
+const dateFormat = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<div class="archive">
+  {years.map(year => (
+    <section class="year-group" aria-labelledby={`year-${year}`}>
+      <h2 id={`year-${year}`}>{year}</h2>
+      <ul>
+        {posts.filter(post => post.data.date.getUTCFullYear() === year).map(post => (
+          <li>
+            <a class="post-title" href={`/blog/${post.id}/`}>{post.data.title}</a>
+            <div class="metadata">
+              <time datetime={post.data.date.toISOString().slice(0, 10)}>
+                <Calendar size={14} aria-hidden="true" />
+                {dateFormat.format(post.data.date)}
+              </time>
+              {post.data.tags.length > 0 && (
+                <div class="tags">
+                  {post.data.tags.map(tag => (
+                    <a href={`/blog/tags/${tag}/`}>
+                      <Hash size={14} aria-hidden="true" />
+                      {tag}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>
+
+<style>
+  .archive {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .year-group {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    gap: 2rem;
+    align-items: baseline;
+  }
+
+  h2 {
+    color: var(--color-muted);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-normal);
+  }
+
+  ul {
+    list-style: none;
+    display: grid;
+    gap: 1.75rem;
+  }
+
+  .post-title {
+    font-size: var(--font-size-archive-title);
+    text-decoration: none;
+  }
+
+  li a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .metadata {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin-top: 0.25rem;
+  }
+
+  time, .tags a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
+  time {
+    color: var(--color-muted);
+    font-size: var(--font-size-tag);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tags a {
+    font-size: var(--font-size-tag);
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+
+  .tags a:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 500px) {
+    .year-group {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

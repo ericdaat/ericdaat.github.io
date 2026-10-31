@@ -1,84 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
+import BlogArchive from '../../components/BlogArchive.astro';
 import Base from '../../layouts/Base.astro';
 
 const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const years = [...new Set(posts.map(post => post.data.date.getUTCFullYear()))];
-const dateFormat = new Intl.DateTimeFormat('en-US', {
-  month: 'long',
-  day: 'numeric',
-  timeZone: 'UTC',
-});
 ---
 
 <Base title="Blog">
-  <div class="archive">
-    {years.map(year => (
-      <section class="year-group" aria-labelledby={`year-${year}`}>
-        <h2 id={`year-${year}`}>{year}</h2>
-        <ul>
-          {posts.filter(post => post.data.date.getUTCFullYear() === year).map(post => (
-            <li>
-              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-              <time datetime={post.data.date.toISOString().slice(0, 10)}>
-                {dateFormat.format(post.data.date)}
-              </time>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
-  </div>
+  <BlogArchive posts={posts} />
 </Base>
-
-<style>
-  .archive {
-    display: grid;
-    gap: 3rem;
-  }
-
-  .year-group {
-    display: grid;
-    grid-template-columns: 5rem minmax(0, 1fr);
-    gap: 2rem;
-    align-items: baseline;
-  }
-
-  h2 {
-    color: var(--color-muted);
-    font-size: var(--font-size-body);
-    font-weight: var(--font-weight-normal);
-  }
-
-  ul {
-    list-style: none;
-    display: grid;
-    gap: 1.75rem;
-  }
-
-  li a {
-    font-size: var(--font-size-archive-title);
-    text-decoration: none;
-  }
-
-  li a:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  time {
-    display: block;
-    margin-top: 0.25rem;
-    color: var(--color-muted);
-    font-size: var(--font-size-small);
-  }
-
-  @media (max-width: 500px) {
-    .year-group {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-  }
-</style>

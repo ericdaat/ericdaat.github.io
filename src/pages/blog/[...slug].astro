@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Calendar, Hash } from '@lucide/astro';
 import Base from '../../layouts/Base.astro';
 
 export async function getStaticPaths() {
@@ -20,12 +21,16 @@ const { Content } = await render(post);
       <h1>{post.data.title}</h1>
       <div class="metadata">
         <time datetime={post.data.date.toISOString().slice(0, 10)}>
+          <Calendar size={14} aria-hidden="true" />
           {post.data.date.toISOString().slice(0, 10)}
         </time>
         {post.data.tags.length > 0 && (
           <div class="tags">
             {post.data.tags.map(tag => (
-              <a href={`/blog/tags/${tag}/`}>{tag}</a>
+              <a href={`/blog/tags/${tag}/`}>
+                <Hash size={14} aria-hidden="true" />
+                {tag}
+              </a>
             ))}
           </div>
         )}
@@ -54,9 +59,15 @@ const { Content } = await render(post);
     gap: 0.5rem 1rem;
   }
 
+  time, .tags a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
   time {
     color: var(--color-muted);
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-tag);
   }
 
   .tags {
@@ -69,14 +80,12 @@ const { Content } = await render(post);
     font-size: var(--font-size-tag);
     color: var(--color-muted);
     text-decoration: none;
-    border: 1px solid var(--color-border);
-    padding: 0.1rem 0.4rem;
-    border-radius: 3px;
   }
 
   .tags a:hover {
     color: var(--color-text);
-    border-color: var(--color-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .content {
