@@ -26,6 +26,7 @@ import { X } from '@lucide/astro';
         if (dialog.open) return;
         trigger = photo;
         openedWithKeyboard = keyboard;
+        dialog.toggleAttribute('data-keyboard', keyboard);
         enlarged.src = photo.currentSrc || photo.src;
         enlarged.alt = photo.alt;
         previousOverflow = document.body.style.overflow;
@@ -60,6 +61,9 @@ import { X } from '@lucide/astro';
       };
 
       closeButton.addEventListener('click', close);
+      dialog.addEventListener('keydown', event => {
+        if (event.key === 'Tab') dialog.setAttribute('data-keyboard', '');
+      });
       dialog.addEventListener('click', event => {
         if (event.target === dialog) close();
       });
@@ -84,7 +88,7 @@ import { X } from '@lucide/astro';
     max-width: none;
     max-height: none;
     margin: 0;
-    padding: 3.5rem 1rem 1rem;
+    padding: 3.5rem 1rem;
     border: 0;
     background: transparent;
     overflow: hidden;
@@ -105,7 +109,7 @@ import { X } from '@lucide/astro';
     width: auto;
     height: auto;
     max-width: 100%;
-    max-height: 100%;
+    max-height: calc(100dvh - 7rem);
     object-fit: contain;
   }
 
@@ -122,9 +126,10 @@ import { X } from '@lucide/astro';
     background: transparent;
     color: white;
     cursor: pointer;
+    outline: none;
   }
 
-  .close:focus-visible {
+  dialog[data-keyboard] .close:focus-visible {
     outline: 2px solid white;
     outline-offset: 2px;
   }
