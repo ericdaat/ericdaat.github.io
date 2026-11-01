@@ -9,12 +9,24 @@ A few street photographs from Rotterdam. Dark passageways framing bright streets
 
 ![A scooter rider on a sunlit street framed by a dark passageway](/blog/rotterdam-2025/L1001565.jpg)
 
+I like the frame on this picture, and the sign.
+
 ![An adult and a child silhouetted in a dim corridor](/blog/rotterdam-2025/L1001590.jpg)
+
+An adult and a child silhouetted in a dim corridor.
 
 ![A child caught mid-jump above a sunlit pavement](/blog/rotterdam-2025/L1001695.jpg)
 
+This child running caught my attention, he's parallel to the window behind him.
+
 ![A person standing in shadow beneath Rotterdam's yellow Cube Houses](/blog/rotterdam-2025/L1001720.jpg)
+
+A person standing in shadow beneath Rotterdam's yellow Cube Houses.
 
 ![Sunlight and sharp shadows across the yellow facades of the Cube Houses](/blog/rotterdam-2025/L1001728.jpg)
 
+Sunlight and sharp shadows across the yellow facades of the Cube Houses.
+
 ![A silhouetted pedestrian passing a window overlooking the Cube Houses](/blog/rotterdam-2025/L1001731.jpg)
+
+A silhouetted pedestrian passing a window overlooking the Cube Houses.
